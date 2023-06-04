@@ -1,0 +1,40 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Bittify"
+run/main_scene="res://Scenes/login_page.tscn"
+config/features=PackedStringArray("4.0", "GL Compatibility")
+boot_splash/show_image=false
+boot_splash/fullsize=false
+boot_splash/use_filter=false
+config/icon="res://icon.svg"
+
+[autoload]
+
+NetworkRequests="*res://Scripts/network_requests.gd"
+WindowFunctions="*res://Scripts/window_functions.gd"
+Initialisation="res://Scripts/initialisation.gd"
+
+[display]
+
+window/size/viewport_width=300
+window/size/viewport_height=350
+window/size/resizable=false
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://Translations/translation.en.translation", "res://Translations/translation.jp.translation")
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"

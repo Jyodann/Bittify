@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://3chnm3xo52ab"]
+
+[ext_resource type="Script" path="res://Scripts/initialisation.gd" id="1_idix6"]
+
+[node name="Initialisation" type="Node2D"]
+scale = Vector2(350, 350)
+script = ExtResource("1_idix6")

@@ -79,3 +79,4 @@ package-lock.json
 .eslintcache
 *v8.log
 lib/
+backend_src/.dev.vars

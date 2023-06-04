@@ -12,6 +12,14 @@ const CLIENT_ID = "9830ce611cad40ab98aaca36e75c0b79"
 
 @onready var oauth_url = "https://accounts.spotify.com/authorize?client_id=%s&response_type=code&redirect_uri=%s&scope=user-modify-playback-state user-read-currently-playing" % [CLIENT_ID, redirect_url]
 
+class Result:
+	var success: bool
+	var result: Dictionary
+
+	func _init(_success, _result):
+		self.success = _success
+		self.result = _result
+
 func _ready():
 	print("Initialiing all HTTPRequests")
 
@@ -35,9 +43,19 @@ func login_with_bittify_code(bittify_code: String):
 		
 		var json = JSON.parse_string(res[3].get_string_from_utf8())
 		if(json.has("error_description")):
-			return [false, json["error_description"]]
+			return Result.new(false, {
+				"error" : json["error_description"]
+			})
 		
-		return [true, [json["refresh_token"], json["access_token"]]]
+		return Result.new(true, {
+			"refresh_token" : json["refresh_token"], 
+			"access_token" :json["access_token"] 
+		})
+
+		
+	return Result.new(false, {
+		"error" : "Failed to Connect to servers"
+	})
 		
 #"https://api.spotify.com/v1/me/player/currently-playing?additional_types=episode,track"
 func currently_playing_song(access_token: String):
@@ -51,4 +69,3 @@ func currently_playing_song(access_token: String):
 
 	var res = await client.request_completed
 	print(res[3].get_string_from_utf8())
-	

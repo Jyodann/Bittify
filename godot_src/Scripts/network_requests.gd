@@ -48,8 +48,7 @@ func login_with_bittify_code(bittify_code: String):
 			})
 		
 		return Result.new(true, {
-			"refresh_token" : json["refresh_token"], 
-			"access_token" :json["access_token"] 
+			"refresh_token" : json["refresh_token"]
 		})
 
 		
@@ -68,4 +67,31 @@ func currently_playing_song(access_token: String):
 	], HTTPClient.METHOD_GET)
 
 	var res = await client.request_completed
-	print(res[3].get_string_from_utf8())
+	
+	if (res[0] == 0):
+		var json = JSON.parse_string(res[3].get_string_from_utf8())
+		
+		return Result.new(
+			true, json
+		)
+		
+func get_new_access_token(refresh_token):
+	var client = create_new_http_request_node("new_access_token")
+	var url = "%s?refresh_token=%s" % [get_refresh_token_url, refresh_token]
+
+	client.request(
+		url
+	);
+
+	var res = await client.request_completed
+
+	if (res[0] == 0):
+		var json = JSON.parse_string(res[3].get_string_from_utf8())
+
+		return Result.new(
+			true, json
+		)
+	
+	return Result.new(
+		false, {}
+	)

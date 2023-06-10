@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 func _ready():
 	print("Performing Initial Startup checks")

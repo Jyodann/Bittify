@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Bittify"
-run/main_scene="res://Scenes/login_page.tscn"
+run/main_scene="res://Scenes/initialisation.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
 boot_splash/show_image=false
 boot_splash/fullsize=false
@@ -28,7 +28,6 @@ Initialisation="res://Scripts/initialisation.gd"
 
 window/size/viewport_width=300
 window/size/viewport_height=350
-window/size/resizable=false
 
 [internationalization]
 

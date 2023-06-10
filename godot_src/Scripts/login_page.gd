@@ -1,9 +1,9 @@
-extends Node2D
+extends Control
 
 
-@onready var login_button = $Control/VBoxContainer/LoginToSpotifyButton
-@onready var bittify_code_go_button = $Control/VBoxContainer/HBoxContainer/BittifyCodeGoButton
-@onready var bittify_code_textedit = $Control/VBoxContainer/HBoxContainer/BittifyCodeTextEdit
+@onready var login_button = $VBoxContainer/LoginToSpotifyButton
+@onready var bittify_code_go_button = $VBoxContainer/HBoxContainer/BittifyCodeGoButton
+@onready var bittify_code_textedit = $VBoxContainer/HBoxContainer/BittifyCodeTextEdit
 
 func _ready():
 	login_button.pressed.connect(self._login_button_pressed)

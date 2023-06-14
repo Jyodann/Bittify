@@ -1,15 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://3chnm3xo52ab"]
 
 [ext_resource type="Script" path="res://Scripts/initialisation.gd" id="1_idix6"]
+[ext_resource type="PackedScene" uid="uid://d23fyxh6csgwh" path="res://Pages/login_page.tscn" id="2_qdw1p"]
 [ext_resource type="PackedScene" uid="uid://bbmlohuvt0lmk" path="res://Scenes/mouse_drag.tscn" id="2_xho5s"]
-[ext_resource type="PackedScene" uid="uid://ctbbi6f6qhfjw" path="res://Scenes/login_page.tscn" id="3_no63r"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1cthy"]
-bg_color = Color(0.172549, 0.172549, 0.172549, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+[ext_resource type="PackedScene" uid="uid://cedi8xp8ducfa" path="res://Scenes/main_player.tscn" id="3_63lwv"]
 
 [node name="Initialisation" type="Control"]
 layout_mode = 3
@@ -30,6 +24,24 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
+[node name="ContentPage" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LoginPage" parent="ContentPage" instance=ExtResource("2_qdw1p")]
+visible = false
+layout_mode = 2
+
+[node name="PlayerPage" type="MarginContainer" parent="ContentPage"]
+layout_mode = 2
+
+[node name="main_player" parent="ContentPage/PlayerPage" instance=ExtResource("3_63lwv")]
+layout_mode = 2
+
 [node name="mouse_drag" parent="." instance=ExtResource("2_xho5s")]
 layout_mode = 1
 anchors_preset = 10
@@ -37,39 +49,3 @@ anchor_bottom = 0.0
 offset_bottom = 25.0
 grow_vertical = 1
 size_flags_vertical = 3
-
-[node name="MainContents" type="PanelContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 25.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="MainContents"]
-layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="Panel" type="Panel" parent="MainContents/MarginContainer"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_1cthy")
-
-[node name="MarginContainer" type="MarginContainer" parent="MainContents/MarginContainer/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 4
-theme_override_constants/margin_top = 4
-theme_override_constants/margin_right = 4
-theme_override_constants/margin_bottom = 4
-
-[node name="LoginPage" parent="MainContents/MarginContainer/Panel/MarginContainer" instance=ExtResource("3_no63r")]
-layout_mode = 2
-size_flags_stretch_ratio = 8.0

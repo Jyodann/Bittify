@@ -8,6 +8,14 @@ extends Control
 var is_animating = false
 var is_duplicate_following = true
 
+func change_text(text_to_change):
+	song_name_label.text = text_to_change
+	is_animating = false
+
+func _ready():
+	duplicate_song_label.position.y = song_name_label.position.y
+	pass
+
 func _physics_process(_delta):
 	if (song_name_label.size.x > size.x):
 		is_animating = true
@@ -27,9 +35,9 @@ func _physics_process(_delta):
 		if (is_duplicate_following):
 			song_name_label.position += Vector2(-0.5, 0)
 
-			duplicate_song_label.position = Vector2(song_name_label.get_end().x + offset_between_text, 0)
+			duplicate_song_label.position = Vector2(song_name_label.get_end().x + offset_between_text, song_name_label.position.y)
 
 		else:
 			duplicate_song_label.position += Vector2(-0.5, 0)
 
-			song_name_label.position = Vector2(duplicate_song_label.get_end().x + offset_between_text, 0)
+			song_name_label.position = Vector2(duplicate_song_label.get_end().x + offset_between_text, duplicate_song_label.position.y)

@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cedi8xp8ducfa"]
+[gd_scene load_steps=5 format=3 uid="uid://cedi8xp8ducfa"]
 
 [ext_resource type="Script" path="res://Scripts/main_player.gd" id="1_m6ui3"]
+[ext_resource type="PackedScene" uid="uid://dhnst0rrc37pj" path="res://Scenes/scrolling_word_component.tscn" id="2_xy54g"]
 
 [sub_resource type="Gradient" id="Gradient_452og"]
 
@@ -41,3 +42,18 @@ grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
 stretch_mode = 5
+
+[node name="MainSongTitle" parent="." instance=ExtResource("2_xy54g")]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -50.0
+grow_vertical = 0
+
+[node name="HBoxContainer" parent="MainSongTitle" index="1"]
+offset_left = 1.0
+offset_right = 1.0
+
+[editable path="MainSongTitle"]

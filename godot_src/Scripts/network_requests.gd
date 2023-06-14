@@ -47,8 +47,10 @@ func login_with_bittify_code(bittify_code: String):
 				"error" : json["error_description"]
 			})
 		
+		print(json)
 		return Result.new(true, {
-			"refresh_token" : json["refresh_token"]
+			"refresh_token" : json["refresh_token"],
+			"access_token" : json["access_token"]
 		})
 
 		
@@ -68,12 +70,31 @@ func currently_playing_song(access_token: String):
 
 	var res = await client.request_completed
 	
+	# Token has expired
+	if (res[1] == 401):
+		return Result.new(
+			false, {
+				"error" : "Token Expired"
+			}
+		)
+
 	if (res[0] == 0):
+
+		# Currently no Active Device
+		if (res[1] == 204):
+			return Result.new(
+				true, {}
+			)
 		var json = JSON.parse_string(res[3].get_string_from_utf8())
 		
 		return Result.new(
 			true, json
 		)
+	printerr("Failed to fetch currently playing song")
+	printerr(res)
+	return Result.new(
+		false, {}
+	)
 		
 func get_new_access_token(refresh_token):
 	var client = create_new_http_request_node("new_access_token")

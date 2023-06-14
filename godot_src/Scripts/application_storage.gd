@@ -7,14 +7,15 @@ func _ready():
 
 const WIN_HEIGHT = "win_height"
 const WIN_WIDTH = "win_width"
-const CLIENT_ID = "client_id"
-
+const ACCESS_TOKEN = "token"
+const REFRESH_TOKEN = "refresh"
 
 # Set Default Data:
 var data = {
 	WIN_HEIGHT : 350, 
 	WIN_WIDTH : 300,
-	CLIENT_ID : "empty_client"
+	ACCESS_TOKEN : "",
+	REFRESH_TOKEN : ""
 }
 
 func save_data(): 

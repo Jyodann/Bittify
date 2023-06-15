@@ -116,3 +116,29 @@ func get_new_access_token(refresh_token):
 	return Result.new(
 		false, {}
 	)
+
+func download_album_art(link):
+	var client = create_new_http_request_node("download_album")
+	
+	client.request(
+		link
+	);
+
+	var res = await client.request_completed
+
+	if (res[0] == 0):
+		var img = Image.new()
+		img.load_jpg_from_buffer(res[3])
+
+		var texture = ImageTexture.new()
+		texture.set_image(img)
+
+		return Result.new(
+			true, {
+				"texture" : texture,
+				"raw_image" : img
+			}
+		)
+	return Result.new(
+		false, {}
+	)

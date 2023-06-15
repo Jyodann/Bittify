@@ -2,7 +2,8 @@ extends Control
 
 
 @onready var main_song_title = $MainSongTitle
-
+@onready var album_art = $AlbumArt
+@onready var album_gradient = $AlbumGradient
 enum {
 	SUCCESS, LOADING, NOT_PLAYING
 }
@@ -14,6 +15,8 @@ func get_access_token():
 	return ApplicationStorage.get_data(ApplicationStorage.ACCESS_TOKEN)
 
 var access_token = "";
+
+var old_metadata = {}
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -34,6 +37,7 @@ func refresh_song():
 			var code = await NetworkRequests.get_new_access_token(get_refresh_token())
 			if (code.success):
 				ApplicationStorage.modify_data(ApplicationStorage.ACCESS_TOKEN, code.result.access_token)
+				access_token = get_access_token()
 			
 		await get_tree().create_timer(1).timeout
 		refresh_song()
@@ -50,12 +54,38 @@ func refresh_song():
 			pass
 		SUCCESS:
 			var data = song_info.metadata
-			main_song_title.change_text("%s by %s from %s" % [data.name, data.artist_name, data.album_name])
-			pass
+			
+			if (old_metadata != data):
+				var title = "%s by %s from %s" % [data.name, data.artist_name, data.album_name]
+				main_song_title.change_text(title)
+				WindowFunctions.change_window_title(title)
+				var art_download = await NetworkRequests.download_album_art(data.cover_art_link)
+				
+				if (art_download.success):
+					album_art.texture = art_download.result.texture
+					album_gradient.texture = generate_gradient(art_download.result.raw_image)
 
+					old_metadata = data
+				
 	await get_tree().create_timer(1).timeout
 
 	refresh_song()
+
+func generate_gradient(img: Image) -> GradientTexture2D:
+	var gradient = GradientTexture2D.new()
+	var gradientValues = Gradient.new()
+
+	var img_size = img.get_size()
+
+	gradientValues.set_color(0, img.get_pixel(img_size.x / 2, img_size.y / 2))
+	gradientValues.set_color(1, Color.BLACK)
+
+	gradient.fill_from = Vector2.ZERO
+	gradient.fill_to = Vector2(0, 1)
+
+	gradient.gradient = gradientValues
+
+	return gradient
 
 func get_metadata(json):
 	if (json.is_empty()):

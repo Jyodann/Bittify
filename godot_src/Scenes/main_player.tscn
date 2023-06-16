@@ -1,15 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cedi8xp8ducfa"]
+[gd_scene load_steps=4 format=3 uid="uid://cedi8xp8ducfa"]
 
 [ext_resource type="Script" path="res://Scripts/main_player.gd" id="1_m6ui3"]
 [ext_resource type="Texture2D" uid="uid://cb5wx3gwcn885" path="res://icon.svg" id="2_ufwm2"]
 [ext_resource type="PackedScene" uid="uid://dhnst0rrc37pj" path="res://Scenes/scrolling_word_component.tscn" id="2_xy54g"]
-
-[sub_resource type="Gradient" id="Gradient_452og"]
-offsets = PackedFloat32Array(0, 0.376238, 0.712871, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.580392, 0.278431, 0.117647, 1, 0.712871, 0.712871, 0.712871, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_xafjb"]
-gradient = SubResource("Gradient_452og")
 
 [node name="main_player" type="Control"]
 layout_mode = 3
@@ -32,7 +25,6 @@ anchor_bottom = 1.0
 offset_bottom = -50.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("GradientTexture2D_xafjb")
 expand_mode = 1
 
 [node name="AlbumArt" type="TextureRect" parent="."]

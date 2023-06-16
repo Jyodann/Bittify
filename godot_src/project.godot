@@ -28,6 +28,7 @@ ApplicationStorage="*res://Scripts/application_storage.gd"
 
 window/size/viewport_width=300
 window/size/viewport_height=350
+window/size/borderless=true
 
 [internationalization]
 

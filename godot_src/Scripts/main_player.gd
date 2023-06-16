@@ -62,14 +62,25 @@ func refresh_song():
 				var art_download = await NetworkRequests.download_album_art(data.cover_art_link)
 				
 				if (art_download.success):
-					album_art.texture = art_download.result.texture
-					album_gradient.texture = generate_gradient(art_download.result.raw_image)
+					#album_art.texture = art_download.result.texture
+					var gradient = generate_gradient(art_download.result.raw_image)
+
+					transition_art_texture(album_gradient, "texture" ,gradient)
+
+					transition_art_texture(album_art, "texture" ,art_download.result.texture)
 
 					old_metadata = data
 				
 	await get_tree().create_timer(1).timeout
 
 	refresh_song()
+
+
+func transition_art_texture(texture_component: TextureRect, property_to_transit: String, object_to_trasit_to: Variant):
+	var tween = get_tree().create_tween()
+	tween.tween_property(texture_component, "modulate", Color.TRANSPARENT, .5).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(texture_component, property_to_transit, object_to_trasit_to, 0)
+	tween.tween_property(texture_component, "modulate", Color.WHITE, .25).set_trans(Tween.TRANS_CUBIC)
 
 func generate_gradient(img: Image) -> GradientTexture2D:
 	var gradient = GradientTexture2D.new()

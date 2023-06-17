@@ -53,14 +53,18 @@ func refresh_song():
 		return
 	
 	if (!res.success):
-
-		if (res.result.error == "Token Expired"):
-			
+		print(res.result)
+		var response_code = res.result.response_code
+		# Handle Expired Token:
+		if (response_code == 401):
 			var code = await NetworkRequests.get_new_access_token(get_refresh_token())
 			if (code.success):
-				ApplicationStorage.modify_data(ApplicationStorage.ACCESS_TOKEN, code.result.access_token)
+				ApplicationStorage.modify_data(ApplicationStorage.ACCESS_TOKEN, code.result.body_string.access_token)
 				access_token = get_access_token()
-			
+		# Song not playing / No Device Detected
+		if (response_code == 204):
+			main_song_title.change_text("Player currently not running")
+		
 		await get_tree().create_timer(1).timeout
 		refresh_song()
 		return 

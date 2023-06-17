@@ -119,7 +119,7 @@ func get_new_access_token(refresh_token) -> Result:
 	);
 
 	var res = await client.request_completed
-
+	return check_for_sucess(res, false)
 	if (res[0] == 0):
 		var json = JSON.parse_string(res[3].get_string_from_utf8())
 

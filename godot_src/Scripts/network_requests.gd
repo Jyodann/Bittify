@@ -27,7 +27,11 @@ func create_new_http_request_node(request_node_name: String):
 	if (http_request_nodes.has(request_node_name)):
 		return http_request_nodes[request_node_name]
 	
-	http_request_nodes[request_node_name] = HTTPRequest.new()
+	var request = HTTPRequest.new()
+
+	request.timeout = 5
+
+	http_request_nodes[request_node_name] = request
 	add_child(http_request_nodes[request_node_name])
 	return http_request_nodes[request_node_name]
 

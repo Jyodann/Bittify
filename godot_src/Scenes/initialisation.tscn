@@ -1,9 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://3chnm3xo52ab"]
+[gd_scene load_steps=3 format=3 uid="uid://3chnm3xo52ab"]
 
 [ext_resource type="Script" path="res://Scripts/initialisation.gd" id="1_idix6"]
-[ext_resource type="PackedScene" uid="uid://d23fyxh6csgwh" path="res://Pages/login_page.tscn" id="2_qdw1p"]
 [ext_resource type="PackedScene" uid="uid://bbmlohuvt0lmk" path="res://Scenes/mouse_drag.tscn" id="2_xho5s"]
-[ext_resource type="PackedScene" uid="uid://cedi8xp8ducfa" path="res://Scenes/main_player.tscn" id="3_63lwv"]
 
 [node name="Initialisation" type="Control"]
 layout_mode = 3
@@ -31,16 +29,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="LoginPage" parent="ContentPage" instance=ExtResource("2_qdw1p")]
-visible = false
-layout_mode = 2
-
-[node name="PlayerPage" type="MarginContainer" parent="ContentPage"]
-layout_mode = 2
-
-[node name="main_player" parent="ContentPage/PlayerPage" instance=ExtResource("3_63lwv")]
-layout_mode = 2
 
 [node name="mouse_drag" parent="." instance=ExtResource("2_xho5s")]
 visible = false

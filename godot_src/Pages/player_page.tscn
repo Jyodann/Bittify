@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cx2ofeaduedw7"]
+
+[ext_resource type="PackedScene" uid="uid://cedi8xp8ducfa" path="res://Scenes/main_player.tscn" id="1_ohi3a"]
+
+[node name="PlayerPage" type="MarginContainer"]
+
+[node name="main_player" parent="." instance=ExtResource("1_ohi3a")]
+layout_mode = 2

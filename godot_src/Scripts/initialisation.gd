@@ -15,9 +15,8 @@ func _ready():
 	var access_token = ApplicationStorage.get_data(ApplicationStorage.ACCESS_TOKEN)
 
 	var res = await NetworkRequests.currently_playing_song(access_token)
-	print(res.result)
+	
 	if (!res.success):
-		
 		ContentPageShell.load_view(ContentPageShell.Page.LOGIN_PAGE)
 	else:
 		ContentPageShell.load_view(ContentPageShell.Page.PLAYER_PAGE)

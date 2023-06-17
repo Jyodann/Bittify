@@ -13,11 +13,14 @@ func _login_button_pressed():
 	OS.shell_open(NetworkRequests.oauth_url)
 
 func _bittify_go_button_pressed():
+	bittify_code_go_button.disabled = true
 	var bittify_code_request = await NetworkRequests.login_with_bittify_code(bittify_code_textedit.text)
+	bittify_code_go_button.disabled = false
 	if (!bittify_code_request.success):
 		return
-	var refresh_token = bittify_code_request.result.refresh_token
-	var access_token = bittify_code_request.result.access_token
+	print(bittify_code_request.result.body_string)
+	var refresh_token = bittify_code_request.result.body_string.refresh_token
+	var access_token = bittify_code_request.result.body_string.access_token
 	ApplicationStorage.modify_data(ApplicationStorage.REFRESH_TOKEN, refresh_token)
 	ApplicationStorage.modify_data(ApplicationStorage.ACCESS_TOKEN, access_token)
 

@@ -4,6 +4,7 @@ extends Control
 @onready var main_song_title = $MainSongTitle
 @onready var album_art = $AlbumArt
 @onready var album_gradient = $AlbumGradient
+@onready var disconnected_icon = preload("res://disconnected.png") 
 enum {
 	SUCCESS, LOADING, NOT_PLAYING
 }
@@ -30,6 +31,27 @@ func _ready():
 func refresh_song():
 	var res = await NetworkRequests.currently_playing_song(access_token)
 
+	if (!NetworkRequests.currently_online):
+		main_song_title.change_text("Not Connected. Attempting To Reconnect")
+		if (album_art.texture != disconnected_icon):
+			transition_art_texture(album_art, "texture", disconnected_icon)
+
+
+			var gradient = GradientTexture2D.new()
+			var gradientValues = Gradient.new()
+
+
+			gradientValues.set_color(0, Color.BLACK)
+			gradientValues.set_color(1, Color.BLACK)
+
+			gradient.gradient = gradientValues
+
+			transition_art_texture(album_gradient, "texture", gradient)
+		await get_tree().create_timer(5).timeout
+
+		refresh_song()
+		return
+	
 	if (!res.success):
 
 		if (res.result.error == "Token Expired"):
@@ -43,7 +65,7 @@ func refresh_song():
 		refresh_song()
 		return 
 	
-	var song_info = get_metadata(res.result)
+	var song_info = get_metadata(res.result.body_string)
 	
 	match (song_info.state):
 		NOT_PLAYING:
@@ -63,15 +85,24 @@ func refresh_song():
 				
 				if (art_download.success):
 					#album_art.texture = art_download.result.texture
-					var gradient = generate_gradient(art_download.result.raw_image)
+
+					var img = Image.new()
+					img.load_jpg_from_buffer(art_download.result.body_string)
+			
+					var texture = ImageTexture.new()
+					texture.set_image(img)
+					
+					var gradient = generate_gradient(img)
+
+
 
 					transition_art_texture(album_gradient, "texture" ,gradient)
 
-					transition_art_texture(album_art, "texture" ,art_download.result.texture)
+					transition_art_texture(album_art, "texture", texture)
 
 					old_metadata = data
 				
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(3).timeout
 
 	refresh_song()
 
@@ -97,6 +128,8 @@ func generate_gradient(img: Image) -> GradientTexture2D:
 	gradient.gradient = gradientValues
 
 	return gradient
+
+
 
 func get_metadata(json):
 	if (json.is_empty()):

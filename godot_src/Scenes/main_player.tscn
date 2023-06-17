@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cedi8xp8ducfa"]
+[gd_scene load_steps=5 format=3 uid="uid://cedi8xp8ducfa"]
 
 [ext_resource type="Script" path="res://Scripts/main_player.gd" id="1_m6ui3"]
 [ext_resource type="Texture2D" uid="uid://cb5wx3gwcn885" path="res://icon.svg" id="2_ufwm2"]
 [ext_resource type="PackedScene" uid="uid://dhnst0rrc37pj" path="res://Scenes/scrolling_word_component.tscn" id="2_xy54g"]
+[ext_resource type="Texture2D" uid="uid://df8wgsaaimt3f" path="res://Spotify_Icon_RGB_White.png" id="4_bo55y"]
 
 [node name="main_player" type="Control"]
 layout_mode = 3
@@ -46,10 +47,33 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_bottom = 1.0
 offset_top = -50.0
+offset_right = -50.0
 grow_vertical = 0
+offset_between_text = 32.0
 
 [node name="HBoxContainer" parent="MainSongTitle" index="1"]
 offset_left = 1.0
 offset_right = 1.0
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -50.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+texture = ExtResource("4_bo55y")
+expand_mode = 1
 
 [editable path="MainSongTitle"]

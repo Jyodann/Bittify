@@ -120,11 +120,22 @@ func transition_art_texture(texture_component: TextureRect, property_to_transit:
 func generate_gradient(img: Image) -> GradientTexture2D:
 	var gradient = GradientTexture2D.new()
 	var gradientValues = Gradient.new()
-
+	gradientValues.interpolation_mode = Gradient.GRADIENT_INTERPOLATE_CUBIC
 	var img_size = img.get_size()
+	gradientValues.offsets = [
+		0, .33, .5, .66, 1
+	]
+	
+	var colors = []
+	for i in range(gradientValues.offsets.size() - 1):
+		var offset_value = gradientValues.offsets[i]
+		print(offset_value)
+		print(img_size.y * offset_value)
+		var pixel = img.get_pixel(img_size.x / 2, img_size.y * offset_value)
+		colors.append(pixel)
 
-	gradientValues.set_color(0, img.get_pixel(img_size.x / 2, img_size.y / 2))
-	gradientValues.set_color(1, Color.BLACK)
+	colors.append(Color.BLACK)
+	gradientValues.colors = colors
 
 	gradient.fill_from = Vector2.ZERO
 	gradient.fill_to = Vector2(0, 1)

@@ -26,8 +26,6 @@ func _ready():
 
 	refresh_song()
 	
-	
-
 func refresh_song():
 	var res = await NetworkRequests.currently_playing_song(access_token)
 
@@ -165,7 +163,6 @@ func get_metadata(json):
 	var song_name = item.name
 
 	var external_link = item.external_urls.spotify
-	var is_song_playing = json.is_playing
 
 	var album_name = ""
 	var artist_name = ""

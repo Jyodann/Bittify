@@ -27,6 +27,11 @@ func attempt_load_player_page():
 				ApplicationStorage.modify_data(ApplicationStorage.ACCESS_TOKEN, new_token.result.body_string.access_token)
 				attempt_load_player_page()
 				return
+		
+		if (res.result.response_code == 204):
+			ContentPageShell.load_view(ContentPageShell.Page.PLAYER_PAGE)
+			return
+
 		ContentPageShell.load_view(ContentPageShell.Page.LOGIN_PAGE)
 	else:
 		ContentPageShell.load_view(ContentPageShell.Page.PLAYER_PAGE)

@@ -5,6 +5,10 @@ extends Control
 @onready var album_art = $AlbumArt
 @onready var album_gradient = $AlbumGradient
 @onready var disconnected_icon = preload("res://disconnected.png") 
+@onready var settings_overlay = $SettingsOverlay
+@onready var listen_on_spotify = $SettingsOverlay/ColorRect/MarginContainer2/ListenOnSpotifyButton
+
+var current_song_url = ""
 enum {
 	SUCCESS, LOADING, NOT_PLAYING
 }
@@ -19,13 +23,42 @@ var access_token = "";
 
 var old_metadata = {}
 
+var mouse_is_on_player = false
+var external_url_is_valid = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	main_song_title.change_text("Hello there, what time is it?")
 	access_token = get_access_token()
-
+	settings_overlay.modulate = Color.TRANSPARENT
 	refresh_song()
+	get_viewport().mouse_entered.connect(_on_mouse_enter)
+	get_viewport().mouse_exited.connect(_on_mouse_exit)
+
+	listen_on_spotify.pressed.connect(
+		open_ext_url
+	)
+func open_ext_url():	
+	if (current_song_url == ""):
+		return		
+	OS.shell_open(current_song_url)
+
+func _on_mouse_enter():
 	
+	mouse_is_on_player = true
+	var tween = get_tree().create_tween()
+	tween.tween_property(settings_overlay, "modulate", Color.WHITE, 0.25)
+	print("Mouse Enter")
+
+
+	
+func _on_mouse_exit():
+	var tween = get_tree().create_tween()
+	tween.tween_property(settings_overlay, "modulate", Color.TRANSPARENT, 0.25)
+	mouse_is_on_player = false
+	print("Mouse Exit")
+
+
 func refresh_song():
 	var res = await NetworkRequests.currently_playing_song(access_token)
 
@@ -68,19 +101,23 @@ func refresh_song():
 		return 
 	
 	var song_info = get_metadata(res.result.body_string)
-	
+	current_song_url = ""
 	match (song_info.state):
 		NOT_PLAYING:
+			external_url_is_valid = false
 			main_song_title.change_text("Player currently not running")
 			pass
 		LOADING:
+			external_url_is_valid = false
 			main_song_title.change_text("Loading Song...")
 			pass
 		SUCCESS:
 			var data = song_info.metadata
-			
+			external_url_is_valid = true
+			current_song_url = data.external_url
 			if (old_metadata != data):
 				var title = "%s by %s from %s" % [data.name, data.artist_name, data.album_name]
+				
 				main_song_title.change_text(title)
 				WindowFunctions.change_window_title(title)
 				var art_download = await NetworkRequests.download_album_art(data.cover_art_link)
@@ -96,14 +133,11 @@ func refresh_song():
 					
 					var gradient = generate_gradient(img)
 
-
-
 					transition_art_texture(album_gradient, "texture" ,gradient)
 
 					transition_art_texture(album_art, "texture", texture)
 
 					old_metadata = data
-				
 	await get_tree().create_timer(3).timeout
 
 	refresh_song()

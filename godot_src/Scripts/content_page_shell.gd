@@ -23,6 +23,7 @@ func clear_pages():
 	
 
 func load_view(page: Page):
+	clear_pages()
 	var curr_page = null
     
 	match page:

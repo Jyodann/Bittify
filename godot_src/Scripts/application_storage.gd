@@ -9,13 +9,15 @@ const WIN_HEIGHT = "win_height"
 const WIN_WIDTH = "win_width"
 const ACCESS_TOKEN = "token"
 const REFRESH_TOKEN = "refresh"
+const PIN_TO_TOP = "pinned"
 
 # Set Default Data:
 var data = {
 	WIN_HEIGHT : 350, 
 	WIN_WIDTH : 300,
 	ACCESS_TOKEN : "",
-	REFRESH_TOKEN : ""
+	REFRESH_TOKEN : "",
+    PIN_TO_TOP : false
 }
 
 func save_data(): 

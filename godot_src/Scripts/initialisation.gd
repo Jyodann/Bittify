@@ -8,13 +8,13 @@ func _ready():
 	var win_width = ApplicationStorage.get_data(ApplicationStorage.WIN_WIDTH)
 	WindowFunctions.set_up_min_window_size()
 	WindowFunctions.change_window_size(win_width, win_height)
-
+	WindowFunctions.set_up_resize()
 	
 	ContentPageShell.set_content_page_holder(content_holder)
 	
 	attempt_load_player_page()
 
-	
+
 func attempt_load_player_page():
 	var access_token = ApplicationStorage.get_data(ApplicationStorage.ACCESS_TOKEN)
 	var res = await NetworkRequests.currently_playing_song(access_token)

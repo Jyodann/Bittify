@@ -7,6 +7,7 @@ extends Control
 @onready var disconnected_icon = preload("res://disconnected.png") 
 @onready var settings_overlay = $SettingsOverlay
 @onready var listen_on_spotify = $SettingsOverlay/ColorRect/MarginContainer2/ListenOnSpotifyButton
+@onready var pin_on_top = $SettingsOverlay/ColorRect/PinOnTopCheckbox
 
 var current_song_url = ""
 enum {
@@ -38,6 +39,19 @@ func _ready():
 	listen_on_spotify.pressed.connect(
 		open_ext_url
 	)
+
+	pin_on_top.on_checked.connect(
+		pin_to_top_pressed
+	)
+
+	var loaded_pin_value = ApplicationStorage.get_data(ApplicationStorage.PIN_TO_TOP)
+	pin_on_top.change_checked_state(loaded_pin_value)
+	
+	print()
+
+func pin_to_top_pressed(pinned_status):
+	ApplicationStorage.modify_data(ApplicationStorage.PIN_TO_TOP, pinned_status)
+	WindowFunctions.change_window_always_on_top(pinned_status)
 func open_ext_url():	
 	if (current_song_url == ""):
 		return		
@@ -155,17 +169,18 @@ func generate_gradient(img: Image) -> GradientTexture2D:
 	gradientValues.interpolation_mode = Gradient.GRADIENT_INTERPOLATE_CUBIC
 	var img_size = img.get_size()
 	gradientValues.offsets = [
-		0, .33, .5, .66, 1
+		0, .33, .5, .66, .90, 1
 	]
 	
 	var colors = []
-	for i in range(gradientValues.offsets.size() - 1):
+	for i in range(gradientValues.offsets.size() - 2):
 		var offset_value = gradientValues.offsets[i]
 		print(offset_value)
 		print(img_size.y * offset_value)
 		var pixel = img.get_pixel(img_size.x / 2, img_size.y * offset_value)
 		colors.append(pixel)
 
+	colors.append(Color.BLACK)
 	colors.append(Color.BLACK)
 	gradientValues.colors = colors
 

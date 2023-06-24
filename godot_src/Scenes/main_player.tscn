@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://cedi8xp8ducfa"]
 
 [ext_resource type="Script" path="res://Scripts/main_player.gd" id="1_m6ui3"]
-[ext_resource type="PackedScene" uid="uid://dhnst0rrc37pj" path="res://Scenes/scrolling_word_component.tscn" id="2_xy54g"]
-[ext_resource type="Texture2D" uid="uid://pw0xg0y8arbg" path="res://Spotify_Icon_RGB_Green.png" id="3_4d0cx"]
-[ext_resource type="Texture2D" uid="uid://fx1q7v4n6lia" path="res://Spotify_Expanded.png" id="3_5u1cy"]
-[ext_resource type="PackedScene" uid="uid://cel5h4i7mo5d6" path="res://Scenes/checkbox_texture_component.tscn" id="4_fyoyi"]
-[ext_resource type="Texture2D" uid="uid://cb5wx3gwcn885" path="res://icon.svg" id="6_fblym"]
+[ext_resource type="PackedScene" uid="uid://dhnst0rrc37pj" path="res://Components/scrolling_word_component.tscn" id="2_xy54g"]
+[ext_resource type="Texture2D" uid="uid://pw0xg0y8arbg" path="res://Icons/Spotify_Icon_RGB_Green.png" id="3_4d0cx"]
+[ext_resource type="Texture2D" uid="uid://fx1q7v4n6lia" path="res://Icons/Spotify_Expanded.png" id="3_5u1cy"]
+[ext_resource type="PackedScene" uid="uid://cel5h4i7mo5d6" path="res://Components/checkbox_texture_component.tscn" id="4_fyoyi"]
+[ext_resource type="Texture2D" uid="uid://cb5wx3gwcn885" path="res://Icons/icon.svg" id="6_fblym"]
 
 [node name="main_player" type="Control"]
 layout_mode = 3
@@ -138,7 +138,7 @@ offset_bottom = 25.0
 grow_horizontal = 0
 tooltip_text = "Always Stay Pinned"
 
-[node name="TextureButton" type="TextureButton" parent="SettingsOverlay/ColorRect"]
+[node name="SettingsButton" type="TextureButton" parent="SettingsOverlay/ColorRect"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0

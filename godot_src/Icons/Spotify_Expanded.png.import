@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6mripxedg2hl"
-path="res://.godot/imported/pin_disabled.png-65f2ceb3ea6a36bca64653291fe7ea01.ctex"
+uid="uid://fx1q7v4n6lia"
+path="res://.godot/imported/Spotify_Expanded.png-5f3663b4c2c3a93dd920734d6632b6b1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://pin_disabled.png"
-dest_files=["res://.godot/imported/pin_disabled.png-65f2ceb3ea6a36bca64653291fe7ea01.ctex"]
+source_file="res://Icons/Spotify_Expanded.png"
+dest_files=["res://.godot/imported/Spotify_Expanded.png-5f3663b4c2c3a93dd920734d6632b6b1.ctex"]
 
 [params]
 

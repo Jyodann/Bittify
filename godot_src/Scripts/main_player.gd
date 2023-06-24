@@ -4,7 +4,7 @@ extends Control
 @onready var main_song_title = $MainSongTitle
 @onready var album_art = $AlbumArt
 @onready var album_gradient = $AlbumGradient
-@onready var disconnected_icon = preload("res://disconnected.png") 
+@onready var disconnected_icon = preload("res://Icons/disconnected.png")
 @onready var settings_overlay = $SettingsOverlay
 @onready var listen_on_spotify = $SettingsOverlay/ColorRect/MarginContainer2/ListenOnSpotifyButton
 @onready var pin_on_top = $SettingsOverlay/ColorRect/PinOnTopCheckbox

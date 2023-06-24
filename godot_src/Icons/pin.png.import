@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pw0xg0y8arbg"
-path="res://.godot/imported/Spotify_Icon_RGB_Green.png-b3644cfcee3033531f68be3649fa1921.ctex"
+uid="uid://fbk1sinhcquu"
+path="res://.godot/imported/pin.png-a728d812eaa7a6252533b3be0d6ceb92.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Spotify_Icon_RGB_Green.png"
-dest_files=["res://.godot/imported/Spotify_Icon_RGB_Green.png-b3644cfcee3033531f68be3649fa1921.ctex"]
+source_file="res://Icons/pin.png"
+dest_files=["res://.godot/imported/pin.png-a728d812eaa7a6252533b3be0d6ceb92.ctex"]
 
 [params]
 

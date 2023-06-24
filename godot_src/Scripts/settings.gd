@@ -4,13 +4,13 @@ extends Control
 @onready var check_box_component = preload("res://Scenes/checkbox_component.tscn")
 var settings_dict = {
 	"Window Settings" : {
-		"hello" : check_box_component
+		"hello" : check_box_component.new()
 	}, 
 	"Language" : {
 
 	}, 
 	"Text Display" : {
-
+		"" : ""
 	}
 }
 

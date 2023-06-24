@@ -4,7 +4,7 @@ extends Node
 @onready var player_page = preload("res://Pages/player_page.tscn")
 
 enum Page {
-    LOGIN_PAGE, PLAYER_PAGE
+	LOGIN_PAGE, PLAYER_PAGE
 }
 
 var content_page_holder = null
@@ -25,7 +25,7 @@ func clear_pages():
 func load_view(page: Page):
 	clear_pages()
 	var curr_page = null
-    
+	
 	match page:
 		Page.LOGIN_PAGE:
 			curr_page = login_page 

@@ -14,7 +14,7 @@ func change_window_always_on_top(is_always_on_top):
 	get_window().always_on_top = is_always_on_top
 	
 func set_up_min_window_size():
-	get_window().min_size = Vector2i(200, 250)
+	get_window().min_size = Vector2i(300, 250)
 
 func change_window_title(title):
 	if (title == ""):

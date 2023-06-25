@@ -15,10 +15,10 @@ enum {
 }
 
 func get_refresh_token():
-	return ApplicationStorage.get_data(ApplicationStorage.REFRESH_TOKEN)
+	return ApplicationStorage.get_data(ApplicationStorage.Settings.REFRESH_TOKEN)
 
 func get_access_token():
-	return ApplicationStorage.get_data(ApplicationStorage.ACCESS_TOKEN)
+	return ApplicationStorage.get_data(ApplicationStorage.Settings.ACCESS_TOKEN)
 
 var access_token = "";
 
@@ -44,13 +44,13 @@ func _ready():
 		pin_to_top_pressed
 	)
 
-	var loaded_pin_value = ApplicationStorage.get_data(ApplicationStorage.PIN_TO_TOP)
+	var loaded_pin_value = ApplicationStorage.get_data(ApplicationStorage.Settings.PIN_TO_TOP)
 	pin_on_top.change_checked_state(loaded_pin_value)
 	
 	print()
 
 func pin_to_top_pressed(pinned_status):
-	ApplicationStorage.modify_data(ApplicationStorage.PIN_TO_TOP, pinned_status)
+	ApplicationStorage.modify_data(ApplicationStorage.Settings.PIN_TO_TOP, pinned_status)
 	WindowFunctions.change_window_always_on_top(pinned_status)
 func open_ext_url():	
 	if (current_song_url == ""):
@@ -104,7 +104,7 @@ func refresh_song():
 		if (response_code == 401):
 			var code = await NetworkRequests.get_new_access_token(get_refresh_token())
 			if (code.success):
-				ApplicationStorage.modify_data(ApplicationStorage.ACCESS_TOKEN, code.result.body_string.access_token)
+				ApplicationStorage.modify_data(ApplicationStorage.Settings.ACCESS_TOKEN, code.result.body_string.access_token)
 				access_token = get_access_token()
 		# Song not playing / No Device Detected
 		if (response_code == 204):

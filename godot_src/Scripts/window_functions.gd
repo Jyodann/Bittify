@@ -35,8 +35,8 @@ func set_up_resize():
 	current_timer.timeout.connect(
 		func():
 			var size = DisplayServer.window_get_size()
-			ApplicationStorage.modify_data(ApplicationStorage.WIN_HEIGHT, size.y)
-			ApplicationStorage.modify_data(ApplicationStorage.WIN_WIDTH, size.x)
+			ApplicationStorage.modify_data(ApplicationStorage.Settings.WIN_HEIGHT, size.y)
+			ApplicationStorage.modify_data(ApplicationStorage.Settings.WIN_WIDTH, size.x)
 	)
 
 func on_resize_prepared():

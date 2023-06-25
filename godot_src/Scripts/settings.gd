@@ -1,15 +1,24 @@
 extends Control
+
 @export var size_of_headers = 18
 @onready var scroll_box = $ScrollContainer/MarginContainer/VBoxContainer
 @onready var log_out_button = $LogOut
 @onready var check_box_component = preload("res://Components/checkbox_component.tscn")
 @onready var settings_dict = {
 	"Window Settings" : {
-		"Always on Top" : check_box_component,
-		"Here with you" : check_box_component
+		"Always on Top" : SettingBoundComponent.new(check_box_component, ApplicationStorage.Settings.PIN_TO_TOP),
+		"Borderless" : SettingBoundComponent.new(check_box_component, ApplicationStorage.Settings.PIN_TO_TOP)
 	}
 	
 }
+
+class SettingBoundComponent:
+	var component
+	var setting: ApplicationStorage.Settings
+
+	func _init(_component, _setting):
+		component = _component
+		setting = _setting
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -34,12 +43,12 @@ func _ready():
 
 		scroll_box.add_child(vbox)
 		for i in dictionary:
-			var component = dictionary[i].instantiate()
+			var component = dictionary[i].component.instantiate()
 
 			vbox.add_child(component)
 			print("		SettingName: %s" % i)
 
-			component._setup(i)
+			component._setup(i, dictionary[i].setting)
 		
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:

@@ -14,7 +14,8 @@ enum Settings {
 	ACCESS_TOKEN, 
 	REFRESH_TOKEN,
 	PIN_TO_TOP,
-	SPEED_OF_SONG
+	SPEED_OF_SONG,
+	BORDERLESS
 }
 
 # Set Default Data:
@@ -28,7 +29,8 @@ var default_data = {
 	Settings.ACCESS_TOKEN : "",
 	Settings.REFRESH_TOKEN : "",
 	Settings.PIN_TO_TOP : false,
-	Settings.SPEED_OF_SONG : 1.0
+	Settings.SPEED_OF_SONG : 1.0,
+	Settings.BORDERLESS : false
 }
 
 func _prep_data():

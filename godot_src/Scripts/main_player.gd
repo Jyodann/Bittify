@@ -44,10 +44,12 @@ func _ready():
 		pin_to_top_pressed
 	)
 
-	var loaded_pin_value = ApplicationStorage.get_data(ApplicationStorage.Settings.PIN_TO_TOP)
-	pin_on_top.change_checked_state(loaded_pin_value)
-	
-	print()
+	ApplicationStorage.on_settings_change.connect(
+		func(data):
+			var is_pinned = ApplicationStorage.filter_emit_data(data, ApplicationStorage.Settings.PIN_TO_TOP)
+			print(is_pinned)
+	)
+
 
 func pin_to_top_pressed(pinned_status):
 	ApplicationStorage.modify_data(ApplicationStorage.Settings.PIN_TO_TOP, pinned_status)

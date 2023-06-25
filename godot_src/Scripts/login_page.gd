@@ -21,8 +21,8 @@ func _bittify_go_button_pressed():
 	print(bittify_code_request.result.body_string)
 	var refresh_token = bittify_code_request.result.body_string.refresh_token
 	var access_token = bittify_code_request.result.body_string.access_token
-	ApplicationStorage.modify_data(ApplicationStorage.REFRESH_TOKEN, refresh_token)
-	ApplicationStorage.modify_data(ApplicationStorage.ACCESS_TOKEN, access_token)
+	ApplicationStorage.modify_data(ApplicationStorage.Settings.REFRESH_TOKEN, refresh_token)
+	ApplicationStorage.modify_data(ApplicationStorage.Settings.ACCESS_TOKEN, access_token)
 
 	ContentPageShell.load_view(ContentPageShell.Page.PLAYER_PAGE)
 

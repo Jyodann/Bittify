@@ -12,10 +12,11 @@ func _ready():
 	texture_button.pressed.connect(check_button)
 	on_checked.connect(change_textures)
 
-func change_checked_state(checked_state):
+func change_checked_state(checked_state, emit_change_signal: bool = false):
 	checked = checked_state
-	on_checked.emit(checked)
-	
+	if (emit_change_signal):
+		on_checked.emit(checked)
+	change_textures(checked)
 
 func check_button():
 	checked = !checked

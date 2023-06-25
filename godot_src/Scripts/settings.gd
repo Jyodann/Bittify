@@ -1,6 +1,7 @@
 extends Control
 @export var size_of_headers = 18
 @onready var scroll_box = $ScrollContainer/MarginContainer/VBoxContainer
+@onready var log_out_button = $LogOut
 @onready var check_box_component = preload("res://Components/checkbox_component.tscn")
 @onready var settings_dict = {
 	"Window Settings" : {
@@ -12,6 +13,14 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	log_out_button.pressed.connect(
+		func():
+			ApplicationStorage.modify_data(ApplicationStorage.Settings.ACCESS_TOKEN, "")
+			ApplicationStorage.modify_data(ApplicationStorage.Settings.REFRESH_TOKEN, "")
+			ContentPageShell.load_view(ContentPageShell.Page.LOGIN_PAGE)
+			get_parent().queue_free()
+	)
+
 	for setting_header in settings_dict:
 		var label = Label.new()
 		label.text = setting_header
@@ -32,6 +41,8 @@ func _ready():
 
 			component._setup(i)
 		
-			
-			
+func _notification(what):
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		get_parent().queue_free()
+
 		

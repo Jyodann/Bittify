@@ -88,3 +88,6 @@ func _convert_string_to_enum(key: String) -> Settings:
 
 func filter_emit_data(emit_data: Variant, key: Settings) -> Variant:
 	return emit_data[_convert_enum_to_str(key)]
+
+func force_emit_data() -> void:
+	on_settings_change.emit(data)

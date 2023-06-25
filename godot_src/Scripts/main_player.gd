@@ -1,14 +1,17 @@
 extends Control
 
 
+@onready var disconnected_icon = preload("res://Icons/disconnected.png")
+@onready var settings_window = preload("res://Scenes/settings.tscn")
+
 @onready var main_song_title = $MainSongTitle
 @onready var album_art = $AlbumArt
 @onready var album_gradient = $AlbumGradient
-@onready var disconnected_icon = preload("res://Icons/disconnected.png")
+
 @onready var settings_overlay = $SettingsOverlay
 @onready var listen_on_spotify = $SettingsOverlay/ColorRect/MarginContainer2/ListenOnSpotifyButton
-@onready var pin_on_top = $SettingsOverlay/ColorRect/PinOnTopCheckbox
-
+@onready var pin_on_top = $SettingsOverlay/ColorRect/PinOnTopCheckbox 
+@onready var settings_button = $SettingsOverlay/ColorRect/SettingsButton
 var current_song_url = ""
 enum {
 	SUCCESS, LOADING, NOT_PLAYING
@@ -29,6 +32,7 @@ var external_url_is_valid = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
 	main_song_title.change_text("Hello there, what time is it?")
 	access_token = get_access_token()
 	settings_overlay.modulate = Color.TRANSPARENT
@@ -44,16 +48,27 @@ func _ready():
 		pin_to_top_pressed
 	)
 
+	settings_button.pressed.connect(
+		open_settings
+	)
+
 	ApplicationStorage.on_settings_change.connect(
 		func(data):
 			var is_pinned = ApplicationStorage.filter_emit_data(data, ApplicationStorage.Settings.PIN_TO_TOP)
-			print(is_pinned)
+			pin_on_top.change_checked_state(is_pinned)
 	)
 
+	ApplicationStorage.force_emit_data()
+func open_settings():
+		var window = settings_window.instantiate()
+
+		window.title = "Settings"
+		get_tree().root.add_child(window)
 
 func pin_to_top_pressed(pinned_status):
 	ApplicationStorage.modify_data(ApplicationStorage.Settings.PIN_TO_TOP, pinned_status)
 	WindowFunctions.change_window_always_on_top(pinned_status)
+
 func open_ext_url():	
 	if (current_song_url == ""):
 		return		
@@ -64,7 +79,6 @@ func _on_mouse_enter():
 	mouse_is_on_player = true
 	var tween = get_tree().create_tween()
 	tween.tween_property(settings_overlay, "modulate", Color.WHITE, 0.25)
-	print("Mouse Enter")
 
 
 	
@@ -72,7 +86,6 @@ func _on_mouse_exit():
 	var tween = get_tree().create_tween()
 	tween.tween_property(settings_overlay, "modulate", Color.TRANSPARENT, 0.25)
 	mouse_is_on_player = false
-	print("Mouse Exit")
 
 
 func refresh_song():

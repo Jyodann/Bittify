@@ -29,6 +29,7 @@ ContentPageShell="*res://Scripts/content_page_shell.gd"
 window/size/viewport_width=300
 window/size/viewport_height=350
 window/size/extend_to_title=true
+window/subwindows/embed_subwindows=false
 
 [internationalization]
 

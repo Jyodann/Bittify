@@ -10,6 +10,7 @@ func _setup(name_of_setting, setting_to_track):
 
 	check_button.pressed.connect(
 		func():
+			WindowFunctions.change_window_always_on_top(check_button.button_pressed)
 			ApplicationStorage.modify_data(setting_to_track, check_button.button_pressed)
 	)
 

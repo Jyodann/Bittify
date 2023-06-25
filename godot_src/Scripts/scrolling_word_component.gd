@@ -1,7 +1,7 @@
 extends Control
 
 @export var offset_between_text = 8.0
-
+@export var speed_of_text = 50
 @onready var song_name_label = $HBoxContainer/song_name
 @onready var duplicate_song_label = $duplicate_song_name
 
@@ -16,7 +16,7 @@ func _ready():
 	duplicate_song_label.position.y = song_name_label.position.y
 	pass
 
-func _physics_process(_delta):
+func _process(delta):
 	if (song_name_label.size.x > size.x):
 		is_animating = true
 		duplicate_song_label.text = song_name_label.text
@@ -33,11 +33,11 @@ func _physics_process(_delta):
 		
 
 		if (is_duplicate_following):
-			song_name_label.position += Vector2(-0.5, 0)
+			song_name_label.position += Vector2.LEFT * delta * speed_of_text
 
 			duplicate_song_label.position = Vector2(song_name_label.get_end().x + offset_between_text, song_name_label.position.y)
 
 		else:
-			duplicate_song_label.position += Vector2(-0.5, 0)
+			duplicate_song_label.position += Vector2.LEFT * delta * speed_of_text
 
 			song_name_label.position = Vector2(duplicate_song_label.get_end().x + offset_between_text, duplicate_song_label.position.y)

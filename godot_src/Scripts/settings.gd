@@ -7,7 +7,6 @@ extends Control
 @onready var settings_dict = {
 	"Window Settings" : {
 		"Always on Top" : SettingBoundComponent.new(check_box_component, ApplicationStorage.Settings.PIN_TO_TOP),
-		"Borderless" : SettingBoundComponent.new(check_box_component, ApplicationStorage.Settings.PIN_TO_TOP)
 	}
 	
 }

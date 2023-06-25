@@ -27,11 +27,18 @@ theme_override_constants/margin_bottom = 4
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+alignment = 1
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "SETTING"
 
-[node name="CheckButton" type="CheckButton" parent="MarginContainer/HBoxContainer"]
+[node name="HSlider" type="HSlider" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+step = 25.0
+rounded = true
+tick_count = 5
+ticks_on_borders = true

@@ -18,6 +18,14 @@ enum Settings {
 	BORDERLESS
 }
 
+enum SpeedOfSong {
+	SLOWEST = 20,
+	SLOW = 30,
+	DEFAULT = 40,
+	FAST = 55,
+	FASTEST = 70
+}
+
 # Set Default Data:
 var data = {
 	
@@ -29,7 +37,7 @@ var default_data = {
 	Settings.ACCESS_TOKEN : "",
 	Settings.REFRESH_TOKEN : "",
 	Settings.PIN_TO_TOP : false,
-	Settings.SPEED_OF_SONG : 1.0,
+	Settings.SPEED_OF_SONG : SpeedOfSong.DEFAULT,
 	Settings.BORDERLESS : false
 }
 

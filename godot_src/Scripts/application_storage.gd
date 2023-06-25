@@ -10,6 +10,7 @@ const WIN_WIDTH = "win_width"
 const ACCESS_TOKEN = "token"
 const REFRESH_TOKEN = "refresh"
 const PIN_TO_TOP = "pinned"
+const SPEED_OF_SONG = "speed"
 
 # Set Default Data:
 var data = {
@@ -17,7 +18,8 @@ var data = {
 	WIN_WIDTH : 300,
 	ACCESS_TOKEN : "",
 	REFRESH_TOKEN : "",
-    PIN_TO_TOP : false
+    PIN_TO_TOP : false,
+    SPEED_OF_SONG : 1.0
 }
 
 func save_data(): 

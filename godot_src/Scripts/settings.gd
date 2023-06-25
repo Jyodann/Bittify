@@ -1,11 +1,8 @@
 extends Control
 @export var size_of_headers = 18
 @onready var scroll_box = $ScrollContainer/MarginContainer/VBoxContainer
-@onready var check_box_component = load("res://Components/checkbox_component.tscn")
+@onready var check_box_component = preload("res://Components/checkbox_component.tscn")
 @onready var settings_dict = {
-	"Language": {
-		"Display Language" : check_box_component
-	},
 	"Window Settings" : {
 		"Always on Top" : check_box_component,
 		"Here with you" : check_box_component
@@ -32,7 +29,9 @@ func _ready():
 
 			vbox.add_child(component)
 			print("		SettingName: %s" % i)
-			
+
+			component._setup(i)
+		
 			
 			
 		

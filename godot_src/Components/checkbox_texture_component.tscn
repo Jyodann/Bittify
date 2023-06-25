@@ -1,9 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://cel5h4i7mo5d6"]
+[gd_scene load_steps=2 format=3 uid="uid://cel5h4i7mo5d6"]
 
 [ext_resource type="Script" path="res://Scripts/checkbox_texture_component.gd" id="1_1h5yg"]
-[ext_resource type="Texture2D" uid="uid://fbk1sinhcquu" path="res://Icons/pin.png" id="2_m2nj8"]
-[ext_resource type="Texture2D" uid="uid://bmpknwwlo2ex2" path="res://Icons/unpin.png" id="3_xee2g"]
-[ext_resource type="Texture2D" uid="uid://cb5wx3gwcn885" path="res://Icons/icon.svg" id="4_w7o81"]
 
 [node name="checkbox_texture_component" type="Control"]
 layout_mode = 3
@@ -13,8 +10,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1h5yg")
-unchecked_texture = ExtResource("2_m2nj8")
-checked_texture = ExtResource("3_xee2g")
 
 [node name="TextureButton" type="TextureButton" parent="."]
 layout_mode = 1
@@ -23,6 +18,5 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture_normal = ExtResource("4_w7o81")
 ignore_texture_size = true
 stretch_mode = 0

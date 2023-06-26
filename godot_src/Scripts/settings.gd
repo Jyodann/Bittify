@@ -34,8 +34,7 @@ func _ready():
 	launch_player.pressed.connect(
 		func():
 			var window = player.instantiate()
-
-			window.title = "Player"
+			
 			get_tree().root.add_child(window)
 	)
 
@@ -59,8 +58,6 @@ func _ready():
 
 			component._setup(i, dictionary[i].setting)
 		
-func _notification(what):
-	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		get_parent().queue_free()
+
 
 		

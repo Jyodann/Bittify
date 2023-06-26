@@ -3,15 +3,7 @@ extends Control
 @onready var content_holder = $ContentPage
 func _ready():
 	print("Performing Initial Startup checks")
-	
-	var win_height = ApplicationStorage.get_data(ApplicationStorage.Settings.WIN_HEIGHT)
-	var win_width = ApplicationStorage.get_data(ApplicationStorage.Settings.WIN_WIDTH)
-	WindowFunctions.set_up_min_window_size()
-	WindowFunctions.change_window_size(win_width, win_height)
-	WindowFunctions.set_up_resize()
-	
 	ContentPageShell.set_content_page_holder(content_holder)
-	
 	attempt_load_player_page()
 
 

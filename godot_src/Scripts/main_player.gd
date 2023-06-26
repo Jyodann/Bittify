@@ -39,7 +39,14 @@ func _ready():
 	refresh_song()
 	get_viewport().mouse_entered.connect(_on_mouse_enter)
 	get_viewport().mouse_exited.connect(_on_mouse_exit)
-
+	var win_height = ApplicationStorage.get_data(ApplicationStorage.Settings.WIN_HEIGHT)
+	var win_width = ApplicationStorage.get_data(ApplicationStorage.Settings.WIN_WIDTH)
+	var win_pos_x =  ApplicationStorage.get_data(ApplicationStorage.Settings.WIN_POS_X)
+	var win_pos_y =  ApplicationStorage.get_data(ApplicationStorage.Settings.WIN_POS_Y)
+	WindowFunctions.set_up_min_window_size(get_window())
+	WindowFunctions.change_window_size(win_width, win_height, get_window())
+	
+	WindowFunctions.change_window_position(win_pos_x, win_pos_y, get_window())
 	listen_on_spotify.pressed.connect(
 		open_ext_url
 	)
@@ -56,6 +63,7 @@ func _ready():
 		func(data):
 			var is_pinned = ApplicationStorage.filter_emit_data(data, ApplicationStorage.Settings.PIN_TO_TOP)
 			pin_on_top.change_checked_state(is_pinned)
+			WindowFunctions.change_window_always_on_top(is_pinned, get_window())
 	)
 
 	ApplicationStorage.force_emit_data()
@@ -67,7 +75,7 @@ func open_settings():
 
 func pin_to_top_pressed(pinned_status):
 	ApplicationStorage.modify_data(ApplicationStorage.Settings.PIN_TO_TOP, pinned_status)
-	WindowFunctions.change_window_always_on_top(pinned_status, get_window())
+	
 
 func open_ext_url():	
 	if (current_song_url == ""):
@@ -269,3 +277,13 @@ func get_metadata(json):
 		}
 
 
+func _notification(what):
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		var current_size = get_window().size
+		var current_window_position = get_window().position
+		ApplicationStorage.modify_data(ApplicationStorage.Settings.WIN_HEIGHT, current_size.y, false)
+		ApplicationStorage.modify_data(ApplicationStorage.Settings.WIN_WIDTH, current_size.x, false)
+		ApplicationStorage.modify_data(ApplicationStorage.Settings.WIN_POS_X, current_window_position.x, false)
+		ApplicationStorage.modify_data(ApplicationStorage.Settings.WIN_POS_Y, current_window_position.y, false)
+		get_tree().root.move_to_foreground()
+		get_parent().queue_free()

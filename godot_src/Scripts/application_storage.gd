@@ -11,6 +11,8 @@ signal on_settings_change(new_settings: Variant)
 enum Settings {
 	WIN_HEIGHT, 
 	WIN_WIDTH,
+	WIN_POS_X,
+	WIN_POS_Y,
 	ACCESS_TOKEN, 
 	REFRESH_TOKEN,
 	PIN_TO_TOP,
@@ -38,7 +40,9 @@ var default_data = {
 	Settings.REFRESH_TOKEN : "",
 	Settings.PIN_TO_TOP : false,
 	Settings.SPEED_OF_SONG : SpeedOfSong.DEFAULT,
-	Settings.BORDERLESS : false
+	Settings.BORDERLESS : false,
+	Settings.WIN_POS_X : 300,
+	Settings.WIN_POS_Y : 300
 }
 
 func _prep_data():

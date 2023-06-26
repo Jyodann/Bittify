@@ -2,9 +2,9 @@ extends Node
 
 @onready var login_page = preload("res://Pages/login_page.tscn")
 @onready var player_page = preload("res://Pages/player_page.tscn")
-
+@onready var settings_page = preload("res://Pages/settings_page.tscn")
 enum Page {
-	LOGIN_PAGE, PLAYER_PAGE
+	LOGIN_PAGE, PLAYER_PAGE, SETTINGS_PAGE
 }
 
 var content_page_holder = null
@@ -31,6 +31,8 @@ func load_view(page: Page):
 			curr_page = login_page 
 		Page.PLAYER_PAGE:
 			curr_page = player_page 
+		Page.SETTINGS_PAGE:
+			curr_page = settings_page
 			
 	var scene = curr_page.instantiate()
 	content_page_holder.add_child(scene)

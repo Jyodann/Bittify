@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cggpe2q486v1y"]
+
+[ext_resource type="PackedScene" uid="uid://wfp154h4swfn" path="res://Scenes/settings_menu.tscn" id="1_0qii0"]
+
+[node name="settings_page" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="settings_menu" parent="." instance=ExtResource("1_0qii0")]
+layout_mode = 2

@@ -2,8 +2,10 @@ extends Control
 
 @export var size_of_headers = 18
 @onready var scroll_box = $ScrollContainer/MarginContainer/VBoxContainer
-@onready var log_out_button = $LogOut
+@onready var log_out_button = $HBoxContainer/LogOut
 @onready var check_box_component = preload("res://Components/checkbox_component.tscn")
+@onready var player = preload("res://Pages/player_page.tscn")
+@onready var launch_player = $HBoxContainer/LaunchMiniplayer
 @onready var settings_dict = {
 	"Window Settings" : {
 		"Always on Top" : SettingBoundComponent.new(check_box_component, ApplicationStorage.Settings.PIN_TO_TOP),
@@ -27,6 +29,14 @@ func _ready():
 			ApplicationStorage.modify_data(ApplicationStorage.Settings.REFRESH_TOKEN, "")
 			ContentPageShell.load_view(ContentPageShell.Page.LOGIN_PAGE)
 			get_parent().queue_free()
+	)
+
+	launch_player.pressed.connect(
+		func():
+			var window = player.instantiate()
+
+			window.title = "Player"
+			get_tree().root.add_child(window)
 	)
 
 	for setting_header in settings_dict:

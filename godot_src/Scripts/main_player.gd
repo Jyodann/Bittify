@@ -67,7 +67,7 @@ func open_settings():
 
 func pin_to_top_pressed(pinned_status):
 	ApplicationStorage.modify_data(ApplicationStorage.Settings.PIN_TO_TOP, pinned_status)
-	WindowFunctions.change_window_always_on_top(pinned_status)
+	WindowFunctions.change_window_always_on_top(pinned_status, get_window())
 
 func open_ext_url():	
 	if (current_song_url == ""):
@@ -148,7 +148,7 @@ func refresh_song():
 				var title = "%s by %s from %s" % [data.name, data.artist_name, data.album_name]
 				
 				main_song_title.change_text(title)
-				WindowFunctions.change_window_title(title)
+				WindowFunctions.change_window_title(title, get_window())
 				var art_download = await NetworkRequests.download_album_art(data.cover_art_link)
 				
 				if (art_download.success):

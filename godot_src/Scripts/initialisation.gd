@@ -29,11 +29,11 @@ func attempt_load_player_page():
 				return
 		
 		if (res.result.response_code == 204):
-			ContentPageShell.load_view(ContentPageShell.Page.PLAYER_PAGE)
+			ContentPageShell.load_view(ContentPageShell.Page.SETTINGS_PAGE)
 			return
 
 		ContentPageShell.load_view(ContentPageShell.Page.LOGIN_PAGE)
 	else:
-		ContentPageShell.load_view(ContentPageShell.Page.PLAYER_PAGE)
+		ContentPageShell.load_view(ContentPageShell.Page.SETTINGS_PAGE)
 
 

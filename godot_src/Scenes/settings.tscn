@@ -7,5 +7,6 @@ gui_embed_subwindows = true
 initial_position = 1
 size = Vector2i(800, 600)
 transient = true
+borderless = true
 
 [node name="Control" parent="." instance=ExtResource("2_r7is5")]

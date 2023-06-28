@@ -74,7 +74,8 @@ func _refresh_song() -> PlayerData:
 	
 	if (previous_player_state == PlayerState.RATE_LIMIT_OVERLOADED):
 		await get_tree().create_timer(CHECK_RATE_LIMIT_DELAY_SEC).timeout
-
+	
+	previous_player_state = PlayerState.SUCCESS
 	if (number_of_sessions == 0):
 		is_ready = true
 		return PlayerData.new(
@@ -102,8 +103,8 @@ func _refresh_song() -> PlayerData:
 				return PlayerData.new(
 					PlayerState.ACCESS_TOKEN_REFRESH_SUCESS
 				)
-			# Wait 5 Seconds at least before next refresh:
 			
+			previous_player_state = PlayerState.ACCESS_TOKEN_REFRESH_FAILED
 			is_ready = true
 			return PlayerData.new(
 				PlayerState.ACCESS_TOKEN_REFRESH_FAILED
@@ -114,6 +115,7 @@ func _refresh_song() -> PlayerData:
 				PlayerState.NO_SPOTIFY_SESSIONS
 			)
 		if (response_code == ResponseCodes.RATE_LIMIT_OVERLOADED):
+			previous_player_state = PlayerState.RATE_LIMIT_OVERLOADED
 			is_ready = true
 			return PlayerData.new(
 				PlayerState.RATE_LIMIT_OVERLOADED

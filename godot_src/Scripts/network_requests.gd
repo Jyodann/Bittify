@@ -85,7 +85,7 @@ func download_album_art(link) -> Result:
 	);
 
 	var res = await client.request_completed
-
+	
 	return check_for_sucess(res, true)
 
 func check_for_sucess(res, return_raw: bool) -> Result:

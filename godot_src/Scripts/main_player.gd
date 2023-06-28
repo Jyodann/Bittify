@@ -23,9 +23,9 @@ func get_refresh_token():
 func get_access_token():
 	return ApplicationStorage.get_data(ApplicationStorage.Settings.ACCESS_TOKEN)
 
-var access_token = "";
+var access_token = ""
 
-var old_metadata = {}
+var old_link = ""
 
 var mouse_is_on_player = false
 var external_url_is_valid = false
@@ -74,38 +74,35 @@ func _ready():
 
 func change_displayed_data(play_data: SongManager.PlayerData):
 	external_url_is_valid = false
+	print(play_data.player_state)
 	if (play_data.player_state == SongManager.PlayerState.SUCCESS):
 
 		var data = play_data.data
+		
 		external_url_is_valid = true
 		current_song_url = data.external_url
 
-		if (old_metadata != data):
+		if (old_link != current_song_url):
 			var title = "%s by %s from %s" % [data.name, data.artist_name, data.album_name]
 				
 			main_song_title.change_text(title)
 			WindowFunctions.change_window_title(title, get_window())
-			var art_download = await NetworkRequests.download_album_art(data.cover_art_link)
-			
-			if (art_download.success):
-				#album_art.texture = art_download.result.texture
-
-				var img = Image.new()
-				img.load_jpg_from_buffer(art_download.result.body_string)
-		
-				var texture = ImageTexture.new()
-				texture.set_image(img)
+	
+			var texture = ImageTexture.new()
+			texture.set_image(data.img)
 				
-				var gradient = generate_gradient(img)
+			var gradient = generate_gradient(data.img)
 
-				transition_art_texture(album_gradient, "texture" ,gradient)
+			transition_art_texture(album_gradient, "texture" ,gradient)
 
-				transition_art_texture(album_art, "texture", texture)
+			transition_art_texture(album_art, "texture", texture)
 
-				old_metadata = data
+			old_link = current_song_url
 		return
 
-
+	if (play_data.player_state == SongManager.PlayerState.RATE_LIMIT_OVERLOADED):
+		main_song_title.change_text("Servers are currently too busy. Attempting to retry connection...")
+	
 	if (play_data.player_state == SongManager.PlayerState.LOADING):
 		main_song_title.change_text("Loading Song...")
 
@@ -194,69 +191,6 @@ func generate_gradient(img: Image) -> GradientTexture2D:
 
 	gradient.gradient = gradientValues
 	return gradient
-
-
-
-func get_metadata(json):
-	if (json.is_empty()):
-		return {
-			"state" : NOT_PLAYING,
-			"metadata" : {}
-		}
-	
-	var currently_playing_type = json.currently_playing_type
-
-	if (currently_playing_type == "unknown"):
-		return {
-			"state" : LOADING,
-			"metadata" : {}
-		}
-
-	var item = json.item
-	var song_name = item.name
-
-	var external_link = item.external_urls.spotify
-
-	var album_name = ""
-	var artist_name = ""
-	var cover_art_link = ""
-
-	
-	match (currently_playing_type):
-		"episode":
-			var podcast_show = item.show
-
-			album_name = podcast_show.publisher
-			artist_name = podcast_show.name
-			cover_art_link = item.images[0].url
-
-			pass
-		"track":
-			album_name = item.album.name
-			
-			artist_name = ", ".join( 
-					item.artists
-					.map(
-						func(current_artist):
-							return current_artist.name)
-			)
-
-			cover_art_link = item.album.images[0].url
-			pass
-		_ :
-			printerr("Invalid Type: %s" % currently_playing_type)
-	return { 
-		"state" : SUCCESS, 
-		"metadata" : 
-			{
-			"name" : song_name,
-			"album_name" : album_name,
-			"artist_name" : artist_name,
-			"cover_art_link" : cover_art_link,
-			"external_url": external_link
-			} 
-		}
-
 
 func _notification(what):
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:

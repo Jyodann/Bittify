@@ -33,8 +33,8 @@ func _ready():
 
 	launch_player.pressed.connect(
 		func():
+			SongManager.number_of_sessions += 1
 			var window = player.instantiate()
-			
 			get_tree().root.add_child(window)
 	)
 

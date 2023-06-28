@@ -51,24 +51,6 @@ func login_with_bittify_code(bittify_code: String) -> Result:
 	var res = await client.request_completed
 	
 	return check_for_sucess(res, false)
-
-	if (res[0] == 0):
-		var json = JSON.parse_string(res[3].get_string_from_utf8())
-		if(json.has("error_description")):
-			return Result.new(false, {
-				"error" : json["error_description"]
-			})
-		
-		print(json)
-		return Result.new(true, {
-			"refresh_token" : json["refresh_token"],
-			"access_token" : json["access_token"]
-		})
-
-		
-	return Result.new(false, {
-		"error" : "Failed to Connect to servers"
-	})
 		
 #"https://api.spotify.com/v1/me/player/currently-playing?additional_types=episode,track"
 func currently_playing_song(access_token: String) -> Result:
@@ -83,32 +65,6 @@ func currently_playing_song(access_token: String) -> Result:
 	var res = await client.request_completed
 
 	return check_for_sucess(res, false)
-	
-	# Token has expired
-	if (res[1] == 401):
-		return Result.new(
-			false, {
-				"error" : "Token Expired"
-			}
-		)
-
-	if (res[0] == 0):
-
-		# Currently no Active Device
-		if (res[1] == 204):
-			return Result.new(
-				true, {}
-			)
-		var json = JSON.parse_string(res[3].get_string_from_utf8())
-		
-		return Result.new(
-			true, json
-		)
-	printerr("Failed to fetch currently playing song")
-	printerr(res)
-	return Result.new(
-		false, {}
-	)
 		
 func get_new_access_token(refresh_token) -> Result:
 	var client = create_new_http_request_node("new_access_token")
@@ -120,16 +76,6 @@ func get_new_access_token(refresh_token) -> Result:
 
 	var res = await client.request_completed
 	return check_for_sucess(res, false)
-	if (res[0] == 0):
-		var json = JSON.parse_string(res[3].get_string_from_utf8())
-
-		return Result.new(
-			true, json
-		)
-	
-	return Result.new(
-		false, {}
-	)
 
 func download_album_art(link) -> Result:
 	var client = create_new_http_request_node("download_album")
@@ -141,22 +87,6 @@ func download_album_art(link) -> Result:
 	var res = await client.request_completed
 
 	return check_for_sucess(res, true)
-	if (res[0] == 0):
-		var img = Image.new()
-		img.load_jpg_from_buffer(res[3])
-
-		var texture = ImageTexture.new()
-		texture.set_image(img)
-
-		return Result.new(
-			true, {
-				"texture" : texture,
-				"raw_image" : img
-			}
-		)
-	return Result.new(
-		false, {}
-	)
 
 func check_for_sucess(res, return_raw: bool) -> Result:
 	var result = res[0] as HTTPRequest.Result

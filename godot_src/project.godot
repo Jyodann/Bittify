@@ -24,6 +24,7 @@ NetworkRequests="*res://Scripts/network_requests.gd"
 WindowFunctions="*res://Scripts/window_functions.gd"
 ApplicationStorage="*res://Scripts/application_storage.gd"
 ContentPageShell="*res://Scripts/content_page_shell.gd"
+SongManager="*res://Scripts/song_manager.gd"
 
 [display]
 

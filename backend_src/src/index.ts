@@ -53,6 +53,10 @@ router.get('/get_refresh_token', async (res) => {
 	return response
 })
 
+router.get('/ping', (res) =>
+	new Response("Pong")
+)
+
 addEventListener('fetch', event =>
 	event.respondWith(router.handle(event.request))
 )

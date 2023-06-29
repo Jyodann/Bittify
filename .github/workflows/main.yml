@@ -14,5 +14,5 @@ jobs:
       - name: Publish
         uses: cloudflare/wrangler-action@2.0.0
         with:
-          working-directory: ./backend_src
+          workingDirectory: ./backend_src
           apiToken: ${{ secrets.CF_API_TOKEN }}

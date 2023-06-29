@@ -7,6 +7,7 @@ initial_position = 2
 size = Vector2i(300, 350)
 
 [node name="main_player" parent="." instance=ExtResource("1_ohi3a")]
+custom_minimum_size = Vector2(300, 300)
 offset_left = 0.0
 offset_top = 0.0
 offset_right = 0.0

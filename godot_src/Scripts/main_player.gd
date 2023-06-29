@@ -3,7 +3,7 @@ extends Control
 
 @onready var disconnected_icon = preload("res://Icons/disconnected.png")
 @onready var settings_window = preload("res://Scenes/settings.tscn")
-
+@onready var mouse_drag_component = preload("res://Scenes/mouse_drag.tscn")
 @onready var main_song_title = $MainSongTitle
 @onready var album_art = $AlbumArt
 @onready var album_gradient = $AlbumGradient
@@ -43,10 +43,12 @@ func _ready():
 	var win_width = ApplicationStorage.get_data(ApplicationStorage.Settings.WIN_WIDTH)
 	var win_pos_x =  ApplicationStorage.get_data(ApplicationStorage.Settings.WIN_POS_X)
 	var win_pos_y =  ApplicationStorage.get_data(ApplicationStorage.Settings.WIN_POS_Y)
+	
 	WindowFunctions.set_up_min_window_size(get_window())
 	WindowFunctions.change_window_size(win_width, win_height, get_window())
-	
 	WindowFunctions.change_window_position(win_pos_x, win_pos_y, get_window())
+
+	var borderless =  ApplicationStorage.get_data(ApplicationStorage.Settings.BORDERLESS)
 	listen_on_spotify.pressed.connect(
 		open_ext_url
 	)
@@ -60,10 +62,7 @@ func _ready():
 	)
 
 	ApplicationStorage.on_settings_change.connect(
-		func(data):
-			var is_pinned = ApplicationStorage.filter_emit_data(data, ApplicationStorage.Settings.PIN_TO_TOP)
-			pin_on_top.change_checked_state(is_pinned)
-			WindowFunctions.change_window_always_on_top(is_pinned, get_window())
+		on_settings_change
 	)
 
 	ApplicationStorage.force_emit_data()
@@ -71,6 +70,13 @@ func _ready():
 	SongManager.on_song_change.connect(
 		change_displayed_data
 	)
+
+	WindowFunctions.change_window_borderless( borderless, get_window())
+	var drag = mouse_drag_component.instantiate()
+	drag.get_node("ColorRect").current_window = get_window()
+	add_child(drag)
+
+	
 
 func change_displayed_data(play_data: SongManager.PlayerData):
 	external_url_is_valid = false
@@ -128,8 +134,12 @@ func change_displayed_data(play_data: SongManager.PlayerData):
 		main_song_title.change_text("Try Playing something from Spotify.")
 		return
 	
-func on_settings_change(settings_data):
-	pass
+func on_settings_change(new_settings):
+	# Alawys Pin to Top Setting:
+	var is_pinned = ApplicationStorage.filter_emit_data(new_settings, ApplicationStorage.Settings.PIN_TO_TOP)
+
+	pin_on_top.change_checked_state(is_pinned)
+	WindowFunctions.change_window_always_on_top(is_pinned, get_window())
 
 
 func open_settings():

@@ -43,13 +43,15 @@ enum PlayerState {
 	ACCESS_TOKEN_REFRESH_FAILED,
 	ACCESS_TOKEN_REFRESH_SUCESS,
 	DOWNLOAD_ART_FAILED,
-	RATE_LIMIT_OVERLOADED
+	RATE_LIMIT_OVERLOADED,
+	NON_VALID_BEARER_TOKEN
 }
 
 enum ResponseCodes {
 	EXPIRED_TOKEN = 401,
 	NO_SPOTIFY_SESSIONS = 204,
-	RATE_LIMIT_OVERLOADED = 429
+	RATE_LIMIT_OVERLOADED = 429,
+	NON_VALID_BEARER_TOKEN = 400
 }
 
 const PLAYING_TYPE_UNKNOWN = "unknown"
@@ -120,9 +122,16 @@ func _refresh_song() -> PlayerData:
 			return PlayerData.new(
 				PlayerState.RATE_LIMIT_OVERLOADED
 			)
+		if (response_code == ResponseCodes.NON_VALID_BEARER_TOKEN):
+			is_ready = true
+			access_token = get_access_token()
+			return PlayerData.new(
+				PlayerState.NON_VALID_BEARER_TOKEN
+			)
 		
 	# Extract Data:
 	var song_info = res.result.body_string
+	print(song_info)
 	var currently_playing_type = song_info.currently_playing_type
 	
 	if (currently_playing_type == PLAYING_TYPE_UNKNOWN):

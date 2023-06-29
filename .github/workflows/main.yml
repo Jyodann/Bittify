@@ -15,4 +15,5 @@ jobs:
         uses: cloudflare/wrangler-action@2.0.0
         with:
           workingDirectory: ./backend_src
+          run: npm i
           apiToken: ${{ secrets.CF_API_TOKEN }}

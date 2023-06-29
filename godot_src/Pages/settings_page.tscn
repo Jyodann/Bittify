@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://cggpe2q486v1y"]
+[gd_scene load_steps=3 format=3 uid="uid://cggpe2q486v1y"]
 
 [ext_resource type="PackedScene" uid="uid://wfp154h4swfn" path="res://Scenes/settings_menu.tscn" id="1_0qii0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iykl3"]
+bg_color = Color(0.172549, 0.172549, 0.172549, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="settings_page" type="MarginContainer"]
 anchors_preset = 15
@@ -8,6 +15,26 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
-[node name="settings_menu" parent="." instance=ExtResource("1_0qii0")]
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_iykl3")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="settings_menu" parent="Panel/MarginContainer" instance=ExtResource("1_0qii0")]
 layout_mode = 2

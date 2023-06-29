@@ -66,6 +66,10 @@ func _ready():
 		func():
 			ApplicationStorage.modify_data(ApplicationStorage.Settings.ACCESS_TOKEN, "")
 			ApplicationStorage.modify_data(ApplicationStorage.Settings.REFRESH_TOKEN, "")
+			for window in player_windows:
+				window.queue_free()
+			player_windows.clear()
+			SongManager.number_of_sessions = 0
 			ContentPageShell.load_view(ContentPageShell.Page.LOGIN_PAGE)
 			get_parent().queue_free()
 	)

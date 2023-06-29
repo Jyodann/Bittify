@@ -28,8 +28,8 @@ SongManager="*res://Scripts/song_manager.gd"
 
 [display]
 
-window/size/viewport_width=300
-window/size/viewport_height=350
+window/size/viewport_width=500
+window/size/viewport_height=500
 window/subwindows/embed_subwindows=false
 
 [internationalization]

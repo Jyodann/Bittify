@@ -9,7 +9,7 @@ router.get('/callback', (res) =>
 
 // GET Access_token:
 router.get('/get_access_token', async (res) => {
-	const { params, query } = res
+	const { query } = res
 
 	const auth_header = btoa(`${Bittify_Client_ID}:${Bittify_Client_Secret}`)
 	const data = new URLSearchParams()
@@ -23,18 +23,16 @@ router.get('/get_access_token', async (res) => {
 		headers: {
 			"Content-Type": "application/x-www-form-urlencoded",
 			"Authorization": `Basic ${auth_header}`
-		},
+		},	
 		body: data.toString()
 	});
 
-	const json = await response.json()
-
-	return new Response(JSON.stringify(json))
+	return response
 })
 
 // GET Refresh_Token:
 router.get('/get_refresh_token', async (res) => {
-	const { params, query } = res
+	const { query } = res
 
 	const auth_header = btoa(`${Bittify_Client_ID}:${Bittify_Client_Secret}`)
 
@@ -51,10 +49,8 @@ router.get('/get_refresh_token', async (res) => {
 		},
 		body: data.toString()
 	});
-
-	const json = await response.json()
-
-	return new Response(JSON.stringify(json))
+	
+	return response
 })
 
 addEventListener('fetch', event =>

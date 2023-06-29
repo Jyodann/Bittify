@@ -17,7 +17,9 @@ enum Settings {
 	REFRESH_TOKEN,
 	PIN_TO_TOP,
 	SPEED_OF_SONG,
-	BORDERLESS
+	BORDERLESS,
+	PLAYER_LAUNCH_IMMEDIATELY,
+	ALLOW_MORE_THAN_ONE_PLAYER
 }
 
 enum SpeedOfSong {
@@ -42,7 +44,9 @@ var default_data = {
 	Settings.SPEED_OF_SONG : SpeedOfSong.DEFAULT,
 	Settings.BORDERLESS : false,
 	Settings.WIN_POS_X : 300,
-	Settings.WIN_POS_Y : 300
+	Settings.WIN_POS_Y : 300,
+	Settings.PLAYER_LAUNCH_IMMEDIATELY : false,
+	Settings.ALLOW_MORE_THAN_ONE_PLAYER : false
 }
 
 func _prep_data():

@@ -128,12 +128,12 @@ func change_displayed_data(play_data: SongManager.PlayerData):
 		main_song_title.change_text("Try Playing something from Spotify.")
 		return
 	
+func on_settings_change(settings_data):
+	pass
+
 
 func open_settings():
-		var window = settings_window.instantiate()
-
-		window.title = "Settings"
-		get_tree().root.add_child(window)
+	WindowFunctions.focus_window()
 
 func pin_to_top_pressed(pinned_status):
 	ApplicationStorage.modify_data(ApplicationStorage.Settings.PIN_TO_TOP, pinned_status)
@@ -201,5 +201,6 @@ func _notification(what):
 		ApplicationStorage.modify_data(ApplicationStorage.Settings.WIN_WIDTH, current_size.x, false)
 		ApplicationStorage.modify_data(ApplicationStorage.Settings.WIN_POS_X, current_window_position.x, false)
 		ApplicationStorage.modify_data(ApplicationStorage.Settings.WIN_POS_Y, current_window_position.y, false)
+		WindowFunctions.focus_window()
 		get_tree().root.move_to_foreground()
 		get_parent().queue_free()

@@ -19,6 +19,12 @@ func change_window_always_on_top(is_always_on_top, window = get_window()) -> voi
 func set_up_min_window_size(window = get_window()) -> void:
 	window.min_size = Vector2i(300, 250)
 
+func minimize_window(window = get_window()) -> void:
+	window.mode = Window.MODE_MINIMIZED
+
+func focus_window(window = get_window()) -> void:
+	window.mode = Window.MODE_WINDOWED
+	
 func change_window_title(title, window = get_window()):
 	if (title == ""):
 		window.title = "Bittify"

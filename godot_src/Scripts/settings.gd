@@ -8,9 +8,13 @@ extends Control
 @onready var launch_player = $HBoxContainer/LaunchMiniplayer
 @onready var settings_dict = {
 	"Window Settings" : {
+		"Launch Player Immediately" : SettingBoundComponent.new(check_box_component, ApplicationStorage.Settings.PLAYER_LAUNCH_IMMEDIATELY),
 		"Always on Top" : SettingBoundComponent.new(check_box_component, ApplicationStorage.Settings.PIN_TO_TOP),
+		"Borderless Player (Restarts Player)" : SettingBoundComponent.new(check_box_component, ApplicationStorage.Settings.BORDERLESS),
+	},
+	"Experimental" : {
+		"Allow multiple Miniplayers" : SettingBoundComponent.new(check_box_component, ApplicationStorage.Settings.ALLOW_MORE_THAN_ONE_PLAYER),
 	}
-	
 }
 
 class SettingBoundComponent:
@@ -20,6 +24,17 @@ class SettingBoundComponent:
 	func _init(_component, _setting):
 		component = _component
 		setting = _setting
+
+func open_new_player_window():
+	if (ApplicationStorage.get_data(ApplicationStorage.Settings.ALLOW_MORE_THAN_ONE_PLAYER) || SongManager.number_of_sessions < 1):
+
+		SongManager.number_of_sessions += 1
+		var window = player.instantiate()
+
+		window.title = "Bittify Miniplayer"
+		get_tree().root.add_child(window)
+
+		WindowFunctions.minimize_window()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -32,12 +47,12 @@ func _ready():
 	)
 
 	launch_player.pressed.connect(
-		func():
-			SongManager.number_of_sessions += 1
-			var window = player.instantiate()
-			get_tree().root.add_child(window)
+		open_new_player_window
 	)
 
+	if (ApplicationStorage.get_data(ApplicationStorage.Settings.PLAYER_LAUNCH_IMMEDIATELY)):
+		open_new_player_window()
+	
 	for setting_header in settings_dict:
 		var label = Label.new()
 		label.text = setting_header

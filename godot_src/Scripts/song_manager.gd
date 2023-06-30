@@ -93,7 +93,7 @@ func _refresh_song() -> PlayerData:
 	
 	if (!res.success):
 		var response_code = res.result.response_code
-		print(response_code)
+		
 		# Handle Expired Token:
 		if (response_code == ResponseCodes.EXPIRED_TOKEN):
 			var code = await NetworkRequests.get_new_access_token(get_refresh_token())
@@ -131,7 +131,7 @@ func _refresh_song() -> PlayerData:
 		
 	# Extract Data:
 	var song_info = res.result.body_string
-	print(song_info)
+	
 	var currently_playing_type = song_info.currently_playing_type
 	
 	if (currently_playing_type == PLAYING_TYPE_UNKNOWN):

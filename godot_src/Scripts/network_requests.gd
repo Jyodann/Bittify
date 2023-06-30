@@ -22,9 +22,6 @@ class Result:
 		self.success = _success
 		self.result = _result
 
-func _ready():
-	print("Initialiing all HTTPRequests")
-
 func create_new_http_request_node(request_node_name: String) -> HTTPRequest:
 	if (http_request_nodes.has(request_node_name)):
 		return http_request_nodes[request_node_name]

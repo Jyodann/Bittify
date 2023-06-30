@@ -95,7 +95,6 @@ func _prep_data():
 		data[_convert_enum_to_str(i)] = default_data[i]
 
 func _save_data() -> void: 
-	print("Saving Data")
 	var config = ConfigFile.new()
 
 	for key in data:
@@ -109,7 +108,6 @@ func _load_data() -> void:
 	var err = config.load(SAVE_FILE_PATH)
 
 	if err != OK:
-		print("Creating new Data")
 		_save_data()
 		_load_data()
 		return
@@ -117,7 +115,7 @@ func _load_data() -> void:
 	for i in config.get_section_keys("bittify"):
 		var data_key = i
 		var data_value = config.get_value("bittify", i)
-		print("Loaded Setting: %s : %s" % [data_key, data_value])
+		print("Loaded Setting: %s" % data_key)
 		data[data_key] = data_value
 	
 func get_data(key: Settings): 

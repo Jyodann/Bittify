@@ -9,8 +9,6 @@ func _gui_input(event):
 		var mouse_position = get_global_mouse_position() as Vector2i
 		var vector =  current_window.position + mouse_position - dragging_start_pos
 
-		print(vector)
-
 		current_window.set_position(vector)
 		
 	if !(event is InputEventMouseButton):

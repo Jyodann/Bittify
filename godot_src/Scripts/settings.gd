@@ -1,6 +1,6 @@
 extends Control
 
-@export var size_of_headers = 18
+@export var size_of_headers = 24
 @onready var scroll_box = $ScrollContainer/MarginContainer/VBoxContainer
 @onready var log_out_button = $HBoxContainer/LogOut
 @onready var check_box_component = preload("res://Components/checkbox_component.tscn")
@@ -54,7 +54,7 @@ func on_settings_change(new_settings):
 	if (is_borderless != old_borderless_setting):
 		old_borderless_setting = is_borderless
 		var any_window_exists = !player_windows.is_empty()
-		print(any_window_exists)
+		
 		for window in player_windows:
 			window.queue_free()
 		player_windows.clear()
@@ -98,7 +98,7 @@ func _ready():
 		label.text = setting_header
 		label.add_theme_font_size_override("font_size", size_of_headers)
 		scroll_box.add_child(label)
-		print("Setting Header: %s" % setting_header)
+		
 
 		var dictionary = settings_dict[setting_header]
 
@@ -109,8 +109,6 @@ func _ready():
 			var component = dictionary[i].component.instantiate()
 
 			vbox.add_child(component)
-			print("		SettingName: %s" % i)
-
 			component._setup(i, dictionary[i].setting)
 		
 

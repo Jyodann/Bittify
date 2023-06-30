@@ -2,7 +2,6 @@ extends Control
 @onready var player_page = preload("res://Pages/player_page.tscn")
 @onready var content_holder = $ContentPage
 func _ready():
-	print("Performing Initial Startup checks")
 	ContentPageShell.set_content_page_holder(content_holder)
 	attempt_load_player_page()
 

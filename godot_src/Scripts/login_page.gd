@@ -21,7 +21,6 @@ func _bittify_go_button_pressed():
 		error_label.visible = true
 		error_label.text = bittify_code_request.result.body_string.error_description.capitalize()
 		return
-	print(bittify_code_request.result.body_string)
 	var refresh_token = bittify_code_request.result.body_string.refresh_token
 	var access_token = bittify_code_request.result.body_string.access_token
 	ApplicationStorage.modify_data(ApplicationStorage.Settings.REFRESH_TOKEN, refresh_token)

@@ -95,7 +95,7 @@ func convert_textstyle_to_text(textstyle: String, song_data: Dictionary) -> Stri
 
 func change_displayed_data(play_data: SongManager.PlayerData):
 	external_url_is_valid = false
-	print(play_data.player_state)
+	
 	if (play_data.player_state == SongManager.PlayerState.SUCCESS):
 
 		var data = play_data.data

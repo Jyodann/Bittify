@@ -5,6 +5,7 @@ extends Control
 @onready var log_out_button = $HBoxContainer/LogOut
 @onready var check_box_component = preload("res://Components/checkbox_component.tscn")
 @onready var dropdown_box_component = preload("res://Components/drop_down_box_component.tscn")
+@onready var textedit_box_component = preload("res://Components/text_edit_component.tscn")
 @onready var player = preload("res://Pages/player_page.tscn")
 @onready var launch_player = $HBoxContainer/LaunchMiniplayer
 @onready var settings_dict = {
@@ -15,7 +16,8 @@ extends Control
 	},
 	"Text Settings" : {
 		"Speed of Text" : SettingBoundComponent.new(dropdown_box_component, ApplicationStorage.Settings.SPEED_OF_SONG),
-		"Display Style" : SettingBoundComponent.new(dropdown_box_component, ApplicationStorage.Settings.SPEED_OF_SONG)
+		"Display Style (Updates within 3s)" : SettingBoundComponent.new(dropdown_box_component, ApplicationStorage.Settings.STYLE_OF_TEXT),
+		"Custom Display Style" : SettingBoundComponent.new(textedit_box_component, ApplicationStorage.Settings.CUSTOM_TEXT_STYLE)
 	},
 	"Experimental Features" : {
 		"Allow multiple Miniplayers" : SettingBoundComponent.new(check_box_component, ApplicationStorage.Settings.ALLOW_MORE_THAN_ONE_PLAYER),

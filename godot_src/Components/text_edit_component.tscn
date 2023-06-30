@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bfbe1aqoxxdja"]
+[gd_scene load_steps=2 format=3 uid="uid://by87gvb7xwk3y"]
 
-[ext_resource type="Script" path="res://Scripts/settings_dropdown_component.gd" id="1_8op5c"]
+[ext_resource type="Script" path="res://Scripts/settings_textedit_component copy.gd" id="1_pjj2y"]
 
-[node name="settings_dropdown_component" type="Control"]
+[node name="settings_textedit_component" type="Control"]
 custom_minimum_size = Vector2(2.08165e-12, 50)
 layout_mode = 3
 anchors_preset = 15
@@ -10,7 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_8op5c")
+script = ExtResource("1_pjj2y")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 custom_minimum_size = Vector2(2.08165e-12, 50)
@@ -34,8 +34,19 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.6
 text = "SETTING"
 
-[node name="OptionButton" type="OptionButton" parent="MarginContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.4
-fit_to_longest_item = false
+
+[node name="EditText" type="TextEdit" parent="MarginContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.6
+drag_and_drop_selection_enabled = false
+
+[node name="SaveButton" type="Button" parent="MarginContainer/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+text = "Save"

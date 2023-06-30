@@ -27,6 +27,8 @@ var access_token = ""
 
 var old_link = ""
 
+var current_text_style = ""
+
 var mouse_is_on_player = false
 var external_url_is_valid = false
 
@@ -76,7 +78,20 @@ func _ready():
 	drag.get_node("ColorRect").current_window = get_window()
 	add_child(drag)
 
+func convert_textstyle_to_text(textstyle: String, song_data: Dictionary) -> String:
+	var song_name = song_data.name
+	var artist = song_data.artist_name
+	var album =  song_data.album_name
+
+	var final_string = textstyle.replace(
+		"`{song}`", song_name
+		).replace(
+		"`{artist}`", artist
+		).replace(
+		"`{album}`", album
+		)
 	
+	return final_string
 
 func change_displayed_data(play_data: SongManager.PlayerData):
 	external_url_is_valid = false
@@ -87,13 +102,11 @@ func change_displayed_data(play_data: SongManager.PlayerData):
 		
 		external_url_is_valid = true
 		current_song_url = data.external_url
-
-		if (old_link != current_song_url):
-			var title = "%s by %s from %s" % [data.name, data.artist_name, data.album_name]
+		var title = convert_textstyle_to_text(current_text_style, data)
 				
-			main_song_title.change_text(title)
-			WindowFunctions.change_window_title(title, get_window())
-	
+		main_song_title.change_text(title)
+		WindowFunctions.change_window_title(title, get_window())
+		if (old_link != current_song_url):
 			var texture = ImageTexture.new()
 			texture.set_image(data.img)
 				
@@ -143,11 +156,19 @@ func on_settings_change(new_settings):
 
 	# Player Speed Setting: 
 	var player_speed = ApplicationStorage.filter_emit_data(new_settings, ApplicationStorage.Settings.SPEED_OF_SONG)
-	var binding = ApplicationStorage.get_settings_bindings(ApplicationStorage.Settings.SPEED_OF_SONG)[player_speed]
-	var speed_of_song = binding.value
+	var speed_binding = ApplicationStorage.get_settings_bindings(ApplicationStorage.Settings.SPEED_OF_SONG)[player_speed]
+	var speed_of_song = speed_binding.value
 
 	main_song_title.speed_of_text = speed_of_song
 
+	# Text Style Settings 
+	var text_style = ApplicationStorage.filter_emit_data(new_settings, ApplicationStorage.Settings.STYLE_OF_TEXT)
+	var text_style_binding = ApplicationStorage.get_settings_bindings(ApplicationStorage.Settings.STYLE_OF_TEXT)[text_style]
+
+	if (text_style == ApplicationStorage.StyleOfText.CUSTOM):
+		current_text_style = ApplicationStorage.filter_emit_data(new_settings, ApplicationStorage.Settings.CUSTOM_TEXT_STYLE)
+	else:
+		current_text_style = text_style_binding.value
 
 func open_settings():
 	WindowFunctions.focus_window()

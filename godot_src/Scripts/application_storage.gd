@@ -36,7 +36,8 @@ enum StyleOfText {
 	NAME_BY_ARTIST,
 	NAME_DASH_ARTIST,
 	NAME_BY_ARTIST_FROM_ALBUM,
-	NAME_DASH_ARTIST_DASH_ALBUM
+	NAME_DASH_ARTIST_DASH_ALBUM,
+	CUSTOM
 }
 
 var speed_of_song_bindings = {
@@ -48,14 +49,16 @@ var speed_of_song_bindings = {
 }
 
 var style_of_text_bindings = {
-	StyleOfText.NAME_BY_ARTIST : DropDownDisplay.new("Song Name by Artist", 20),
-	StyleOfText.NAME_DASH_ARTIST : DropDownDisplay.new("Song Name - Artist", 20),
-	StyleOfText.NAME_BY_ARTIST_FROM_ALBUM : DropDownDisplay.new("Song Name by Artist from Album", 20),
-	StyleOfText.NAME_DASH_ARTIST_DASH_ALBUM : DropDownDisplay.new("Song Name - Artist - Album", 20),
+	StyleOfText.NAME_BY_ARTIST : DropDownDisplay.new("Song Name by Artist", "`{song}` by `{artist}`"),
+	StyleOfText.NAME_DASH_ARTIST : DropDownDisplay.new("Song Name - Artist", "`{song}` - `{artist}`"),
+	StyleOfText.NAME_BY_ARTIST_FROM_ALBUM : DropDownDisplay.new("Song Name by Artist from Album", "`{song}` by `{artist}` from `{album}`"),
+	StyleOfText.NAME_DASH_ARTIST_DASH_ALBUM : DropDownDisplay.new("Song Name - Artist - Album", "`{song}` - `{artist}` - `{album}`"),
+	StyleOfText.CUSTOM : DropDownDisplay.new("Custom Style", "")
 }
 
 var settingsBindings = {
-	Settings.SPEED_OF_SONG : speed_of_song_bindings
+	Settings.SPEED_OF_SONG : speed_of_song_bindings,
+	Settings.STYLE_OF_TEXT : style_of_text_bindings
 }
 
 class DropDownDisplay:
@@ -82,7 +85,9 @@ var default_data = {
 	Settings.WIN_POS_X : 300,
 	Settings.WIN_POS_Y : 300,
 	Settings.PLAYER_LAUNCH_IMMEDIATELY : false,
-	Settings.ALLOW_MORE_THAN_ONE_PLAYER : false
+	Settings.ALLOW_MORE_THAN_ONE_PLAYER : false,
+	Settings.STYLE_OF_TEXT : StyleOfText.NAME_DASH_ARTIST,
+	Settings.CUSTOM_TEXT_STYLE : "`{song}` * `{artist}` * `{album}`"
 }
 
 func _prep_data():

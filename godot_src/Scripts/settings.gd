@@ -4,6 +4,7 @@ extends Control
 @onready var scroll_box = $ScrollContainer/MarginContainer/VBoxContainer
 @onready var log_out_button = $HBoxContainer/LogOut
 @onready var check_box_component = preload("res://Components/checkbox_component.tscn")
+@onready var dropdown_box_component = preload("res://Components/drop_down_box_component.tscn")
 @onready var player = preload("res://Pages/player_page.tscn")
 @onready var launch_player = $HBoxContainer/LaunchMiniplayer
 @onready var settings_dict = {
@@ -11,6 +12,10 @@ extends Control
 		"Launch Player on Start" : SettingBoundComponent.new(check_box_component, ApplicationStorage.Settings.PLAYER_LAUNCH_IMMEDIATELY),
 		"Always on Top" : SettingBoundComponent.new(check_box_component, ApplicationStorage.Settings.PIN_TO_TOP),
 		
+	},
+	"Text Settings" : {
+		"Speed of Text" : SettingBoundComponent.new(dropdown_box_component, ApplicationStorage.Settings.SPEED_OF_SONG),
+		"Display Style" : SettingBoundComponent.new(dropdown_box_component, ApplicationStorage.Settings.SPEED_OF_SONG)
 	},
 	"Experimental Features" : {
 		"Allow multiple Miniplayers" : SettingBoundComponent.new(check_box_component, ApplicationStorage.Settings.ALLOW_MORE_THAN_ONE_PLAYER),

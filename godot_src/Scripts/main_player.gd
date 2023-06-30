@@ -36,7 +36,7 @@ func _ready():
 	main_song_title.change_text("Try Playing something from Spotify.")
 	access_token = get_access_token()
 	settings_overlay.modulate = Color.TRANSPARENT
-	#refresh_song()
+	
 	get_viewport().mouse_entered.connect(_on_mouse_enter)
 	get_viewport().mouse_exited.connect(_on_mouse_exit)
 	var win_height = ApplicationStorage.get_data(ApplicationStorage.Settings.WIN_HEIGHT)
@@ -140,6 +140,13 @@ func on_settings_change(new_settings):
 
 	pin_on_top.change_checked_state(is_pinned)
 	WindowFunctions.change_window_always_on_top(is_pinned, get_window())
+
+	# Player Speed Setting: 
+	var player_speed = ApplicationStorage.filter_emit_data(new_settings, ApplicationStorage.Settings.SPEED_OF_SONG)
+	var binding = ApplicationStorage.get_settings_bindings(ApplicationStorage.Settings.SPEED_OF_SONG)[player_speed]
+	var speed_of_song = binding.value
+
+	main_song_title.speed_of_text = speed_of_song
 
 
 func open_settings():

@@ -19,16 +19,52 @@ enum Settings {
 	SPEED_OF_SONG,
 	BORDERLESS,
 	PLAYER_LAUNCH_IMMEDIATELY,
-	ALLOW_MORE_THAN_ONE_PLAYER
+	ALLOW_MORE_THAN_ONE_PLAYER,
+	STYLE_OF_TEXT,
+	CUSTOM_TEXT_STYLE
 }
 
 enum SpeedOfSong {
-	SLOWEST = 20,
-	SLOW = 30,
-	DEFAULT = 40,
-	FAST = 55,
-	FASTEST = 70
+	SLOWEST,
+	SLOW ,
+	DEFAULT,
+	FAST,
+	FASTEST
 }
+
+enum StyleOfText {
+	NAME_BY_ARTIST,
+	NAME_DASH_ARTIST,
+	NAME_BY_ARTIST_FROM_ALBUM,
+	NAME_DASH_ARTIST_DASH_ALBUM
+}
+
+var speed_of_song_bindings = {
+	SpeedOfSong.SLOWEST : DropDownDisplay.new("Slowest", 20),
+	SpeedOfSong.SLOW : DropDownDisplay.new("Slow", 30),
+	SpeedOfSong.DEFAULT : DropDownDisplay.new("Default", 40),
+	SpeedOfSong.FAST : DropDownDisplay.new("Fast", 55),
+	SpeedOfSong.FASTEST : DropDownDisplay.new("Fastest", 70),
+}
+
+var style_of_text_bindings = {
+	StyleOfText.NAME_BY_ARTIST : DropDownDisplay.new("Song Name by Artist", 20),
+	StyleOfText.NAME_DASH_ARTIST : DropDownDisplay.new("Song Name - Artist", 20),
+	StyleOfText.NAME_BY_ARTIST_FROM_ALBUM : DropDownDisplay.new("Song Name by Artist from Album", 20),
+	StyleOfText.NAME_DASH_ARTIST_DASH_ALBUM : DropDownDisplay.new("Song Name - Artist - Album", 20),
+}
+
+var settingsBindings = {
+	Settings.SPEED_OF_SONG : speed_of_song_bindings
+}
+
+class DropDownDisplay:
+	var displayedText: String
+	var value: Variant
+
+	func _init(_displayedText: String, _value: Variant):
+		displayedText = _displayedText
+		value = _value
 
 # Set Default Data:
 var data = {
@@ -109,3 +145,6 @@ func filter_emit_data(emit_data: Variant, key: Settings) -> Variant:
 
 func force_emit_data() -> void:
 	on_settings_change.emit(data)
+
+func get_settings_bindings(key: Settings) -> Dictionary:
+	return settingsBindings[key]

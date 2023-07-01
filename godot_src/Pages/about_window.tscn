@@ -1,4 +1,9 @@
-[gd_scene format=3 uid="uid://bvl8l65v08kqd"]
+[gd_scene load_steps=2 format=3 uid="uid://bl81qk36du24v"]
+
+[ext_resource type="PackedScene" uid="uid://cux8w6xaeorb1" path="res://Scenes/about_window.tscn" id="1_nff8o"]
 
 [node name="about_window" type="Window"]
-size = Vector2i(200, 300)
+initial_position = 2
+size = Vector2i(800, 1000)
+
+[node name="about_window" parent="." instance=ExtResource("1_nff8o")]

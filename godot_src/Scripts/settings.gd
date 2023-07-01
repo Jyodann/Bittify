@@ -3,10 +3,12 @@ extends Control
 @export var size_of_headers = 24
 @onready var scroll_box = $ScrollContainer/MarginContainer/VBoxContainer
 @onready var log_out_button = $HBoxContainer/LogOut
+@onready var about_button = $HBoxContainer/About
 @onready var check_box_component = preload("res://Components/checkbox_component.tscn")
 @onready var dropdown_box_component = preload("res://Components/drop_down_box_component.tscn")
 @onready var textedit_box_component = preload("res://Components/text_edit_component.tscn")
 @onready var player = preload("res://Pages/player_page.tscn")
+@onready var about_page = preload("res://Pages/about_window.tscn")
 @onready var launch_player = $HBoxContainer/LaunchMiniplayer
 @onready var settings_dict = {
 	"Window Settings" : {
@@ -61,11 +63,6 @@ func on_settings_change(new_settings):
 		SongManager.number_of_sessions = 0
 		if (any_window_exists):
 			open_new_player_window()
-		
-	
-		
-	
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -79,6 +76,13 @@ func _ready():
 			SongManager.number_of_sessions = 0
 			ContentPageShell.load_view(ContentPageShell.Page.LOGIN_PAGE)
 			get_parent().queue_free()
+	)
+
+	about_button.pressed.connect(
+		func():
+			var window = about_page.instantiate()
+			window.title = "About - Bittify"
+			add_child(window)
 	)
 
 	launch_player.pressed.connect(

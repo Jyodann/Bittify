@@ -114,7 +114,3 @@ func _ready():
 
 			vbox.add_child(component)
 			component._setup(i, dictionary[i].setting)
-		
-
-
-		

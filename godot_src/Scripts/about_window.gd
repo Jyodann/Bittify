@@ -1,7 +1,8 @@
 extends Control
 
 @onready var build_info_label = $VBoxContainer/About_Section/bittify_build_info
-@onready var licences_info_label = $VBoxContainer/OpenSource_Section/ScrollContainer/VBoxContainer/bittify_licence
+@onready
+var licences_info_label = $VBoxContainer/OpenSource_Section/ScrollContainer/VBoxContainer/bittify_licence
 @onready var gd_label = $VBoxContainer/About_Section/bittify_godot_info
 
 @onready var email_button = $VBoxContainer/Support_Section/HBoxContainer/Email
@@ -14,46 +15,38 @@ extends Control
 @onready var ENGINE_VERSION = Engine.get_version_info().string
 
 @onready var ENGINE_LICENCE = Engine.get_license_text()
-@onready var ENGINE_LICENCE_INFO = Engine.get_license_info() 
+@onready var ENGINE_LICENCE_INFO = Engine.get_license_info()
 
 @onready var version = "0.1"
 @onready var licences = [
 	Licence.new("Godot Engine", ENGINE_LICENCE, "www.godot.com"),
 	Licence.new("Godot Engine Third Party Licences", "\n", ""),
 ]
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-
 	github_source_button.pressed.connect(
-		func():
-			OS.shell_open("https://github.com/Jyodann/Bittify")
+		func(): OS.shell_open("https://github.com/Jyodann/Bittify")
 	)
 
-	email_button.pressed.connect(
-		func():
-			OS.shell_open("mailto:jordynwinnie@gmail.com")
-	)
+	email_button.pressed.connect(func(): OS.shell_open("mailto:jordynwinnie@gmail.com"))
 
 	pull_request_button.pressed.connect(
-		func():
-			OS.shell_open("https://github.com/Jyodann/Bittify/pulls")
+		func(): OS.shell_open("https://github.com/Jyodann/Bittify/pulls")
 	)
 
-	donate_button.pressed.connect(
-		func():
-			OS.shell_open("https://ko-fi.com/jyodann")
-	)
+	donate_button.pressed.connect(func(): OS.shell_open("https://ko-fi.com/jyodann"))
 
 	build_info_label.text = "Bittify for %s (%s) v%s" % [OS_NAME, ARCHITECTURE_NAME, version]
 	gd_label.text = "Godot Version: %s" % [ENGINE_VERSION]
 
 	for i in ENGINE_LICENCE_INFO:
-
 		licences.append(Licence.new(i, ENGINE_LICENCE_INFO[i], ""))
 
 	licences_info_label.push_normal()
 	licences_info_label.add_text("\n")
-	
+
 	for i in licences:
 		licences_info_label.push_bold()
 		licences_info_label.add_text(i.heading)
@@ -62,10 +55,10 @@ func _ready():
 		licences_info_label.add_text(i.licence_info)
 		licences_info_label.push_normal()
 		licences_info_label.add_text("\n")
-		
-	
+
+
 func _notification(what):
-	if (what == NOTIFICATION_WM_CLOSE_REQUEST):
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		get_window().queue_free()
 
 

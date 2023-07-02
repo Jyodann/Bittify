@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - cd_ci_test
+      - r**
+        
 
 jobs:
     build-windows:

@@ -1,5 +1,7 @@
 extends Node
 
+@onready var BITTIFY_VERSION = "developer_version" if OS.get_environment("build_version") == "" else OS.get_environment("build_version")
+
 const SAVE_FILE_PATH = "user://bittify_conf.cfg"
 
 
@@ -82,7 +84,7 @@ var default_data = {
 	Settings.PLAYER_LAUNCH_IMMEDIATELY: false,
 	Settings.ALLOW_MORE_THAN_ONE_PLAYER: false,
 	Settings.STYLE_OF_TEXT: StyleOfText.NAME_DASH_ARTIST,
-	Settings.CUSTOM_TEXT_STYLE: "`{song}` * `{artist}` * `{album}`"
+	Settings.CUSTOM_TEXT_STYLE: "`{song}` * `{artist}` * `{album}`",
 }
 
 

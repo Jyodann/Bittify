@@ -7,6 +7,10 @@ router.get('/callback', (res) =>
 	new Response(`Paste this into your Bittify Application: ${res.query["code"]}`)
 )
 
+router.get('/ping', (res) =>
+	new Response(`Pong!`)
+)
+
 // GET Access_token:
 router.get('/get_access_token', async (res) => {
 	const { query } = res

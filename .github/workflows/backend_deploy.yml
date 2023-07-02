@@ -2,8 +2,8 @@ name: Deploy-Server
 
 on:
   push:
-    branches:
-      - main
+    paths:
+      - 'backend_src/**'
 
 jobs:
   deploy:

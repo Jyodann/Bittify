@@ -26,7 +26,7 @@ jobs:
               run: echo '$BIT_VERSION'
             
             - name: Change Version in Version.gd
-              run: echo "extends Node" 'const VERSION = "$BIT_VERSION" '  > ./godot_src/version.gd
+              run: echo "extends Node" 'const VERSION = "${{ github.ref_name }}" '  > ./godot_src/version.gd
             
             - name: Echo Version.gd file contents
               run: gc ./godot_src/version.gd

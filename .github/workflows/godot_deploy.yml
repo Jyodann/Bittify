@@ -20,5 +20,7 @@ jobs:
             - name: Unzip Godot 
               run:  Expand-Archive .\godot.zip  
             
-            - name: Echo Path
-              run: ls
+            - name: Dump GitHub context
+              env:
+                GITHUB_CONTEXT: ${{ toJson(github) }}
+              run: echo '$GITHUB_CONTEXT'

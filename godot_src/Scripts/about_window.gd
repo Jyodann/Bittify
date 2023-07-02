@@ -17,7 +17,7 @@ var licences_info_label = $VBoxContainer/OpenSource_Section/ScrollContainer/VBox
 @onready var ENGINE_LICENCE = Engine.get_license_text()
 @onready var ENGINE_LICENCE_INFO = Engine.get_license_info()
 
-@onready var version = ApplicationStorage.BITTIFY_VERSION
+@onready var version = preload("res://version.gd").VERSION
 @onready var licences = [
 	Licence.new("Godot Engine", ENGINE_LICENCE, "www.godot.com"),
 	Licence.new("Godot Engine Third Party Licences", "\n", ""),

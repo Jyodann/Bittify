@@ -20,7 +20,13 @@ jobs:
             - name: Unzip Godot 
               run:  Expand-Archive .\godot.zip  
             
-            - name: Dump GitHub context
+            - name: Get Release Name
               env:
-                GITHUB_CONTEXT: ${{ toJson(github) }}
-              run: echo '$GITHUB_CONTEXT'
+                BIT_VERSION: ${{ github.ref_name }}
+              run: echo '$BIT_VERSION'
+            
+            - name: Change Version in Version.gd
+              run: echo "extends Node" 'const VERSION = "$BIT_VERSION" '  > ./godot_src/version.gd
+            
+            - name: Echo Version.gd file contents
+              run: gc ./godot_src/version.gd

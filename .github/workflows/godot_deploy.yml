@@ -54,19 +54,17 @@ jobs:
           run: ls
         
         - name: Make Directory for Export Templates
-          run: mkdir -p ~/.local/share/godot/export_templates/4.0.3.stable && mkdir -p ~/builds && mkdir ~/godot
+          run: mkdir -p ~/.local/share/godot/templates/4.0.3.stable && mkdir -p ~/builds && mkdir ~/godot
 
         - name: Unzip Godot
           run: unzip -j godot.zip -d ~/godot
 
-       
-
         - name: Unzip Godot Templates
-          run: unzip -j templates.zip -d ~/.local/share/godot/export_templates/4.0.3.stable
+          run: unzip -j templates.zip -d ~/.local/share/godot/templates/4.0.3.stable
         
 
         - name: Check Directory
-          run: ls ~/.local/share/godot/export_templates/4.0.3.stable
+          run: ls ~/.local/share/godot/templates/4.0.3.stable
         
         - name: Attempt to Complie Game
           run: ~/godot/Godot_v4.0.3-stable_linux.x86_64 --path ./godot_src --headless --export-release "${{ matrix.os }}" ~/builds/bittify-${{matrix.os}}

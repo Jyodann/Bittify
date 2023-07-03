@@ -31,13 +31,11 @@ jobs:
         - name: Attempt to Complie Game
           run: ~/godot/Godot_v4.0.3-stable_linux.x86_64 --path ./godot_src --headless --export-release "Linux" ~/builds/bittify-linux.x86_64
         
-        - name: Zip builds
-          run: cd ~/builds/ && zip -r linux-build.zip ./
         - name: Compliation Output
           uses: actions/upload-artifact@v3
           with: 
             name: Linux Build
-            path: ~/builds/linux-build.zip
+            path: ~/builds/bittify-linux.x86_64
             retention-days: 1
     
     complie-game-windows:
@@ -55,14 +53,12 @@ jobs:
 
         - name: Attempt to Complie Game
           run: ~/godot/Godot_v4.0.3-stable_linux.x86_64 --path ./godot_src --headless --export-release "WindowsDesktop" ~/builds/bittify-windows.exe
-        
-        - name: Zip builds
-          run: cd ~/builds/ && zip -r windows-build.zip ./
+
         - name: Compliation Output
           uses: actions/upload-artifact@v3
           with: 
             name: Windows Build
-            path: ~/builds/windows-build.zip
+            path: ~/builds/bittify-windows.exe
             retention-days: 1
     
     complie-game-meh-os:
@@ -81,13 +77,11 @@ jobs:
         - name: Attempt to Complie Game
           run: ~/godot/Godot_v4.0.3-stable_linux.x86_64 --path ./godot_src --headless --export-release "macOS" ~/builds/bittify-mac.zip
         
-        - name: Zip builds
-          run: cd ~/builds/ && zip -r mac-build.zip ./
         - name: Compliation Output
           uses: actions/upload-artifact@v3
           with: 
             name: MacOS Build
-            path: ~/builds/mac-build.zip
+            path: ~/builds/bittify-mac.zip
             retention-days: 1
           
 

@@ -12,12 +12,7 @@ jobs:
       name: Download Godot Engine
       runs-on: ubuntu-latest
       steps:
-        - name: Download Godot
-          run: wget https://downloads.tuxfamily.org/godotengine/4.0.3/Godot_v4.0.3-stable_linux.x86_64.zip -O godot.zip
 
-        - name: Download Templates
-          run: wget https://downloads.tuxfamily.org/godotengine/4.0.3/godot-lib.4.0.3.stable.template_release.aar -O templates.zip
-        
         - name: Cache Downloads
           id: cache-godot
           uses: actions/cache@v3
@@ -26,5 +21,15 @@ jobs:
                 ./godot.zip
                 ./templates.zip
               key: godot-download
+
+        - name: Download Godot
+          if: steps.cache-godot.outputs.cache-hit != 'true'
+          run: wget https://downloads.tuxfamily.org/godotengine/4.0.3/Godot_v4.0.3-stable_linux.x86_64.zip -O godot.zip
+
+        - name: Download Templates
+          if: steps.cache-godot.outputs.cache-hit != 'true'
+          run: wget https://downloads.tuxfamily.org/godotengine/4.0.3/godot-lib.4.0.3.stable.template_release.aar -O templates.zip
+        
+        
        
    

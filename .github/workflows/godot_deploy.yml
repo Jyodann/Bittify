@@ -37,7 +37,7 @@ jobs:
           uses: actions/upload-artifact@v3
           with: 
             name: Upload Complied Folder to Artifacts
-            path: linux-build.zip
+            path: ~/builds/linux-build.zip
             retention-days: 1
     
     complie-game-windows:
@@ -62,7 +62,7 @@ jobs:
           uses: actions/upload-artifact@v3
           with: 
             name: Upload Complied Folder to Artifacts
-            path: windows-build.zip
+            path: ~/builds/windows-build.zip
             retention-days: 1
     
     complie-game-meh-os:
@@ -87,7 +87,7 @@ jobs:
           uses: actions/upload-artifact@v3
           with: 
             name: Upload Complied Folder to Artifacts
-            path: mac-build.zip
+            path: ~/builds/mac-build.zip
             retention-days: 1
           
 

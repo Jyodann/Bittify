@@ -8,31 +8,23 @@ on:
         
 
 jobs:
-    build-windows:
-        name: Build on Windows
-        runs-on: windows-latest
-        steps:
-            - uses: actions/checkout@v3
+    download-godot:
+      name: Download Godot Engine
+      runs-on: ubuntu-latest
+      steps:
+        - name: Download Godot
+          run: wget https://downloads.tuxfamily.org/godotengine/4.0.3/Godot_v4.0.3-stable_linux.x86_64.zip -O godot.zip
 
-            - name: Download Godot
-              run:  curl https://downloads.tuxfamily.org/godotengine/4.0.3/Godot_v4.0.3-stable_win64.exe.zip --output godot.zip
-
-            - name: Unzip Godot 
-              run:  Expand-Archive .\godot.zip  
-            
-            - name: Get Release Name
-              env:
-                BIT_VERSION: ${{ github.ref_name }}
-              run: echo '$BIT_VERSION'
-            
-            - name: Change Version in Version.gd
-              run: echo "extends Node" 'const VERSION = "${{ github.ref_name }}" '  > ./godot_src/version.gd
-            
-            - name: Echo Version.gd file contents
-              run: gc ./godot_src/version.gd
-
-            - name: Complie with godot
-              run: ./godot/Godot_v4.0.3-stable_win64.exe --path ./godot_src/ --headless --export-release "Windows Desktop" ./bittify-windows-alpha.exe
-            
-            - name: Check File Path
-              run: ls
+        - name: Download Templates
+          run: wget https://downloads.tuxfamily.org/godotengine/4.0.3/godot-lib.4.0.3.stable.template_release.aar -O templates.zip
+        
+        - name: Cache Downloads
+          id: cache-godot
+          uses: actions/cache@v3
+          with:
+              path: |
+                ./godot.zip
+                ./templates.zip
+              key: godot-download
+       
+   

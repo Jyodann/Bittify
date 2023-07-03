@@ -5,7 +5,7 @@ inputs:
     default: "4.0.3"
 
 runs:
-  shell: bash
+  
   using: "composite"
   steps:
 
@@ -21,7 +21,9 @@ runs:
     - name: Download Godot
       if: steps.cache-godot.outputs.cache-hit != 'true'
       run: wget https://downloads.tuxfamily.org/godotengine/${{inputs.godot-version}}/Godot_v${{inputs.godot-version}}-stable_linux.x86_64.zip -O godot.zip
+      shell: bash
 
     - name: Download Templates
       if: steps.cache-godot.outputs.cache-hit != 'true'
       run: wget https://downloads.tuxfamily.org/godotengine/${{inputs.godot-version}}/Godot_v${{inputs.godot-version}}-stable_export_templates.tpz -O templates.zip
+      shell: bash

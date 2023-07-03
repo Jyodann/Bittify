@@ -67,8 +67,10 @@ jobs:
           run: ls ~/.local/share/godot/export_templates/4.0.3.stable
         
         - name: Attempt to Complie Game
-          run: ~/godot/Godot_v4.0.3-stable_linux.x86_64 --path ./godot_src --headless --export-release "${{ matrix.os }}" ~/builds/bittify-${{matrix.os}}
+          run: ~/godot/Godot_v4.0.3-stable_linux.x86_64 --path ./godot_src --headless --export-release "${{ matrix.os }}" ~/builds/bittify-${{matrix.os}}.exe
         
+        - name: List builds
+          run: ls ~/builds
         - name: Zip builds
           run: zip ${{matrix.os}}-build.zip ~/builds
         - name: Compliation Output

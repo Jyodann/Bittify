@@ -20,7 +20,7 @@ jobs:
               path: |
                 ./godot.zip
                 ./templates.zip
-              key: godot-download
+              key: godot-downloads
 
         - name: Download Godot
           if: steps.cache-godot.outputs.cache-hit != 'true'
@@ -28,7 +28,7 @@ jobs:
 
         - name: Download Templates
           if: steps.cache-godot.outputs.cache-hit != 'true'
-          run: wget https://downloads.tuxfamily.org/godotengine/4.0.3/godot-lib.4.0.3.stable.template_release.aar -O templates.zip
+          run: wget https://downloads.tuxfamily.org/godotengine/4.0.3/Godot_v4.0.3-stable_export_templates.tpz -O templates.zip
     
     complie-game:
       needs: download-godot
@@ -37,6 +37,9 @@ jobs:
         matrix:
           os: ["Windows Desktop", "Linux/X11", macOS]
       steps:
+        - name: Clone Repo    
+          uses: actions/checkout@v3
+
         - name: Restore Godot Cache
           id: cache-godot
           uses: actions/cache@v3
@@ -44,17 +47,19 @@ jobs:
               path: |
                 ./godot.zip
                 ./templates.zip
-              key: godot-download
+              key: godot-downloads
 
         - name: List Directory
           run: ls
         
-        - name: Unzip Cache
-          run: unzip godot.zip && unzip templates.zip
+        - name: Unzip Godot
+          run: unzip godot.zip 
 
-        - name: Clone Repo    
-          uses: actions/checkout@v3
+        - name: Unzip Godot Templates
+          run: unzip templates.zip -d ~/.local/share/godot/export_templates/4.0.3.stable
         
+        - name: Check Directory
+          run: ls ~/.local/share/godot/export_templates/4.0.3.stable
         
         
         

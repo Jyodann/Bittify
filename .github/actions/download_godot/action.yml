@@ -5,6 +5,7 @@ inputs:
     default: "4.0.3"
 
 runs:
+  shell: bash
   using: "composite"
   steps:
 

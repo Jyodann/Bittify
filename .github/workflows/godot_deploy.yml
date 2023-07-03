@@ -45,14 +45,16 @@ jobs:
                 ./godot.zip
                 ./templates.zip
               key: godot-download
+              
+        - name: List Directory
+          run: ls
         - name: Clone Repo    
           uses: actions/checkout@v3
         
         - name: Unzip Cache
           run: unzip ./godot.zip -O godot && unzip ./templates.zip -O templates
         
-        - name: List Directory
-          run: ls
+        
 
 
         

@@ -15,55 +15,64 @@ jobs:
         - name: Download and Cache Godot Engine + Templates
           uses: ./.github/actions/download_godot
     
-    complie-game:
+    complie-game-linux:
       needs: download-godot
       runs-on: ubuntu-latest
-      strategy:
-        fail-fast: false
-        matrix:
-          os: ["WindowsDesktop", "Linux", macOS]
       steps:
-        - name: Clone Repo    
-          uses: actions/checkout@v3
+        - name: Prepare Godot
+          uses: ./.github/actions/extract_godot
 
-        - name: Restore Godot Cache
-          id: cache-godot
-          uses: actions/cache@v3
-          with:
-              path: |
-                ./godot.zip
-                ./templates.zip
-              key: godot-downloads
-
-        - name: List Directory
-          run: ls
-        
-        - name: Make Directory for Export Templates
-          run: mkdir -p ~/.local/share/godot/export_templates/4.0.3.stable && mkdir -p ~/builds && mkdir ~/godot
-
-        - name: Unzip Godot
-          run: unzip -j godot.zip -d ~/godot
-
-        - name: Unzip Godot Templates
-          run: unzip -j templates.zip -d ~/.local/share/godot/export_templates/4.0.3.stable
-        
-
-        - name: Check Directory
-          run: ls ~/.local/share/godot/export_templates/4.0.3.stable
-        
         - name: Attempt to Complie Game
-          run: ~/godot/Godot_v4.0.3-stable_linux.x86_64 --path ./godot_src --headless --export-release "${{ matrix.os }}" ~/builds/bittify-${{matrix.os}}.exe
+          run: ~/godot/Godot_v4.0.3-stable_linux.x86_64 --path ./godot_src --headless --export-release "Linux" ~/builds/bittify-linux.x86_64
         
-        - name: List builds
-          run: ls ~/builds
         - name: Zip builds
-          run: zip -r ${{matrix.os}}-build.zip ~/builds
+          run: zip -r linux-build.zip ~/builds
         - name: Compliation Output
           uses: actions/upload-artifact@v3
           with: 
             name: Upload Complied Folder to Artifacts
-            path: ${{matrix.os}}-build.zip
+            path: linux-build.zip
             retention-days: 1
+    
+    complie-game-windows:
+      needs: download-godot
+      runs-on: ubuntu-latest
+      steps:
+        - name: Prepare Godot
+          uses: ./.github/actions/extract_godot
+
+        - name: Attempt to Complie Game
+          run: ~/godot/Godot_v4.0.3-stable_linux.x86_64 --path ./godot_src --headless --export-release "WindowsDesktop" ~/builds/bittify-windows.exe
+        
+        - name: Zip builds
+          run: zip -r windows-build.zip ~/builds
+        - name: Compliation Output
+          uses: actions/upload-artifact@v3
+          with: 
+            name: Upload Complied Folder to Artifacts
+            path: windows-build.zip
+            retention-days: 1
+    
+    complie-game-meh-os:
+      needs: download-godot
+      runs-on: ubuntu-latest
+      steps:
+        - name: Prepare Godot
+          uses: ./.github/actions/extract_godot
+
+        - name: Attempt to Complie Game
+          run: ~/godot/Godot_v4.0.3-stable_linux.x86_64 --path ./godot_src --headless --export-release "macOS" ~/builds/bittify-mac.zip
+        
+        - name: Zip builds
+          run: zip -r mac-build.zip ~/builds
+        - name: Compliation Output
+          uses: actions/upload-artifact@v3
+          with: 
+            name: Upload Complied Folder to Artifacts
+            path: mac-build.zip
+            retention-days: 1
+          
+
         
         
 

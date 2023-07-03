@@ -36,7 +36,7 @@ jobs:
         - name: Compliation Output
           uses: actions/upload-artifact@v3
           with: 
-            name: Upload Complied Folder to Artifacts
+            name: Linux Build
             path: ~/builds/linux-build.zip
             retention-days: 1
     
@@ -61,7 +61,7 @@ jobs:
         - name: Compliation Output
           uses: actions/upload-artifact@v3
           with: 
-            name: Upload Complied Folder to Artifacts
+            name: Windows Build
             path: ~/builds/windows-build.zip
             retention-days: 1
     
@@ -86,7 +86,7 @@ jobs:
         - name: Compliation Output
           uses: actions/upload-artifact@v3
           with: 
-            name: Upload Complied Folder to Artifacts
+            name: MacOS Build
             path: ~/builds/mac-build.zip
             retention-days: 1
           

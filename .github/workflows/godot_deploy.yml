@@ -21,9 +21,12 @@ jobs:
       steps:
         - name: Check out repository
           uses: actions/checkout@v3
-          
+
         - name: Prepare Godot
           uses: ./.github/actions/extract_godot
+
+        - name: Attempt to Import all resources
+          run: ~/godot/Godot_v4.0.3-stable_linux.x86_64 --path ./godot_src --headless --quit
 
         - name: Attempt to Complie Game
           run: ~/godot/Godot_v4.0.3-stable_linux.x86_64 --path ./godot_src --headless --export-release "Linux" ~/builds/bittify-linux.x86_64
@@ -47,6 +50,9 @@ jobs:
         - name: Prepare Godot
           uses: ./.github/actions/extract_godot
 
+        - name: Attempt to Import all resources
+          run: ~/godot/Godot_v4.0.3-stable_linux.x86_64 --path ./godot_src --headless --quit
+
         - name: Attempt to Complie Game
           run: ~/godot/Godot_v4.0.3-stable_linux.x86_64 --path ./godot_src --headless --export-release "WindowsDesktop" ~/builds/bittify-windows.exe
         
@@ -69,6 +75,9 @@ jobs:
         - name: Prepare Godot
           uses: ./.github/actions/extract_godot
 
+        - name: Attempt to Import all resources
+          run: ~/godot/Godot_v4.0.3-stable_linux.x86_64 --path ./godot_src --headless --quit
+          
         - name: Attempt to Complie Game
           run: ~/godot/Godot_v4.0.3-stable_linux.x86_64 --path ./godot_src --headless --export-release "macOS" ~/builds/bittify-mac.zip
         

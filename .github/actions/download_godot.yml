@@ -1,0 +1,26 @@
+name: "Download and cache Godot"
+inputs:
+  godot-version:
+    required: false
+    default: "4.0.3"
+
+runs:
+  using: "composite"
+  steps:
+
+    - name: Cache Downloads
+      id: cache-godot
+      uses: actions/cache@v3
+      with:
+          path: |
+            ./godot.zip
+            ./templates.zip
+          key: godot-downloads
+
+    - name: Download Godot
+      if: steps.cache-godot.outputs.cache-hit != 'true'
+      run: wget https://downloads.tuxfamily.org/godotengine/${{inputs.godot-version}}/Godot_v${{inputs.godot-version}}-stable_linux.x86_64.zip -O godot.zip
+
+    - name: Download Templates
+      if: steps.cache-godot.outputs.cache-hit != 'true'
+      run: wget https://downloads.tuxfamily.org/godotengine/${{inputs.godot-version}}/Godot_v${{inputs.godot-version}}-stable_export_templates.tpz -O templates.zip

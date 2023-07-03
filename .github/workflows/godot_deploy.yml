@@ -5,30 +5,13 @@ on:
     branches:
       - cd_ci_test
       - r**
-        
 
 jobs:
     download-godot:
       name: Download and Cache Godot Engine + Templates
       runs-on: ubuntu-latest
       steps:
-
-        - name: Cache Downloads
-          id: cache-godot
-          uses: actions/cache@v3
-          with:
-              path: |
-                ./godot.zip
-                ./templates.zip
-              key: godot-downloads
-
-        - name: Download Godot
-          if: steps.cache-godot.outputs.cache-hit != 'true'
-          run: wget https://downloads.tuxfamily.org/godotengine/4.0.3/Godot_v4.0.3-stable_linux.x86_64.zip -O godot.zip
-
-        - name: Download Templates
-          if: steps.cache-godot.outputs.cache-hit != 'true'
-          run: wget https://downloads.tuxfamily.org/godotengine/4.0.3/Godot_v4.0.3-stable_export_templates.tpz -O templates.zip
+        - uses: ./.github/actions/download_godot
     
     complie-game:
       needs: download-godot

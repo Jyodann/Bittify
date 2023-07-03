@@ -52,7 +52,7 @@ jobs:
           uses: actions/checkout@v3
         
         - name: Unzip Cache
-          run: unzip godot.zip -O godot && unzip templates.zip -O templates
+          run: unzip godot -O godot && unzip templates -O templates
         
         
 

@@ -50,7 +50,7 @@ jobs:
           run: ls
         
         - name: Unzip Cache
-          run: unzip godot.zip -O godot && unzip templates.zip -O templates
+          run: unzip godot.zip && unzip templates.zip
 
         - name: Clone Repo    
           uses: actions/checkout@v3

@@ -30,3 +30,9 @@ jobs:
             
             - name: Echo Version.gd file contents
               run: gc ./godot_src/version.gd
+
+            - name: Complie with godot
+              run: ./godot/Godot_v4.0.3-stable_win64.exe --path ./godot_src/ --headless --export-release "Windows Desktop" ./bittify-windows-alpha.exe
+            
+            - name: Check File Path
+              run: ls

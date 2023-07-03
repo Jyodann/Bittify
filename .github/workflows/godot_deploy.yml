@@ -9,7 +9,7 @@ on:
 
 jobs:
     download-godot:
-      name: Download Godot Engine
+      name: Download and Cache Godot Engine + Templates
       runs-on: ubuntu-latest
       steps:
 
@@ -29,7 +29,32 @@ jobs:
         - name: Download Templates
           if: steps.cache-godot.outputs.cache-hit != 'true'
           run: wget https://downloads.tuxfamily.org/godotengine/4.0.3/godot-lib.4.0.3.stable.template_release.aar -O templates.zip
+    
+    complie-game:
+      needs: download-godot
+      runs-on: ubuntu-latest
+      strategy:
+        matrix:
+          os: ["Windows Desktop", "Linux/X11", macOS]
+      steps:
+        - name: Restore Godot Cache
+          id: cache-godot
+          uses: actions/cache@v3
+          with:
+              path: |
+                ./godot.zip
+                ./templates.zip
+              key: godot-download
+        - name: Clone Repo    
+          uses: actions/checkout@v3
         
+        - name: Unzip Cache
+          run: unzip ./godot.zip -O godot && unzip ./templates.zip -O templates
+        
+        - name: List Directory
+          run: ls
+
+
         
        
    

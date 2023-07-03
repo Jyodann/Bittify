@@ -55,9 +55,13 @@ jobs:
         - name: Unzip Godot
           run: unzip godot.zip 
 
+        - name: Make Directory for Export Templates
+          run: mkdir -p ~/.local/share/godot/export_templates/4.0.3.stable
+
         - name: Unzip Godot Templates
           run: unzip templates.zip -d ~/.local/share/godot/export_templates/4.0.3.stable
         
+
         - name: Check Directory
           run: ls ~/.local/share/godot/export_templates/4.0.3.stable
         

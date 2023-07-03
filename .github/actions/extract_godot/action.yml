@@ -10,33 +10,33 @@ runs:
   steps:
 
     - name: Clone Repo    
-          uses: actions/checkout@v3
+      uses: actions/checkout@v3
 
-        - name: Restore Godot Cache
-          id: cache-godot
-          uses: actions/cache@v3
-          with:
-              path: |
-                ./godot.zip
-                ./templates.zip
-              key: godot-downloads
+    - name: Restore Godot Cache
+      id: cache-godot
+      uses: actions/cache@v3
+      with:
+          path: |
+            ./godot.zip
+            ./templates.zip
+          key: godot-downloads
 
-        - name: List Directory
-          run: ls
-          shell: bash
-        
-        - name: Make Directory for Export Templates
-          run: mkdir -p ~/.local/share/godot/export_templates/4.0.3.stable && mkdir -p ~/builds && mkdir ~/godot
-          shell: bash
+    - name: List Directory
+      run: ls
+      shell: bash
+    
+    - name: Make Directory for Export Templates
+      run: mkdir -p ~/.local/share/godot/export_templates/4.0.3.stable && mkdir -p ~/builds && mkdir ~/godot
+      shell: bash
 
-        - name: Unzip Godot
-          run: unzip -j godot.zip -d ~/godot
-          shell: bash
+    - name: Unzip Godot
+      run: unzip -j godot.zip -d ~/godot
+      shell: bash
 
-        - name: Unzip Godot Templates
-          run: unzip -j templates.zip -d ~/.local/share/godot/export_templates/4.0.3.stable
-          shell: bash
+    - name: Unzip Godot Templates
+      run: unzip -j templates.zip -d ~/.local/share/godot/export_templates/4.0.3.stable
+      shell: bash
 
-        - name: Check Directory
-          run: ls ~/.local/share/godot/export_templates/4.0.3.stable
-          shell: bash
+    - name: Check Directory
+      run: ls ~/.local/share/godot/export_templates/4.0.3.stable
+      shell: bash

@@ -96,7 +96,7 @@ jobs:
           run: mkdir -p ~/builds
 
         - name: Run Godot Command game macOS
-          run:  ~/godot-4.0.3/Godot.app/Contents/MacOS/Godot --path ./godot_src --headless --export-release "MacOS" ~/builds/bittify.zip
+          run:  ~/godot-4.0.3/Godot.app/Contents/MacOS/Godot --path ./godot_src --headless --export-release "macOS" ~/builds/bittify.zip
         
         - name: Upload Artifact for MacOS build of ${{env.game-name}} 
           uses: actions/upload-artifact@v3

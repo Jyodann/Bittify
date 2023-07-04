@@ -86,11 +86,11 @@ jobs:
           shell: bash
     
         - name: Unzip Godot Templates
-          run: unzip -q -j templates.zip -d /Users/runner/Library/Application Support/Godot/export_templates/4.0.3.stable/
+          run: unzip -q -j templates.zip -d "/Users/runner/Library/Application Support/Godot/export_templates/4.0.3.stable/""
         
 
         - name: List Extracted Directory
-          run: ls /Users/runner/Library/Application Support/Godot/export_templates/4.0.3.stable/
+          run: ls "/Users/runner/Library/Application Support/Godot/export_templates/4.0.3.stable/""
           shell: bash
         - name: List Recursive
           run:  ls -R ~/godot-4.0.3/

@@ -3,7 +3,9 @@ inputs:
   godot-version:
     required: false
     default: "4.0.3"
-
+  godot-build:
+    required: false
+    default: "linux.x86_64"
 runs:
   
   using: "composite"
@@ -15,7 +17,7 @@ runs:
           path: |
             ./godot.zip
             ./templates.zip
-          key: godot-downloads-${{inputs.godot-version}}
+          key: godot-downloads-${{inputs.godot-version}}-${{inputs.godot-build}}
     
     - name: Make Directory for Export Templates & Godot Engine
       run: mkdir -p ~/.local/share/godot/export_templates/${{inputs.godot-version}}.stable && mkdir ~/godot-${{inputs.godot-version}}

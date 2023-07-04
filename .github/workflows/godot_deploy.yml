@@ -78,7 +78,7 @@ jobs:
               key: godot-downloads-4.0.3-macos.universal
 
         - name: Make Directory for Export Templates & Godot Engine
-          run: mkdir -p ~/.local/share/godot/export_templates/4.0.3.stable && mkdir ~/godot-4.0.3
+          run: mkdir -p /Users/runner/Library/Application Support/Godot/export_templates/4.0.3.stable && mkdir ~/godot-4.0.3
           shell: bash
     
         - name: Unzip Godot
@@ -86,8 +86,11 @@ jobs:
           shell: bash
     
         - name: Unzip Godot Templates
-          run: unzip -q -j templates.zip -d ~/.local/share/godot/export_templates/4.0.3.stable
+          run: unzip -q -j templates.zip -d /Users/runner/Library/Application Support/Godot/export_templates/4.0.3.stable/
+        
 
+        - name: List Extracted Directory
+          run: ls /Users/runner/Library/Application Support/Godot/export_templates/4.0.3.stable/
           shell: bash
         - name: List Recursive
           run:  ls -R ~/godot-4.0.3/

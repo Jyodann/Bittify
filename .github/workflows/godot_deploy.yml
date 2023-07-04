@@ -72,7 +72,9 @@ jobs:
           uses: ./.github/actions/extract_godot
           with:
             godot-build: macos.universal
-
+        - name: List Recursive
+          run:  ls -R ~/godot-4.0.3/
+          
         - name: Run Godot Command game macOS
           run:  ~/godot-4.0.3/Godot.app/Contents/MacOS/Godot --version
          

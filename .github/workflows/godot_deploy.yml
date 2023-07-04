@@ -68,6 +68,15 @@ jobs:
         - name: Check out repository
           uses: actions/checkout@v3
 
+        - name: Restore Godot Cache
+          id: cache-godot
+          uses: actions/cache@v3
+          with:
+              path: |
+                ./godot.zip
+                ./templates.zip
+              key: godot-downloads-4.0.3-macos.universal
+
         - name: Make Directory for Export Templates & Godot Engine
           run: mkdir -p ~/.local/share/godot/export_templates/4.0.3.stable && mkdir ~/godot-4.0.3
           shell: bash

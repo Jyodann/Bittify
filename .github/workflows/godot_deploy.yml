@@ -62,7 +62,7 @@ jobs:
           uses: ./.github/actions/build_godot_game
           with:
             game-name: "Bittify"
-            release-name: "MacOS"
+            release-name: "macOS"
             release-extension: "zip"
           
 

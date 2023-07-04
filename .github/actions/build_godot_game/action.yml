@@ -17,6 +17,7 @@ runs:
   steps:
     - name: Make Directory for game builds
       run: mkdir -p ~/builds
+      shell: bash
 
     - name: Attempt to Complie Game
       run: ~/godot/Godot_v${{inputs.godot-version}}-stable_linux.x86_64 --path ./godot_src --headless --export-release ${{inputs.release-name}} ~/builds/${{inputs.game-name}}.${{inputs.release-extension}}

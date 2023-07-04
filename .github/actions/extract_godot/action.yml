@@ -24,7 +24,7 @@ runs:
       shell: bash
 
     - name: Unzip Godot
-      run: unzip -q -j godot.zip -d ~/godot-${{inputs.godot-version}}
+      run: unzip -q -j -o godot.zip -d ~/godot-${{inputs.godot-version}}
       shell: bash
 
     - name: Unzip Godot Templates

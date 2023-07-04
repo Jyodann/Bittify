@@ -62,7 +62,7 @@ jobs:
             release-extension: "exe"
     
     complie-game-meh-os:
-      needs: download-godot
+      needs: download-godot-mehOS
       runs-on: macos-latest
       steps:
         - name: Check out repository

@@ -8,10 +8,6 @@ runs:
   
   using: "composite"
   steps:
-
-    - name: Clone Repo    
-      uses: actions/checkout@v3
-
     - name: Restore Godot Cache
       id: cache-godot
       uses: actions/cache@v3
@@ -19,24 +15,16 @@ runs:
           path: |
             ./godot.zip
             ./templates.zip
-          key: godot-downloads
-
-    - name: List Directory
-      run: ls
-      shell: bash
+          key: godot-downloads-${{inputs.godot-version}}
     
-    - name: Make Directory for Export Templates
-      run: mkdir -p ~/.local/share/godot/export_templates/4.0.3.stable && mkdir -p ~/builds && mkdir ~/godot
+    - name: Make Directory for Export Templates & Godot Engine
+      run: mkdir -p ~/.local/share/godot/export_templates/${{inputs.godot-version}}.stable && mkdir ~/godot-${{inputs.godot-version}}
       shell: bash
 
     - name: Unzip Godot
-      run: unzip -j godot.zip -d ~/godot
+      run: unzip -q -j godot.zip -d ~/godot-${{inputs.godot-version}}
       shell: bash
 
     - name: Unzip Godot Templates
-      run: unzip -j templates.zip -d ~/.local/share/godot/export_templates/4.0.3.stable
-      shell: bash
-
-    - name: Check Directory
-      run: ls ~/.local/share/godot/export_templates/4.0.3.stable
+      run: unzip -q -j templates.zip -d ~/.local/share/godot/export_templates/${{inputs.godot-version}}.stable
       shell: bash

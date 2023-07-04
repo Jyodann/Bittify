@@ -1,0 +1,30 @@
+name: "Attempt To Complie Game"
+inputs:
+  game-name:
+    required: true
+  godot-version:
+    required: false
+    default: "4.0.3"
+  release-name:
+    required: true
+    default: "Linux"
+  release-extension:
+    required: true
+    default: "x86_64"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Make Directory for game builds
+      run: mkdir -p ~/builds
+
+    - name: Attempt to Complie Game
+      run: ~/godot/Godot_v${{inputs.godot-version}}-stable_linux.x86_64 --path ./godot_src --headless --export-release ${{inputs.release-name}} ~/builds/${{inputs.game-name}}.${{inputs.release-extension}}
+      shell: bash
+    
+    - name: Upload Artifact for ${{inputs.release-name}} build of ${{inputs.game-name}}
+      uses: actions/upload-artifact@v3
+        with: 
+          name: ${{inputs.release-name}} Build
+          path: ~/builds/${{inputs.game-name}}.${{inputs.release-extension}}
+          retention-days: 1

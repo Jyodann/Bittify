@@ -10,8 +10,9 @@ jobs:
     download-godot:
       runs-on: ubuntu-latest
       steps:
-        - name: Check out repository
+        - name: Check out repository (To Get Local Action)
           uses: actions/checkout@v3
+
         - name: Download and Cache Godot Engine + Templates
           uses: ./.github/actions/download_godot
     
@@ -25,19 +26,11 @@ jobs:
         - name: Prepare Godot
           uses: ./.github/actions/extract_godot
 
-        - name: Attempt to Import all resources
-          run: ~/godot/Godot_v4.0.3-stable_linux.x86_64 --path ./godot_src --headless --quit
-
-        - name: Attempt to Complie Game
-          run: ~/godot/Godot_v4.0.3-stable_linux.x86_64 --path ./godot_src --headless --export-release "Linux" ~/builds/bittify-linux.x86_64
-        
-        - name: Compliation Output
-          uses: actions/upload-artifact@v3
-          with: 
-            name: Linux Build
-            path: ~/builds/bittify-linux.x86_64
-            retention-days: 1
-    
+        - name: Complie game
+          uses: ./.github/actions/build_godot_game
+          with:
+            game-name: "Bittify"
+          
     complie-game-windows:
       needs: download-godot
       runs-on: ubuntu-latest
@@ -48,18 +41,12 @@ jobs:
         - name: Prepare Godot
           uses: ./.github/actions/extract_godot
 
-        - name: Attempt to Import all resources
-          run: ~/godot/Godot_v4.0.3-stable_linux.x86_64 --path ./godot_src --headless --quit
-
-        - name: Attempt to Complie Game
-          run: ~/godot/Godot_v4.0.3-stable_linux.x86_64 --path ./godot_src --headless --export-release "WindowsDesktop" ~/builds/bittify-windows.exe
-
-        - name: Compliation Output
-          uses: actions/upload-artifact@v3
-          with: 
-            name: Windows Build
-            path: ~/builds/bittify-windows.exe
-            retention-days: 1
+        - name: Complie game
+          uses: ./.github/actions/build_godot_game
+          with:
+            game-name: "Bittify"
+            release-name: "WindowsDesktop"
+            release-extension: "exe"
     
     complie-game-meh-os:
       needs: download-godot
@@ -71,18 +58,12 @@ jobs:
         - name: Prepare Godot
           uses: ./.github/actions/extract_godot
 
-        - name: Attempt to Import all resources
-          run: ~/godot/Godot_v4.0.3-stable_linux.x86_64 --path ./godot_src --headless --quit
-
-        - name: Attempt to Complie Game
-          run: ~/godot/Godot_v4.0.3-stable_linux.x86_64 --path ./godot_src --headless --export-release "macOS" ~/builds/bittify-mac.zip
-        
-        - name: Compliation Output
-          uses: actions/upload-artifact@v3
-          with: 
-            name: MacOS Build
-            path: ~/builds/bittify-mac.zip
-            retention-days: 1
+        - name: Complie game
+          uses: ./.github/actions/build_godot_game
+          with:
+            game-name: "Bittify"
+            release-name: "MacOS"
+            release-extension: "zip"
           
 
         

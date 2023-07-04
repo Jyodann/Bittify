@@ -1,4 +1,4 @@
-name: "Download and cache Godot"
+name: "Download Godot Engine + Templates, extract to path"
 inputs:
   godot-version:
     required: false
@@ -16,7 +16,7 @@ runs:
           path: |
             ./godot.zip
             ./templates.zip
-          key: godot-downloads
+          key: godot-downloads-${{inputs.godot-version}}
 
     - name: Download Godot
       if: steps.cache-godot.outputs.cache-hit != 'true'

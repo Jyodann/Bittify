@@ -73,12 +73,9 @@ jobs:
           with:
             godot-build: macos.universal
 
-        - name: Complie game
-          uses: ./.github/actions/build_godot_game
-          with:
-            game-name: ${{env.game-name}}
-            release-name: "macOS"
-            release-extension: "zip"
+        - name: Run Godot Command game macOS
+          run:  ."~/godot-4.0.3/Godot.app/Contents/MacOS/Godot" --version
+         
           
 
         

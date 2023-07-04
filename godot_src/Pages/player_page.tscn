@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cedi8xp8ducfa" path="res://Scenes/main_player.tscn" id="1_ohi3a"]
 
 [node name="PlayerPage" type="Window"]
-initial_position = 2
+initial_position = 1
 size = Vector2i(300, 350)
 
 [node name="main_player" parent="." instance=ExtResource("1_ohi3a")]

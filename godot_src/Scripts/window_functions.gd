@@ -14,6 +14,9 @@ func change_window_position(x, y, window = get_window()) -> void:
 
 
 func change_window_borderless(is_borderless, window = get_window()) -> void:
+	if (OS.get_name() == "macOS"):
+		window.extend_to_title = is_borderless
+		return
 	window.borderless = is_borderless
 
 

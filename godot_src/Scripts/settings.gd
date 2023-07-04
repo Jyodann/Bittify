@@ -48,7 +48,7 @@ func open_new_player_window():
 		
 		get_tree().root.add_child(window)
 		player_windows.append(window)
-		WindowFunctions.minimize_window()
+		#WindowFunctions.minimize_window()
 
 func on_settings_change(new_settings): 
 	var is_borderless = ApplicationStorage.filter_emit_data(new_settings, ApplicationStorage.Settings.BORDERLESS)

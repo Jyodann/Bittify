@@ -74,7 +74,7 @@ jobs:
             godot-build: macos.universal
 
         - name: Run Godot Command game macOS
-          run:  ."~/godot-4.0.3/Godot.app/Contents/MacOS/Godot" --version
+          run:  ~/godot-4.0.3/Godot.app/Contents/MacOS/Godot --version
          
           
 

@@ -20,7 +20,7 @@ runs:
       shell: bash
 
     - name: Attempt to Complie Game
-      run: ~/godot/Godot_v${{inputs.godot-version}}-stable_linux.x86_64 --path ./godot_src --headless --export-release ${{inputs.release-name}} ~/builds/${{inputs.game-name}}.${{inputs.release-extension}}
+      run: ~/godot-${{inputs.godot-version}}/Godot_v${{inputs.godot-version}}-stable_linux.x86_64 --path ./godot_src --headless --export-release ${{inputs.release-name}} ~/builds/${{inputs.game-name}}.${{inputs.release-extension}}
       shell: bash
     
     - name: Upload Artifact for ${{inputs.release-name}} build of ${{inputs.game-name}}

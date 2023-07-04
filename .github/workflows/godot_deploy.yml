@@ -1,12 +1,17 @@
-name: Deploy-Godot
+name: Canary-Deploy-Godot
 
 on:
   push:
     branches:
       - cd_ci_test
-      - r**
+      - dev
+
+env:
+  game-name: "Bittify-canary-${{github.sha}}"
 
 jobs:
+   
+
     download-godot:
       runs-on: ubuntu-latest
       steps:
@@ -29,7 +34,7 @@ jobs:
         - name: Complie game
           uses: ./.github/actions/build_godot_game
           with:
-            game-name: "Bittify"
+            game-name: ${{env.game-name}}
           
     complie-game-windows:
       needs: download-godot
@@ -44,7 +49,7 @@ jobs:
         - name: Complie game
           uses: ./.github/actions/build_godot_game
           with:
-            game-name: "Bittify"
+            game-name: ${{env.game-name}}
             release-name: "WindowsDesktop"
             release-extension: "exe"
     
@@ -61,7 +66,7 @@ jobs:
         - name: Complie game
           uses: ./.github/actions/build_godot_game
           with:
-            game-name: "Bittify"
+            game-name: ${{env.game-name}}
             release-name: "macOS"
             release-extension: "zip"
           

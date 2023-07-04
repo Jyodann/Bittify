@@ -25,7 +25,7 @@ runs:
     
     - name: Upload Artifact for ${{inputs.release-name}} build of ${{inputs.game-name}}
       uses: actions/upload-artifact@v3
-        with: 
-          name: ${{inputs.release-name}} Build
-          path: ~/builds/${{inputs.game-name}}.${{inputs.release-extension}}
-          retention-days: 1
+      with: 
+        name: ${{inputs.release-name}} Build
+        path: ~/builds/${{inputs.game-name}}.${{inputs.release-extension}}
+        retention-days: 1

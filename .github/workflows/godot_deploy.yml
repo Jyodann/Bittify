@@ -68,13 +68,21 @@ jobs:
         - name: Check out repository
           uses: actions/checkout@v3
 
-        - name: Prepare Godot
-          uses: ./.github/actions/extract_godot
-          with:
-            godot-build: macos.universal
+        - name: Make Directory for Export Templates & Godot Engine
+          run: mkdir -p ~/.local/share/godot/export_templates/4.0.3.stable && mkdir ~/godot-4.0.3
+          shell: bash
+    
+        - name: Unzip Godot
+          run: unzip -q -o godot.zip -d ~/godot-4.0.3
+          shell: bash
+    
+        - name: Unzip Godot Templates
+          run: unzip -q -j templates.zip -d ~/.local/share/godot/export_templates/4.0.3.stable
+
+          shell: bash
         - name: List Recursive
           run:  ls -R ~/godot-4.0.3/
-          
+
         - name: Run Godot Command game macOS
           run:  ~/godot-4.0.3/Godot.app/Contents/MacOS/Godot --version
          

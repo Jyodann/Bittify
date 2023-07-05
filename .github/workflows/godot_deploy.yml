@@ -36,6 +36,8 @@ jobs:
       needs: download-godot
       runs-on: ubuntu-latest
       steps:
+        - name: Check out repository (To Get Local Action)
+          uses: actions/checkout@v3
         - name: Compiling for All Available Platforms
           uses: ./.github/workflows/all_platform_comp.yml
           with:
@@ -48,6 +50,9 @@ jobs:
       needs: download-godot
       runs-on: ubuntu-latest
       steps:
+        - name: Check out repository (To Get Local Action)
+          uses: actions/checkout@v3
+          
         - name: Compiling for All Available Platforms
           uses: ./.github/workflows/all_platform_comp.yml
           with:

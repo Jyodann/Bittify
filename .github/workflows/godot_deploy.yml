@@ -60,7 +60,22 @@ jobs:
             game-name: ${{env.game-name}}
             release-name: "WindowsDesktop"
             release-extension: "exe"
-    
+    complie-game-mac-os:
+      needs: download-godot
+      runs-on: ubuntu-latest
+      steps:
+        - name: Check out repository
+          uses: actions/checkout@v3
+
+        - name: Prepare Godot
+          uses: ./.github/actions/extract_godot
+
+        - name: Complie game
+          uses: ./.github/actions/build_godot_game
+          with:
+            game-name: ${{env.game-name}}
+            release-name: "macOS"
+            release-extension: "zip"
     complie-game-meh-os:
       needs: download-godot-mehOS
       runs-on: macos-latest
@@ -107,13 +122,3 @@ jobs:
             name: MacOS Build
             path: ~/builds/bittify.zip
             retention-days: 1
-         
-          
-
-        
-        
-
-
-        
-       
-   

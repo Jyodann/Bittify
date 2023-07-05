@@ -1,4 +1,4 @@
-name: Canary-Deploy-Godot
+name: Godot Deploy New Action
 
 
 on:

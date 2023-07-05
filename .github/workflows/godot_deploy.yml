@@ -1,25 +1,17 @@
 name: Canary-Deploy-Godot
 
+
 on:
   push:
     branches:
       - cd_ci_test
       - dev
-
+    
 env:
   game-name: "Bittify-canary-${{github.sha}}"
+  version: "dev-build-${{github.sha}}"
 
 jobs:
-    download-godot-mehOS:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Check out repository (To Get Local Action)
-          uses: actions/checkout@v3
-
-        - name: Download and Cache Godot Engine + Templates
-          uses: ./.github/actions/download_godot
-          with:
-            godot-build: macos.universal
     download-godot:
       runs-on: ubuntu-latest
       steps:
@@ -35,6 +27,9 @@ jobs:
       steps:
         - name: Check out repository
           uses: actions/checkout@v3
+        
+        - name: Modify Version.gd file
+          run: printf 'extends Node\nconst VERSION = "${{env.version}}"' > ./godot_src/version.gd
 
         - name: Prepare Godot
           uses: ./.github/actions/extract_godot
@@ -51,6 +46,9 @@ jobs:
         - name: Check out repository
           uses: actions/checkout@v3
 
+        - name: Modify Version.gd file
+          run: printf 'extends Node\nconst VERSION = "${{env.version}}"' > ./godot_src/version.gd
+
         - name: Prepare Godot
           uses: ./.github/actions/extract_godot
 
@@ -60,12 +58,16 @@ jobs:
             game-name: ${{env.game-name}}
             release-name: "WindowsDesktop"
             release-extension: "exe"
+
     complie-game-mac-os:
       needs: download-godot
       runs-on: ubuntu-latest
       steps:
         - name: Check out repository
           uses: actions/checkout@v3
+          
+        - name: Modify Version.gd file
+          run: printf 'extends Node\nconst VERSION = "${{env.version}}"' > ./godot_src/version.gd
 
         - name: Prepare Godot
           uses: ./.github/actions/extract_godot
@@ -76,49 +78,3 @@ jobs:
             game-name: ${{env.game-name}}
             release-name: "macOS"
             release-extension: "zip"
-    complie-game-meh-os:
-      needs: download-godot-mehOS
-      runs-on: macos-latest
-      steps:
-        - name: Check out repository
-          uses: actions/checkout@v3
-
-        - name: Restore Godot Cache
-          id: cache-godot
-          uses: actions/cache@v3
-          with:
-              path: |
-                ./godot.zip
-                ./templates.zip
-              key: godot-downloads-4.0.3-macos.universal
-
-        - name: Make Directory for Export Templates & Godot Engine
-          run: mkdir -p "/Users/runner/Library/Application Support/Godot/export_templates/4.0.3.stable" && mkdir ~/godot-4.0.3
-          shell: bash
-    
-        - name: Unzip Godot
-          run: unzip -q -o godot.zip -d ~/godot-4.0.3
-          shell: bash
-    
-        - name: Unzip Godot Templates
-          run: unzip -q -j templates.zip -d "/Users/runner/Library/Application Support/Godot/export_templates/4.0.3.stable/"
-        
-
-        - name: List Extracted Directory
-          run: ls "/Users/runner/Library/Application Support/Godot/export_templates/4.0.3.stable/"
-          shell: bash
-        - name: List Recursive
-          run:  ls -R ~/godot-4.0.3/
-
-        - name: Make Directory for game builds
-          run: mkdir -p ~/builds
-
-        - name: Run Godot Command game macOS
-          run:  ~/godot-4.0.3/Godot.app/Contents/MacOS/Godot --path ./godot_src --headless --export-release "macOS" ~/builds/bittify.zip
-        
-        - name: Upload Artifact for MacOS build of ${{env.game-name}} 
-          uses: actions/upload-artifact@v3
-          with: 
-            name: MacOS Build
-            path: ~/builds/bittify.zip
-            retention-days: 1

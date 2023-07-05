@@ -1,2 +1,2 @@
 extends Node
-const VERSION = "dev"
+const VERSION = "hi"

@@ -20,61 +20,33 @@ jobs:
 
         - name: Download and Cache Godot Engine + Templates
           uses: ./.github/actions/download_godot
+    complie_linux:
+      name: Compile For Linux
+      uses: ./.github/workflows/godot_complie.yml
+      with:
+        godot-version: "4.0.3"
+        version-number: "dev-canary"
+        release-name: "Bittify"
+        cfg-release-name: "Linux"
+        platform-release-extension: "x86_64"
     
-    complie-game-linux:
-      needs: download-godot
-      runs-on: ubuntu-latest
-      steps:
-        - name: Check out repository
-          uses: actions/checkout@v3
+    complie_windows:
+      name: Compile For Windows
+      uses: ./.github/workflows/godot_complie.yml
+      with:
+        godot-version: "4.0.3"
+        version-number: "dev-canary"
+        release-name: "Bittify"
+        cfg-release-name: "WindowsDesktop"
+        platform-release-extension: "exe"
         
-        - name: Modify Version.gd file
-          run: printf 'extends Node\nconst VERSION = "${{env.version}}"' > ./godot_src/version.gd
-
-        - name: Prepare Godot
-          uses: ./.github/actions/extract_godot
-
-        - name: Complie game
-          uses: ./.github/actions/build_godot_game
-          with:
-            game-name: ${{env.game-name}}
-          
-    complie-game-windows:
-      needs: download-godot
-      runs-on: ubuntu-latest
-      steps:
-        - name: Check out repository
-          uses: actions/checkout@v3
-
-        - name: Modify Version.gd file
-          run: printf 'extends Node\nconst VERSION = "${{env.version}}"' > ./godot_src/version.gd
-
-        - name: Prepare Godot
-          uses: ./.github/actions/extract_godot
-
-        - name: Complie game
-          uses: ./.github/actions/build_godot_game
-          with:
-            game-name: ${{env.game-name}}
-            release-name: "WindowsDesktop"
-            release-extension: "exe"
-
-    complie-game-mac-os:
-      needs: download-godot
-      runs-on: ubuntu-latest
-      steps:
-        - name: Check out repository
-          uses: actions/checkout@v3
-          
-        - name: Modify Version.gd file
-          run: printf 'extends Node\nconst VERSION = "${{env.version}}"' > ./godot_src/version.gd
-
-        - name: Prepare Godot
-          uses: ./.github/actions/extract_godot
-
-        - name: Complie game
-          uses: ./.github/actions/build_godot_game
-          with:
-            game-name: ${{env.game-name}}
-            release-name: "macOS"
-            release-extension: "zip"
+    complie_macOS:
+      name: Compile For MacOS
+      uses: ./.github/workflows/godot_complie.yml
+      with:
+        godot-version: "4.0.3"
+        version-number: "dev-canary"
+        release-name: "Bittify"
+        cfg-release-name: "macOS"
+        platform-release-extension: "zip"
+   

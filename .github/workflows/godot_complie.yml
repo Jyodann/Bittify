@@ -1,32 +1,32 @@
 name: Compile Godot Game for a Selected Platform
 
 on:
-    workflow_call:
-        inputs:
-            godot-version:
-              required: true
-              type: string
-              default: "4.0.3"
-              description: Version of godot to use to use
+  workflow_call:
+      inputs:
+          godot-version:
+            required: true
+            type: string
+            default: "4.0.3"
+            description: Version of godot to use to use
 
-            version-number:
-              required: true
-              type: string
-              default: "developer-canary"
-              
-            cfg-release-name:
-              required: true
-              type: string
-              default: "Windows Desktop"
+          version-number:
+            required: true
+            type: string
+            default: "developer-canary"
             
-            platform-release-extension: 
-              required: true
-              type: string
-              default: ".exe"
-            
-            release-name:
-              required: true
-              type: string
+          cfg-release-name:
+            required: true
+            type: string
+            default: "Windows Desktop"
+          
+          platform-release-extension: 
+            required: true
+            type: string
+            default: ".exe"
+          
+          release-name:
+            required: true
+            type: string
             
 jobs:
     compile-game:

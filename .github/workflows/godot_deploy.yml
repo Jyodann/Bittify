@@ -6,10 +6,17 @@ on:
     branches:
       - cd_ci_test
       - dev
-    
-env:
-  game-name: "Bittify-canary-${{github.sha}}"
-  version: "dev-build-${{github.sha}}"
+  workflow_dispatch:
+    inputs:
+      version-name: 
+        required: true
+      version-tag:
+        required: true
+        type: choice
+        options:
+          - alpha
+          - beta
+          - release
 
 jobs:
     download-godot:
@@ -20,33 +27,32 @@ jobs:
 
         - name: Download and Cache Godot Engine + Templates
           uses: ./.github/actions/download_godot
-    complie_linux:
-      name: Compile For Linux
-      uses: ./.github/workflows/godot_complie.yml
-      with:
-        godot-version: "4.0.3"
-        version-number: "dev-canary"
-        release-name: "Bittify"
-        cfg-release-name: "Linux"
-        platform-release-extension: "x86_64"
     
-    complie_windows:
-      name: Compile For Windows
-      uses: ./.github/workflows/godot_complie.yml
-      with:
-        godot-version: "4.0.3"
-        version-number: "dev-canary"
-        release-name: "Bittify"
-        cfg-release-name: "WindowsDesktop"
-        platform-release-extension: "exe"
-        
-    complie_macOS:
-      name: Compile For MacOS
-      uses: ./.github/workflows/godot_complie.yml
-      with:
-        godot-version: "4.0.3"
-        version-number: "dev-canary"
-        release-name: "Bittify"
-        cfg-release-name: "macOS"
-        platform-release-extension: "zip"
+    compile_all_platforms_dispatch:
+      if: ${{ github.event_name == 'workflow_dispatch' }}
+      env:
+        game-name: "Bittify"
+        version: ${{inputs.version-name}}-${{inputs.version-tag}}
+      needs: download-godot
+      runs-on: ubuntu-latest
+      steps:
+        - name: Compiling for All Available Platforms
+          uses: ./.github/workflows/godot_complie_all_platforms.yml
+          with:
+            version-number: ${{env.version}}
+    compile_all_platforms_canary:
+      if: ${{ github.event_name != 'workflow_dispatch' }}
+      env:
+        game-name: "Bittify-canary-${{github.sha}}"
+        version: "dev-build-${{github.sha}}"
+      needs: download-godot
+      runs-on: ubuntu-latest
+      steps:
+        - name: Compiling for All Available Platforms
+          uses: ./.github/workflows/godot_complie_all_platforms.yml
+          with:
+            version-number: ${{env.version}}
+            release-name: ${{env.game-name}}
+
+
    

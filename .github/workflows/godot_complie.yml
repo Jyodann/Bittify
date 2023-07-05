@@ -27,10 +27,8 @@ on:
             release-name:
               required: true
               type: string
-              
-        
+            
 jobs:
-
     compile-game:
         runs-on: ubuntu-latest
         steps:

@@ -29,31 +29,24 @@ jobs:
     
    
     compile_all_platforms_dispatch:
-      
-      env:
-        game-name: "Bittify"
-        version: ${{inputs.version-name}}-${{inputs.version-tag}}
-      
-      runs-on: ubuntu-latest
-      steps:
-        - name: Compiling for All Available Platforms
-          uses: ./.github/workflows/platform_comp.yml
-          with:
-            version-number: ${{env.version}}
-
+      if: ${{ github.event_name == 'workflow_dispatch' }}
+      name: All Platforms
+      uses: ./.github/workflows/platform_comp.yml
+      with: 
+        version-number: ${{inputs.version-name}}-${{inputs.version-tag}}
+        release-name: "Bittify"
+    
+    
     compile_all_platforms_canary:
       
-      env:
-        game-name: "Bittify-canary-${{github.sha}}"
-        version: "dev-build-${{github.sha}}"
-      needs: download-godot
-      runs-on: ubuntu-latest
-      steps:
-        - name: Compiling for All Available Platforms
-          uses: ./.github/workflows/platform_comp.yml
-          with:
-            version-number: ${{env.version}}
-            release-name: ${{env.game-name}}
+      if: ${{ github.event_name != 'workflow_dispatch' }}
+      
+      name: All Platforms
+      uses: ./.github/workflows/platform_comp.yml
+      
+      with: 
+        version-number: ${{github.sha}}
+        release-name: "Bittify-canary"
 
 
    

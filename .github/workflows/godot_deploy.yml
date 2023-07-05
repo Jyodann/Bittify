@@ -1,6 +1,5 @@
 name: Godot Deploy New Action
 
-
 on:
     push:
         branches:
@@ -28,17 +27,9 @@ jobs:
             - name: Download and Cache Godot Engine + Templates
               uses: ./.github/actions/download_godot
     
-    complie_test:
-        runs-on: ubuntu-latest
-        steps:
-            - name: Check out repository (To Get Local Action)
-              uses: actions/checkout@v3
-            - name: List
-              run: ls
-            - name: hello?
-              uses: ./.github/workflows/all_platform_comp.yml
+   
     compile_all_platforms_dispatch:
-      if: ${{ github.event_name == 'workflow_dispatch' }}
+      
       env:
         game-name: "Bittify"
         version: ${{inputs.version-name}}-${{inputs.version-tag}}
@@ -51,7 +42,7 @@ jobs:
           with:
             version-number: ${{env.version}}
     compile_all_platforms_canary:
-      if: ${{ github.event_name != 'workflow_dispatch' }}
+      
       env:
         game-name: "Bittify-canary-${{github.sha}}"
         version: "dev-build-${{github.sha}}"

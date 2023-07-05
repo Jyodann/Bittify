@@ -1,6 +1,3 @@
-res://Translations/translation.en.translation
-res://Translations/translation.jp.translation
-res://Scripts/initialisation.gd
 res://export_presets.cfg
 res://Pages/player_page.tscn
 res://Themes/Bittify_Main_Theme.tres

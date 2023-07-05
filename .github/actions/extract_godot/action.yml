@@ -1,0 +1,32 @@
+name: "Extract, Move and prepare Godot for Compliation"
+inputs:
+  godot-version:
+    required: false
+    default: "4.0.3"
+  godot-build:
+    required: false
+    default: "linux.x86_64"
+runs:
+  
+  using: "composite"
+  steps:
+    - name: Restore Godot Cache
+      id: cache-godot
+      uses: actions/cache@v3
+      with:
+          path: |
+            ./godot.zip
+            ./templates.zip
+          key: godot-downloads-${{inputs.godot-version}}-${{inputs.godot-build}}
+    
+    - name: Make Directory for Export Templates & Godot Engine
+      run: mkdir -p ~/.local/share/godot/export_templates/${{inputs.godot-version}}.stable && mkdir ~/godot-${{inputs.godot-version}}
+      shell: bash
+
+    - name: Unzip Godot
+      run: unzip -q -j -o godot.zip -d ~/godot-${{inputs.godot-version}}
+      shell: bash
+
+    - name: Unzip Godot Templates
+      run: unzip -q -j templates.zip -d ~/.local/share/godot/export_templates/${{inputs.godot-version}}.stable
+      shell: bash

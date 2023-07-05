@@ -1,0 +1,41 @@
+name: Compile Godot Game for all Supported Platforms
+
+on: 
+  workflow_call:
+    inputs:
+      version-number: 
+          required: true
+          type: string
+      release-name:
+          required: true
+          type: string
+jobs:
+    complie_linux:
+      name: Compile For Linux
+      uses: ./.github/workflows/godot_complie.yml
+      with:
+        godot-version: "4.0.3"
+        version-number: ${{inputs.version-number}}
+        release-name: ${{inputs.release-name}}
+        cfg-release-name: "Linux"
+        platform-release-extension: "x86_64"
+      
+    complie_windows:
+      name: Compile For Windows
+      uses: ./.github/workflows/godot_complie.yml
+      with:
+          godot-version: "4.0.3"
+          version-number: ${{inputs.version-number}}
+          release-name: ${{inputs.release-name}}
+          cfg-release-name: "WindowsDesktop"
+          platform-release-extension: "exe"
+  
+    complie_macOS:
+      name: Compile For MacOS
+      uses: ./.github/workflows/godot_complie.yml
+      with:
+          godot-version: "4.0.3"
+          version-number: ${{inputs.version-number}}
+          release-name: ${{inputs.release-name}}
+          cfg-release-name: "macOS"
+          platform-release-extension: "zip"

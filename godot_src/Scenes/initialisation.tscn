@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://3chnm3xo52ab"]
+[gd_scene load_steps=3 format=3 uid="uid://3chnm3xo52ab"]
 
 [ext_resource type="Script" path="res://Scripts/initialisation.gd" id="1_idix6"]
 [ext_resource type="PackedScene" uid="uid://bbmlohuvt0lmk" path="res://Scenes/mouse_drag.tscn" id="2_xho5s"]
-[ext_resource type="PackedScene" uid="uid://ctbbi6f6qhfjw" path="res://Scenes/login_page.tscn" id="3_no63r"]
 
 [node name="Initialisation" type="Control"]
 layout_mode = 3
@@ -14,20 +13,24 @@ grow_vertical = 2
 size_flags_horizontal = 6
 script = ExtResource("1_idix6")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="ColorRect" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-alignment = 1
+color = Color(0, 0, 0, 1)
 
-[node name="mouse_drag" parent="VBoxContainer" instance=ExtResource("2_xho5s")]
-layout_mode = 2
-size_flags_vertical = 3
+[node name="ContentPage" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="LoginPage" parent="VBoxContainer" instance=ExtResource("3_no63r")]
-layout_mode = 2
+[node name="mouse_drag" parent="." instance=ExtResource("2_xho5s")]
+visible = false
+layout_mode = 1
 size_flags_vertical = 3
-size_flags_stretch_ratio = 8.0

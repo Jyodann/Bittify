@@ -1,0 +1,53 @@
+name: Godot Deploy New Action
+
+on:
+    push:
+        branches:
+            - cd_ci_test
+            - dev
+    workflow_dispatch:
+        inputs:
+            version-name: 
+                required: true
+            version-tag:
+                required: true
+                type: choice
+                options:
+                - alpha
+                - beta
+                - release
+
+jobs:
+    download-godot:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check out repository (To Get Local Action)
+              uses: actions/checkout@v3
+
+            - name: Download and Cache Godot Engine + Templates
+              uses: ./.github/actions/download_godot
+    
+   
+    compile_all_platforms_dispatch:
+      if: ${{ github.event_name == 'workflow_dispatch' }}
+      needs: download-godot
+      name: All Platforms - Release Dispatch
+      uses: ./.github/workflows/platform_comp.yml
+      with: 
+        version-number: ${{inputs.version-name}}-${{inputs.version-tag}}
+        release-name: "Bittify"
+    
+    
+    compile_all_platforms_canary:
+      
+      if: ${{ github.event_name != 'workflow_dispatch' }}
+      needs: download-godot
+      name: All Platforms - Canary Build
+      uses: ./.github/workflows/platform_comp.yml
+      
+      with: 
+        version-number: ${{github.sha}}
+        release-name: "Bittify-canary"
+
+
+   

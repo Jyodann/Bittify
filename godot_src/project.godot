@@ -13,21 +13,24 @@ config_version=5
 config/name="Bittify"
 run/main_scene="res://Scenes/initialisation.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
+boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
 boot_splash/fullsize=false
 boot_splash/use_filter=false
-config/icon="res://icon.svg"
 
 [autoload]
 
 NetworkRequests="*res://Scripts/network_requests.gd"
 WindowFunctions="*res://Scripts/window_functions.gd"
-Initialisation="res://Scripts/initialisation.gd"
+ApplicationStorage="*res://Scripts/application_storage.gd"
+ContentPageShell="*res://Scripts/content_page_shell.gd"
+SongManager="*res://Scripts/song_manager.gd"
 
 [display]
 
-window/size/viewport_width=300
-window/size/viewport_height=350
+window/size/viewport_width=1000
+window/size/viewport_height=800
+window/subwindows/embed_subwindows=false
 
 [internationalization]
 
@@ -37,3 +40,5 @@ locale/translations=PackedStringArray("res://Translations/translation.en.transla
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)
+occlusion_culling/use_occlusion_culling=true

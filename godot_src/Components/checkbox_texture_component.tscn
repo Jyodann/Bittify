@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://cel5h4i7mo5d6"]
+
+[ext_resource type="Script" path="res://Scripts/checkbox_texture_component.gd" id="1_1h5yg"]
+
+[node name="checkbox_texture_component" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1h5yg")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+ignore_texture_size = true
+stretch_mode = 0

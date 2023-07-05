@@ -1,0 +1,49 @@
+name: Compile Godot Game for a Selected Platform
+
+on:
+  workflow_call:
+      inputs:
+          godot-version:
+            required: true
+            type: string
+            default: "4.0.3"
+            description: Version of godot to use to use
+
+          version-number:
+            required: true
+            type: string
+            default: "developer-canary"
+            
+          cfg-release-name:
+            required: true
+            type: string
+            default: "Windows Desktop"
+          
+          platform-release-extension: 
+            required: true
+            type: string
+            default: ".exe"
+          
+          release-name:
+            required: true
+            type: string
+            
+jobs:
+    compile-game:
+      runs-on: ubuntu-latest
+      steps:
+          - name: Check out repository
+            uses: actions/checkout@v3
+          
+          - name: Modify Version.gd file
+            run: printf 'extends Node\nconst VERSION = "${{inputs.version-number}}"' > ./godot_src/version.gd
+  
+          - name: Prepare Godot
+            uses: ./.github/actions/extract_godot
+  
+          - name: Complie game
+            uses: ./.github/actions/build_godot_game
+            with:
+              game-name: ${{inputs.release-name}}
+              release-name: ${{inputs.cfg-release-name}}
+              release-extension: ${{inputs.platform-release-extension}}

@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://d23fyxh6csgwh"]
+
+[ext_resource type="PackedScene" uid="uid://ctbbi6f6qhfjw" path="res://Scenes/login_view.tscn" id="1_krybq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1cthy"]
+bg_color = Color(0.172549, 0.172549, 0.172549, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="LoginPage" type="MarginContainer"]
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1cthy")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="LoginView" parent="Panel/MarginContainer" instance=ExtResource("1_krybq")]
+layout_mode = 2
+size_flags_stretch_ratio = 8.0

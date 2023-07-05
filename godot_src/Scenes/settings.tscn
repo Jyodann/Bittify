@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://yho1kejwafj6"]
+
+[ext_resource type="PackedScene" uid="uid://wfp154h4swfn" path="res://Scenes/settings_menu.tscn" id="2_r7is5"]
+
+[node name="Settings" type="Window"]
+gui_embed_subwindows = true
+initial_position = 1
+size = Vector2i(800, 600)
+transient = true
+borderless = true
+
+[node name="Control" parent="." instance=ExtResource("2_r7is5")]

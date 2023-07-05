@@ -37,7 +37,7 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - name: Compiling for All Available Platforms
-          uses: ~/.github/workflows/all_platform_comp.yml
+          uses: ./.github/workflows/all_platform_comp.yml
           with:
             version-number: ${{env.version}}
     compile_all_platforms_canary:
@@ -49,7 +49,7 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - name: Compiling for All Available Platforms
-          uses: ~/.github/workflows/all_platform_comp.yml
+          uses: ./.github/workflows/all_platform_comp.yml
           with:
             version-number: ${{env.version}}
             release-name: ${{env.game-name}}

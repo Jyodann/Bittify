@@ -30,7 +30,8 @@ jobs:
    
     compile_all_platforms_dispatch:
       if: ${{ github.event_name == 'workflow_dispatch' }}
-      name: All Platforms
+      needs: download-godot
+      name: All Platforms - Release Dispatch
       uses: ./.github/workflows/platform_comp.yml
       with: 
         version-number: ${{inputs.version-name}}-${{inputs.version-tag}}
@@ -40,8 +41,8 @@ jobs:
     compile_all_platforms_canary:
       
       if: ${{ github.event_name != 'workflow_dispatch' }}
-      
-      name: All Platforms
+      needs: download-godot
+      name: All Platforms - Canary Build
       uses: ./.github/workflows/platform_comp.yml
       
       with: 

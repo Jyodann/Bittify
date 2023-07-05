@@ -31,6 +31,10 @@ jobs:
     complie_test:
         runs-on: ubuntu-latest
         steps:
+            - name: Check out repository (To Get Local Action)
+              uses: actions/checkout@v3
+            - name: List
+              run: ls
             - name: hello?
               uses: ./.github/workflows/all_platform_comp.yml
     compile_all_platforms_dispatch:

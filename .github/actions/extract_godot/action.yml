@@ -2,7 +2,7 @@ name: "Extract, Move and prepare Godot for Compliation"
 inputs:
   godot-version:
     required: false
-    default: "4.0.3"
+    default: "4.1"
   godot-build:
     required: false
     default: "linux.x86_64"

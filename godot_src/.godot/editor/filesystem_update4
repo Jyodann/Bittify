@@ -1,2 +1,9 @@
-res://Pages/player_page.tscn
+res://Pages/about_window.tscn
 res://Themes/Bittify_Main_Theme.tres
+res://Scenes/about_window.tscn
+res://Pages/settings_page.tscn
+res://Scenes/settings_menu.tscn
+res://Scenes/about_menu.tscn
+res://Scenes/main_player.tscn
+res://Pages/player_page.tscn
+res://Scripts/settings.gd

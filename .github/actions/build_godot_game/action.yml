@@ -4,7 +4,7 @@ inputs:
     required: true
   godot-version:
     required: false
-    default: "4.0.3"
+    default: "4.1"
   release-name:
     required: true
     default: "Linux"

@@ -1,12 +1,11 @@
 extends Control
 
 @onready var disconnected_icon = preload("res://Icons/disconnected.png")
-@onready var settings_window = preload("res://Scenes/settings.tscn")
+@onready var settings_window = preload("res://Pages/settings_page.tscn")
 @onready var mouse_drag_component = preload("res://Scenes/mouse_drag.tscn")
 @onready var main_song_title = $MainSongTitle
 @onready var album_art = $AlbumArt
 @onready var album_gradient = $AlbumGradient
-
 @onready var settings_overlay = $SettingsOverlay
 @onready var listen_on_spotify = $SettingsOverlay/ColorRect/MarginContainer2/ListenOnSpotifyButton
 @onready var pin_on_top = $SettingsOverlay/ColorRect/PinOnTopCheckbox
@@ -35,6 +34,7 @@ var external_url_is_valid = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	SongManager.number_of_sessions += 1
 	main_song_title.change_text("Try Playing something from Spotify.")
 	access_token = get_access_token()
 	settings_overlay.modulate = Color.TRANSPARENT
@@ -177,7 +177,11 @@ func on_settings_change(new_settings):
 
 
 func open_settings():
-	WindowFunctions.focus_window()
+	var window = settings_window.instantiate()
+
+	window.title = "Bittify Miniplayer"
+	
+	get_tree().root.add_child(window)	
 
 
 func pin_to_top_pressed(pinned_status):

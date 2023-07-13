@@ -7,7 +7,7 @@ extends Control
 @onready var check_box_component = preload("res://Components/checkbox_component.tscn")
 @onready var dropdown_box_component = preload("res://Components/drop_down_box_component.tscn")
 @onready var textedit_box_component = preload("res://Components/text_edit_component.tscn")
-@onready var player = preload("res://Pages/player_page.tscn")
+#@onready var player = preload("res://Scenes/player_page.tscn")
 @onready var about_page = preload("res://Pages/about_window.tscn")
 @onready var launch_player = $HBoxContainer/LaunchMiniplayer
 @onready var settings_dict = {
@@ -42,12 +42,12 @@ class SettingBoundComponent:
 func open_new_player_window():
 	if (ApplicationStorage.get_data(ApplicationStorage.Settings.ALLOW_MORE_THAN_ONE_PLAYER) || SongManager.number_of_sessions < 1):
 		SongManager.number_of_sessions += 1
-		var window = player.instantiate()
+		#var window = player.instantiate()
 
-		window.title = "Bittify Miniplayer"
+		#window.title = "Bittify Miniplayer"
 		
-		get_tree().root.add_child(window)
-		player_windows.append(window)
+		#get_tree().root.add_child(window)
+		#player_windows.append(window)
 		#WindowFunctions.minimize_window()
 
 func on_settings_change(new_settings): 

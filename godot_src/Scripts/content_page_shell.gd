@@ -1,7 +1,7 @@
 extends Node
 
 @onready var login_page = preload("res://Pages/login_page.tscn")
-@onready var player_page = preload("res://Pages/player_page.tscn")
+@onready var player_page = preload("res://Scenes/main_player.tscn")
 @onready var settings_page = preload("res://Pages/settings_page.tscn")
 enum Page { LOGIN_PAGE, PLAYER_PAGE, SETTINGS_PAGE }
 

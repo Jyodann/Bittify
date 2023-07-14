@@ -18,7 +18,7 @@ boot_splash/show_image=false
 boot_splash/fullsize=false
 boot_splash/use_filter=false
 config/icon="res://bittify.png"
-config/macos_native_icon="res://icon.ico"
+config/macos_native_icon="res://bittify.icns"
 config/windows_native_icon="res://icon.ico"
 
 [autoload]

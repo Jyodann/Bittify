@@ -1,4 +1,4 @@
-name: Godot Deploy New Action
+name: Export Bittify for All Platforms
 
 on:
     push:

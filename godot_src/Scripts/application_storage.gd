@@ -25,7 +25,8 @@ enum Settings {
 	PLAYER_LAUNCH_IMMEDIATELY,
 	ALLOW_MORE_THAN_ONE_PLAYER,
 	STYLE_OF_TEXT,
-	CUSTOM_TEXT_STYLE
+	CUSTOM_TEXT_STYLE,
+	ADAPTIVE_BACKGROUND
 }
 
 enum SpeedOfSong { SLOWEST, SLOW, DEFAULT, FAST, FASTEST }
@@ -85,6 +86,7 @@ var default_data = {
 	Settings.ALLOW_MORE_THAN_ONE_PLAYER: false,
 	Settings.STYLE_OF_TEXT: StyleOfText.NAME_DASH_ARTIST,
 	Settings.CUSTOM_TEXT_STYLE: "`{song}` * `{artist}` * `{album}`",
+	Settings.ADAPTIVE_BACKGROUND: true
 }
 
 

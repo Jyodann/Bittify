@@ -4,7 +4,7 @@ inputs:
     required: true
   godot-version:
     required: false
-    default: "4.0.3"
+    default: "4.1"
   release-name:
     required: true
     default: "Linux"
@@ -27,5 +27,5 @@ runs:
       uses: actions/upload-artifact@v3
       with: 
         name: ${{inputs.release-name}} Build
-        path: ~/builds/${{inputs.game-name}}.${{inputs.release-extension}}
+        path: ~/builds/
         retention-days: 1

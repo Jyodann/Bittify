@@ -7,6 +7,9 @@ extends Control
 
 
 func _ready():
+	WindowFunctions.change_window_title("Login", get_window())
+	WindowFunctions.window_resizable(false, get_window())
+	WindowFunctions.change_window_size(500, 350, get_window())
 	login_button.pressed.connect(self._login_button_pressed)
 	bittify_code_go_button.pressed.connect(self._bittify_go_button_pressed)
 
@@ -29,4 +32,4 @@ func _bittify_go_button_pressed():
 	ApplicationStorage.modify_data(ApplicationStorage.Settings.REFRESH_TOKEN, refresh_token)
 	ApplicationStorage.modify_data(ApplicationStorage.Settings.ACCESS_TOKEN, access_token)
 
-	ContentPageShell.load_view(ContentPageShell.Page.SETTINGS_PAGE)
+	ContentPageShell.load_view(ContentPageShell.Page.PLAYER_PAGE)

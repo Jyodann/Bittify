@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://ctbbi6f6qhfjw"]
+[gd_scene load_steps=3 format=3 uid="uid://ctbbi6f6qhfjw"]
 
 [ext_resource type="Script" path="res://Scripts/login_page.gd" id="1_e63wq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wmn2v"]
+bg_color = Color(0.113725, 0.72549, 0.329412, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [node name="LoginPage" type="Control"]
 layout_mode = 3
@@ -38,6 +45,9 @@ vertical_alignment = 1
 [node name="LoginToSpotifyButton" type="Button" parent="VBoxContainer2/VBoxContainer"]
 custom_minimum_size = Vector2(250, 50)
 layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_wmn2v")
+theme_override_styles/hover = SubResource("StyleBoxFlat_wmn2v")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_wmn2v")
 text = "LOGIN_SPOTIFY"
 
 [node name="BittifyCodeLabel" type="Label" parent="VBoxContainer2/VBoxContainer"]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmph0463nt2jo"]
+[gd_scene load_steps=3 format=3 uid="uid://bmph0463nt2jo"]
 
 [ext_resource type="Script" path="res://Scripts/about_window.gd" id="1_v6dfw"]
+[ext_resource type="Texture2D" uid="uid://bu08ibtcb32e" path="res://Icons/kofi_button_red.png" id="2_g3jew"]
 
 [node name="about_menu" type="Control"]
 layout_mode = 3
@@ -41,6 +42,11 @@ layout_mode = 2
 text = "Need Help? "
 horizontal_alignment = 1
 
+[node name="CheckForUpdatesButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Check for Updates"
+
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_constants/margin_top = 32
@@ -65,10 +71,13 @@ horizontal_alignment = 1
 [node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/Support_Section"]
 layout_mode = 2
 
-[node name="Donate" type="Button" parent="VBoxContainer/Support_Section/HBoxContainer3"]
+[node name="Donate" type="TextureButton" parent="VBoxContainer/Support_Section/HBoxContainer3"]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Donate"
+texture_normal = ExtResource("2_g3jew")
+ignore_texture_size = true
+stretch_mode = 5
 
 [node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/Support_Section"]
 layout_mode = 2

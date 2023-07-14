@@ -1,16 +1,16 @@
 extends Control
 
-@onready var disconnected_icon = preload("res://Icons/disconnected.png")
-@onready var settings_window = preload("res://Scenes/settings.tscn")
+@onready var disconnected_icon = preload("res://Icons/disconnected_icon.png")
+@onready var settings_window = preload("res://Pages/settings_page.tscn")
 @onready var mouse_drag_component = preload("res://Scenes/mouse_drag.tscn")
 @onready var main_song_title = $MainSongTitle
 @onready var album_art = $AlbumArt
 @onready var album_gradient = $AlbumGradient
-
 @onready var settings_overlay = $SettingsOverlay
 @onready var listen_on_spotify = $SettingsOverlay/ColorRect/MarginContainer2/ListenOnSpotifyButton
-@onready var pin_on_top = $SettingsOverlay/ColorRect/PinOnTopCheckbox
 @onready var settings_button = $SettingsOverlay/ColorRect/SettingsButton
+@onready var close_button = $SettingsOverlay/ColorRect/CloseButton
+@onready var art_blocker = $GradientBlocker
 var current_song_url = ""
 enum { SUCCESS, LOADING, NOT_PLAYING }
 
@@ -35,6 +35,8 @@ var external_url_is_valid = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	WindowFunctions.window_resizable(true, get_window())
+	SongManager.number_of_sessions += 1
 	main_song_title.change_text("Try Playing something from Spotify.")
 	access_token = get_access_token()
 	settings_overlay.modulate = Color.TRANSPARENT
@@ -53,8 +55,6 @@ func _ready():
 	var borderless = ApplicationStorage.get_data(ApplicationStorage.Settings.BORDERLESS)
 	listen_on_spotify.pressed.connect(open_ext_url)
 
-	pin_on_top.on_checked.connect(pin_to_top_pressed)
-
 	settings_button.pressed.connect(open_settings)
 
 	ApplicationStorage.on_settings_change.connect(on_settings_change)
@@ -67,6 +67,11 @@ func _ready():
 	var drag = mouse_drag_component.instantiate()
 	drag.get_node("ColorRect").current_window = get_window()
 	add_child(drag)
+
+	close_button.pressed.connect(
+		func():
+			get_tree().quit()
+	)
 
 
 func convert_textstyle_to_text(textstyle: String, song_data: Dictionary) -> String:
@@ -144,7 +149,7 @@ func on_settings_change(new_settings):
 		new_settings, ApplicationStorage.Settings.PIN_TO_TOP
 	)
 
-	pin_on_top.change_checked_state(is_pinned)
+	
 	WindowFunctions.change_window_always_on_top(is_pinned, get_window())
 
 	# Player Speed Setting:
@@ -158,6 +163,13 @@ func on_settings_change(new_settings):
 	var speed_of_song = speed_binding.value
 
 	main_song_title.speed_of_text = speed_of_song
+
+	# Adaptive Gradient:
+	var adaptive_background = ApplicationStorage.filter_emit_data(
+		new_settings, ApplicationStorage.Settings.ADAPTIVE_BACKGROUND
+	)	
+
+	art_blocker.visible = !adaptive_background
 
 	# Text Style Settings
 	var text_style = ApplicationStorage.filter_emit_data(
@@ -177,7 +189,15 @@ func on_settings_change(new_settings):
 
 
 func open_settings():
-	WindowFunctions.focus_window()
+	if (get_tree().get_root().has_node("Settings")):
+		get_tree().get_root().get_node("Settings").move_to_foreground()
+		return
+
+	var window = settings_window.instantiate()
+
+	window.title = "Bittify Miniplayer"
+	
+	get_tree().root.add_child(window)	
 
 
 func pin_to_top_pressed(pinned_status):

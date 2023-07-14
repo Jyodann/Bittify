@@ -35,6 +35,9 @@ func minimize_window(window = get_window()) -> void:
 func focus_window(window = get_window()) -> void:
 	window.mode = Window.MODE_WINDOWED
 
+func window_resizable(resizable: bool, window = get_window()) -> void:
+	window.unresizable = !resizable
+
 
 func change_window_title(title, window = get_window()):
 	if title == "":

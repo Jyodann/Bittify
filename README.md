@@ -1,8 +1,8 @@
 # Bittify 🎵🎶
 
 [![wakatime](https://wakatime.com/badge/user/f5667326-f378-4a99-aacd-abd866a8364d/project/c531fef6-7f26-4dc9-9ce5-bae4281ad3a8.svg)](https://wakatime.com/badge/user/f5667326-f378-4a99-aacd-abd866a8364d/project/c531fef6-7f26-4dc9-9ce5-bae4281ad3a8)
-
 [![Export Bittify for All Platforms](https://github.com/Jyodann/Bittify/actions/workflows/godot_deploy.yml/badge.svg)](https://github.com/Jyodann/Bittify/actions/workflows/godot_deploy.yml)
+[![Github All Releases](https://img.shields.io/github/downloads/jyodann/Bittify/total.svg)]()
 # General
 ## About 🐳
 Bittify is a rebuild of [Minify](https://github.com/Jyodann/MinifyPlayer/) in the Godot Engine. 
@@ -10,6 +10,8 @@ Bittify is a rebuild of [Minify](https://github.com/Jyodann/MinifyPlayer/) in th
 It is a Miniplayer built for Windows, MacOS and Linux which shows the current song you have playing on [Spotify](https://www.spotify.com/us/download/). 
 
 Useful for people who want to see what songs are currently playing without constantly tabbing back to the main application. It also be used as a Window Source on OBS for Twitch streamers to easily show what they are listening to.
+
+[Download it here](https://github.com/Jyodann/Bittify/releases/tag/v0.1.0-alpha)
 
 ## How do I use it ❓
 1. Unzip/unpack the file, then open the .dmg or .exe file:

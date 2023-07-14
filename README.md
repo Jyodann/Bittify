@@ -1,6 +1,8 @@
 # Bittify 🎵🎶
 
 [![wakatime](https://wakatime.com/badge/user/f5667326-f378-4a99-aacd-abd866a8364d/project/c531fef6-7f26-4dc9-9ce5-bae4281ad3a8.svg)](https://wakatime.com/badge/user/f5667326-f378-4a99-aacd-abd866a8364d/project/c531fef6-7f26-4dc9-9ce5-bae4281ad3a8)
+
+[![Export Bittify for All Platforms](https://github.com/Jyodann/Bittify/actions/workflows/godot_deploy.yml/badge.svg)](https://github.com/Jyodann/Bittify/actions/workflows/godot_deploy.yml)
 # General
 ## About 🐳
 Bittify is a rebuild of [Minify](https://github.com/Jyodann/MinifyPlayer/) in the Godot Engine. 

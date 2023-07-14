@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://sw3ajtmkgl88"
-path="res://.godot/imported/disconnected.png-24aa57ce269b041efdd6dde8e7ff5411.ctex"
+path="res://.godot/imported/disconnected_icon.png-12f721b0e6561e3ab99b2bbe8dcac4c1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Icons/disconnected.png"
-dest_files=["res://.godot/imported/disconnected.png-24aa57ce269b041efdd6dde8e7ff5411.ctex"]
+source_file="res://Icons/disconnected_icon.png"
+dest_files=["res://.godot/imported/disconnected_icon.png-12f721b0e6561e3ab99b2bbe8dcac4c1.ctex"]
 
 [params]
 

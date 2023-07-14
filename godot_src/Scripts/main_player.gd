@@ -1,6 +1,6 @@
 extends Control
 
-@onready var disconnected_icon = preload("res://Icons/disconnected.png")
+@onready var disconnected_icon = preload("res://Icons/disconnected_icon.png")
 @onready var settings_window = preload("res://Pages/settings_page.tscn")
 @onready var mouse_drag_component = preload("res://Scenes/mouse_drag.tscn")
 @onready var main_song_title = $MainSongTitle
@@ -10,6 +10,7 @@ extends Control
 @onready var listen_on_spotify = $SettingsOverlay/ColorRect/MarginContainer2/ListenOnSpotifyButton
 @onready var settings_button = $SettingsOverlay/ColorRect/SettingsButton
 @onready var close_button = $SettingsOverlay/ColorRect/CloseButton
+@onready var art_blocker = $GradientBlocker
 var current_song_url = ""
 enum { SUCCESS, LOADING, NOT_PLAYING }
 
@@ -34,6 +35,7 @@ var external_url_is_valid = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	WindowFunctions.window_resizable(true, get_window())
 	SongManager.number_of_sessions += 1
 	main_song_title.change_text("Try Playing something from Spotify.")
 	access_token = get_access_token()
@@ -161,6 +163,13 @@ func on_settings_change(new_settings):
 	var speed_of_song = speed_binding.value
 
 	main_song_title.speed_of_text = speed_of_song
+
+	# Adaptive Gradient:
+	var adaptive_background = ApplicationStorage.filter_emit_data(
+		new_settings, ApplicationStorage.Settings.ADAPTIVE_BACKGROUND
+	)	
+
+	art_blocker.visible = !adaptive_background
 
 	# Text Style Settings
 	var text_style = ApplicationStorage.filter_emit_data(

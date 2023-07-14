@@ -7,6 +7,9 @@ extends Control
 
 
 func _ready():
+	WindowFunctions.change_window_title("Login", get_window())
+	WindowFunctions.window_resizable(false, get_window())
+	WindowFunctions.change_window_size(500, 350, get_window())
 	login_button.pressed.connect(self._login_button_pressed)
 	bittify_code_go_button.pressed.connect(self._bittify_go_button_pressed)
 

@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cedi8xp8ducfa"]
+[gd_scene load_steps=7 format=3 uid="uid://smcxgrhe0pd7"]
 
 [ext_resource type="Script" path="res://Scripts/main_player.gd" id="1_m6ui3"]
 [ext_resource type="PackedScene" uid="uid://dhnst0rrc37pj" path="res://Components/scrolling_word_component.tscn" id="2_xy54g"]
 [ext_resource type="Texture2D" uid="uid://pw0xg0y8arbg" path="res://Icons/Spotify_Icon_RGB_Green.png" id="3_4g77f"]
 [ext_resource type="Texture2D" uid="uid://fx1q7v4n6lia" path="res://Icons/Spotify_Expanded.png" id="3_cfax8"]
-[ext_resource type="Texture2D" uid="uid://sn864dgjt8qk" path="res://Icons/settings_FILL0_wght400_GRAD0_opsz48.png" id="4_4yv2y"]
-[ext_resource type="Texture2D" uid="uid://f8b87l1ndoa1" path="res://Icons/close_FILL0_wght400_GRAD0_opsz48 (1).png" id="6_kr3s6"]
+[ext_resource type="Texture2D" uid="uid://sn864dgjt8qk" path="res://Icons/settings_icon.png" id="5_1ierp"]
+[ext_resource type="Texture2D" uid="uid://f8b87l1ndoa1" path="res://Icons/close_icon.png" id="6_veeya"]
 
 [node name="main_player" type="Control"]
 layout_mode = 3
@@ -28,6 +28,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 1
+
+[node name="GradientBlocker" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [node name="AlbumArt" type="TextureRect" parent="."]
 layout_mode = 1
@@ -131,7 +140,7 @@ offset_right = -50.0
 offset_bottom = 25.0
 grow_horizontal = 0
 grow_vertical = 2
-texture_normal = ExtResource("4_4yv2y")
+texture_normal = ExtResource("5_1ierp")
 ignore_texture_size = true
 stretch_mode = 0
 
@@ -146,6 +155,6 @@ offset_left = -50.0
 offset_top = -50.0
 grow_horizontal = 0
 grow_vertical = 0
-texture_normal = ExtResource("6_kr3s6")
+texture_normal = ExtResource("6_veeya")
 ignore_texture_size = true
 stretch_mode = 0

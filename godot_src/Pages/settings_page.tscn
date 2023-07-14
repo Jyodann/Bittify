@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://yho1kejwafj6"]
 
-[ext_resource type="PackedScene" uid="uid://cggpe2q486v1y" path="res://settings_page.tscn" id="1_wsbya"]
+[ext_resource type="PackedScene" uid="uid://2626vxlr3qa" path="res://settings_page.tscn" id="1_wsbya"]
 
 [node name="Settings" type="Window"]
 gui_embed_subwindows = true

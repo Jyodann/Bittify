@@ -9,7 +9,7 @@ var licences_info_label = $VBoxContainer/OpenSource_Section/ScrollContainer/VBox
 @onready var pull_request_button = $VBoxContainer/Support_Section/HBoxContainer/PullReq
 @onready var github_source_button = $VBoxContainer/Support_Section/HBoxContainer2/GitSource
 @onready var donate_button = $VBoxContainer/Support_Section/HBoxContainer3/Donate
-
+@onready var check_for_updates_button = $VBoxContainer/CheckForUpdatesButton
 @onready var OS_NAME = OS.get_name()
 @onready var ARCHITECTURE_NAME = Engine.get_architecture_name()
 @onready var ENGINE_VERSION = Engine.get_version_info().string
@@ -26,6 +26,8 @@ var licences_info_label = $VBoxContainer/OpenSource_Section/ScrollContainer/VBox
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+
+	WindowFunctions.change_window_title("About", get_window())
 	github_source_button.pressed.connect(
 		func(): OS.shell_open("https://github.com/Jyodann/Bittify")
 	)
@@ -34,6 +36,10 @@ func _ready():
 
 	pull_request_button.pressed.connect(
 		func(): OS.shell_open("https://github.com/Jyodann/Bittify/pulls")
+	)
+
+	check_for_updates_button.pressed.connect(
+		func(): OS.shell_open("https://github.com/Jyodann/Bittify/releases")
 	)
 
 	donate_button.pressed.connect(func(): OS.shell_open("https://ko-fi.com/jyodann"))

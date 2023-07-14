@@ -7,16 +7,16 @@ extends Control
 @onready var check_box_component = preload("res://Components/checkbox_component.tscn")
 @onready var dropdown_box_component = preload("res://Components/drop_down_box_component.tscn")
 @onready var textedit_box_component = preload("res://Components/text_edit_component.tscn")
-#@onready var player = preload("res://Scenes/player_page.tscn")
 @onready var about_page = preload("res://Pages/about_window.tscn")
 @onready var settings_dict = {
 	"Window Settings" : {
-		"Launch Player on Start" : SettingBoundComponent.new(check_box_component, ApplicationStorage.Settings.PLAYER_LAUNCH_IMMEDIATELY),
 		"Always on Top" : SettingBoundComponent.new(check_box_component, ApplicationStorage.Settings.PIN_TO_TOP),
-		
+	},
+	"Player Settings" : {
+		"Show Adaptive Background": SettingBoundComponent.new(check_box_component, ApplicationStorage.Settings.ADAPTIVE_BACKGROUND),
 	},
 	"Text Settings" : {
-		"Speed of Text" : SettingBoundComponent.new(dropdown_box_component, ApplicationStorage.Settings.SPEED_OF_SONG),
+		"Text Overflow Scroll Speed" : SettingBoundComponent.new(dropdown_box_component, ApplicationStorage.Settings.SPEED_OF_SONG),
 		"Display Style (Updates within 3s)" : SettingBoundComponent.new(dropdown_box_component, ApplicationStorage.Settings.STYLE_OF_TEXT),
 		"Custom Display Style" : SettingBoundComponent.new(textedit_box_component, ApplicationStorage.Settings.CUSTOM_TEXT_STYLE)
 	},
@@ -37,39 +37,16 @@ class SettingBoundComponent:
 		component = _component
 		setting = _setting
 
-func open_new_player_window():
-	if (ApplicationStorage.get_data(ApplicationStorage.Settings.ALLOW_MORE_THAN_ONE_PLAYER) || SongManager.number_of_sessions < 1):
-		SongManager.number_of_sessions += 1
-		#var window = player.instantiate()
 
-		#window.title = "Bittify Miniplayer"
-		
-		#get_tree().root.add_child(window)
-		#player_windows.append(window)
-		#WindowFunctions.minimize_window()
-
-func on_settings_change(new_settings): 
-	var is_borderless = ApplicationStorage.filter_emit_data(new_settings, ApplicationStorage.Settings.BORDERLESS)
-
-	if (is_borderless != old_borderless_setting):
-		old_borderless_setting = is_borderless
-		var any_window_exists = !player_windows.is_empty()
-		
-		for window in player_windows:
-			window.queue_free()
-		player_windows.clear()
-		SongManager.number_of_sessions = 0
-		if (any_window_exists):
-			open_new_player_window()
 func on_about_pressed():
 	if (get_tree().get_root().has_node("about_window")):
 		get_tree().get_root().get_node("about_window").move_to_foreground()
 		return
 	var window = about_page.instantiate()
-	window.title = "About - Bittify"
 	get_tree().get_root().add_child(window)
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	WindowFunctions.change_window_title("Settings", get_window())
 	log_out_button.pressed.connect(
 		func():
 			ApplicationStorage.modify_data(ApplicationStorage.Settings.ACCESS_TOKEN, "")
@@ -85,13 +62,8 @@ func _ready():
 	)
 
 
-	ApplicationStorage.on_settings_change.connect(
-		on_settings_change
-	)
-	old_borderless_setting = ApplicationStorage.get_data(ApplicationStorage.Settings.BORDERLESS)
 
-	if (ApplicationStorage.get_data(ApplicationStorage.Settings.PLAYER_LAUNCH_IMMEDIATELY)):
-		open_new_player_window()
+	old_borderless_setting = ApplicationStorage.get_data(ApplicationStorage.Settings.BORDERLESS)
 	
 	for setting_header in settings_dict:
 		var label = Label.new()

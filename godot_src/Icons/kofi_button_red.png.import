@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://sn864dgjt8qk"
-path="res://.godot/imported/settings_FILL0_wght400_GRAD0_opsz48.png-b21293b0f4ca1b57b5d61a1f9f5c0980.ctex"
+uid="uid://bu08ibtcb32e"
+path="res://.godot/imported/kofi_button_red.png-4836002e29b9f86104caaf776910bec1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Icons/settings_FILL0_wght400_GRAD0_opsz48.png"
-dest_files=["res://.godot/imported/settings_FILL0_wght400_GRAD0_opsz48.png-b21293b0f4ca1b57b5d61a1f9f5c0980.ctex"]
+source_file="res://Icons/kofi_button_red.png"
+dest_files=["res://.godot/imported/kofi_button_red.png-4836002e29b9f86104caaf776910bec1.ctex"]
 
 [params]
 

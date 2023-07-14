@@ -11,11 +11,7 @@ It is a Miniplayer built for Windows, MacOS and Linux which shows the current so
 
 Useful for people who want to see what songs are currently playing without constantly tabbing back to the main application. It also be used as a Window Source on OBS for Twitch streamers to easily show what they are listening to.
 
-[Download it from Github](https://github.com/Jyodann/Bittify/releases/latest)
-
-OR
-
-[Download it from Itch](https://jyodann.itch.io/bittify)
+[Download it from Github](https://github.com/Jyodann/Bittify/releases/latest) OR [Download it from Itch](https://jyodann.itch.io/bittify)
 
 ## How do I use it ❓
 1. Unzip/unpack the file, then open the .dmg or .exe file:

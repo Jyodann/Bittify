@@ -35,10 +35,6 @@ window/size/viewport_width=1000
 window/size/viewport_height=800
 window/subwindows/embed_subwindows=false
 
-[internationalization]
-
-locale/translations=PackedStringArray("res://Translations/translation.en.translation", "res://Translations/translation.jp.translation")
-
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

@@ -1,10 +1,10 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1689348490
+::res://::1689348748
 bittify.png::CompressedTexture2D::6595204776886184012::1689346910::1689348491::1::::<><>::
 default_button_style.tres::StyleBoxFlat::2448971041996359851::1688181375::0::1::::<><>::
 expired_tokens.txt::TextFile::-1::1687661496::0::1::::<><>::
 export_presets.cfg::TextFile::-1::1688565342::0::1::::<><>::
-settings_page.tscn::PackedScene::57670304295969256::1689347734::0::1::::<><>::uid://wfp154h4swfn::::res://Scenes/settings_scene.tscn
+settings_page.tscn::PackedScene::57670304295969256::1689347734::0::1::::<><>::uid://wfp154h4swfn
 version.gd::GDScript::-1::1688560022::0::1::::<>Node<>::
 ::res://Components/::1688193580
 checkbox_component.tscn::PackedScene::2352270520490725111::1688193580::0::1::::<><>::res://Scripts/settings_checkbox_component.gd
@@ -13,7 +13,7 @@ drop_down_box_component.tscn::PackedScene::2739718603634525990::1688193580::0::1
 range_component.tscn::PackedScene::6427796299186061436::1688193580::0::1::::<><>::res://Scripts/settings_checkbox_component.gd
 scrolling_word_component.tscn::PackedScene::7678549043423937895::1688193580::0::1::::<><>::res://Scripts/scrolling_word_component.gd
 text_edit_component.tscn::PackedScene::4141032161442511064::1688193580::0::1::::<><>::res://Scripts/settings_textedit_component copy.gd
-::res://Icons/::1689343992
+::res://Icons/::1689348491
 close_icon.png::CompressedTexture2D::419190031204643258::1689341996::1689348491::1::::<><>::
 disconnected_icon.png::CompressedTexture2D::1310516074491632319::1687661496::1689348491::1::::<><>::
 icon.svg::CompressedTexture2D::4906339871672135372::1687661496::1689348491::1::::<><>::
@@ -24,17 +24,17 @@ Spotify_Icon_RGB_Black.png::CompressedTexture2D::90265471972582467::1687661496::
 Spotify_Icon_RGB_Green.png::CompressedTexture2D::1099808318133555260::1687661496::1689348491::1::::<><>::
 Spotify_Icon_RGB_White.png::CompressedTexture2D::7579678169189217129::1687661496::1689348491::1::::<><>::
 ::res://Pages/::1689347735
-about_window.tscn::PackedScene::3228230214011186827::1689347734::0::1::::<><>::uid://cux8w6xaeorb1::::res://Scenes/about_window.tscn
-login_page.tscn::PackedScene::9112511070699971291::1689347735::0::1::::<><>::uid://ctbbi6f6qhfjw::::res://Scenes/login_view.tscn
-settings_page.tscn::PackedScene::1699879891982496869::1689347734::0::1::::<><>::uid://2626vxlr3qa::::res://settings_page.tscn
+about_window.tscn::PackedScene::3228230214011186827::1689347734::0::1::::<><>::uid://cux8w6xaeorb1
+login_page.tscn::PackedScene::9112511070699971291::1689347735::0::1::::<><>::uid://ctbbi6f6qhfjw
+settings_page.tscn::PackedScene::1699879891982496869::1689347734::0::1::::<><>::uid://2626vxlr3qa
 ::res://Scenes/::1689348139
-about_menu.tscn::PackedScene::3260123709813807572::1689347734::0::1::::<><>::res://Scripts/about_window.gd<>uid://bu08ibtcb32e::::res://Icons/kofi_button_red.png
-about_window.tscn::PackedScene::6226143540477697008::1689347734::0::1::::<><>::uid://bmph0463nt2jo::::res://Scenes/about_menu.tscn
-initialisation.tscn::PackedScene::1969865286242814365::1689347734::0::1::::<><>::res://Scripts/initialisation.gd<>uid://bbmlohuvt0lmk::::res://Scenes/mouse_drag.tscn
+about_menu.tscn::PackedScene::3260123709813807572::1689347734::0::1::::<><>::res://Scripts/about_window.gd<>uid://bu08ibtcb32e
+about_window.tscn::PackedScene::6226143540477697008::1689347734::0::1::::<><>::uid://bmph0463nt2jo
+initialisation.tscn::PackedScene::1969865286242814365::1689347734::0::1::::<><>::res://Scripts/initialisation.gd<>uid://bbmlohuvt0lmk
 login_view.tscn::PackedScene::6108570414984920116::1689348139::0::1::::<><>::res://Scripts/login_page.gd
-main_player.tscn::PackedScene::1288334567504815082::1689347734::0::1::::<><>::res://Scripts/main_player.gd<>uid://dhnst0rrc37pj::::res://Components/scrolling_word_component.tscn<>uid://pw0xg0y8arbg::::res://Icons/Spotify_Icon_RGB_Green.png<>uid://fx1q7v4n6lia::::res://Icons/Spotify_Expanded.png<>uid://sn864dgjt8qk::::res://Icons/settings_icon.png<>uid://f8b87l1ndoa1::::res://Icons/close_icon.png
+main_player.tscn::PackedScene::1288334567504815082::1689347734::0::1::::<><>::res://Scripts/main_player.gd<>uid://dhnst0rrc37pj
 mouse_drag.tscn::PackedScene::2482075347955019750::1688193580::0::1::::<><>::res://Scripts/mouse_drag.gd
-settings_scene.tscn::PackedScene::1555435255197402767::1689347972::0::1::::<><>::res://Scripts/settings.gd<>uid://ba5kgvyul8gkh::::res://default_button_style.tres
+settings_scene.tscn::PackedScene::1555435255197402767::1689347972::0::1::::<><>::res://Scripts/settings.gd<>uid://ba5kgvyul8gkh
 ::res://Scripts/::1689334744
 about_window.gd::GDScript::-1::1689345317::0::1::::<>Control<>::
 application_storage.gd::GDScript::-1::1689345105::0::1::::<>Node<>::

@@ -38,7 +38,7 @@ alignment = 1
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_font_sizes/font_size = 36
-text = "WELCOME_MESSAGE"
+text = "Welcome to Bittify!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -48,12 +48,12 @@ layout_mode = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_wmn2v")
 theme_override_styles/hover = SubResource("StyleBoxFlat_wmn2v")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_wmn2v")
-text = "LOGIN_SPOTIFY"
+text = "Login to Spotify"
 
 [node name="BittifyCodeLabel" type="Label" parent="VBoxContainer2/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 20
-text = "BITTIFY_CODE_LABEL"
+text = "Bittify Code:"
 vertical_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2/VBoxContainer"]
@@ -63,6 +63,7 @@ layout_mode = 2
 [node name="BittifyCodeTextEdit" type="TextEdit" parent="VBoxContainer2/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+placeholder_text = "Paste your code here…"
 virtual_keyboard_enabled = false
 wrap_mode = 1
 
@@ -71,7 +72,7 @@ clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 0.2
-text = "BITTIFY_CODE_GO_BUTTON"
+text = "Go!"
 clip_text = true
 
 [node name="ErrorText" type="Label" parent="VBoxContainer2/VBoxContainer"]

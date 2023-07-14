@@ -8,8 +8,8 @@ extends Control
 @onready var album_gradient = $AlbumGradient
 @onready var settings_overlay = $SettingsOverlay
 @onready var listen_on_spotify = $SettingsOverlay/ColorRect/MarginContainer2/ListenOnSpotifyButton
-@onready var pin_on_top = $SettingsOverlay/ColorRect/PinOnTopCheckbox
 @onready var settings_button = $SettingsOverlay/ColorRect/SettingsButton
+@onready var close_button = $SettingsOverlay/ColorRect/CloseButton
 var current_song_url = ""
 enum { SUCCESS, LOADING, NOT_PLAYING }
 
@@ -53,8 +53,6 @@ func _ready():
 	var borderless = ApplicationStorage.get_data(ApplicationStorage.Settings.BORDERLESS)
 	listen_on_spotify.pressed.connect(open_ext_url)
 
-	pin_on_top.on_checked.connect(pin_to_top_pressed)
-
 	settings_button.pressed.connect(open_settings)
 
 	ApplicationStorage.on_settings_change.connect(on_settings_change)
@@ -67,6 +65,11 @@ func _ready():
 	var drag = mouse_drag_component.instantiate()
 	drag.get_node("ColorRect").current_window = get_window()
 	add_child(drag)
+
+	close_button.pressed.connect(
+		func():
+			get_tree().quit()
+	)
 
 
 func convert_textstyle_to_text(textstyle: String, song_data: Dictionary) -> String:
@@ -144,7 +147,7 @@ func on_settings_change(new_settings):
 		new_settings, ApplicationStorage.Settings.PIN_TO_TOP
 	)
 
-	pin_on_top.change_checked_state(is_pinned)
+	
 	WindowFunctions.change_window_always_on_top(is_pinned, get_window())
 
 	# Player Speed Setting:
@@ -177,6 +180,10 @@ func on_settings_change(new_settings):
 
 
 func open_settings():
+	if (get_tree().get_root().has_node("Settings")):
+		get_tree().get_root().get_node("Settings").move_to_foreground()
+		return
+
 	var window = settings_window.instantiate()
 
 	window.title = "Bittify Miniplayer"

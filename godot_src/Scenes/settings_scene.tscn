@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://wfp154h4swfn"]
+[gd_scene load_steps=5 format=3 uid="uid://wfp154h4swfn"]
 
 [ext_resource type="Script" path="res://Scripts/settings.gd" id="1_n213r"]
-[ext_resource type="Theme" uid="uid://b8gj6cuwsbxf5" path="res://Themes/Bittify_Main_Theme.tres" id="2_80dnk"]
 [ext_resource type="StyleBox" uid="uid://ba5kgvyul8gkh" path="res://default_button_style.tres" id="3_g7vyi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sinj8"]
@@ -89,13 +88,6 @@ grow_vertical = 0
 layout_mode = 2
 size_flags_horizontal = 3
 text = "About"
-
-[node name="LaunchMiniplayer" type="Button" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 3.0
-theme = ExtResource("2_80dnk")
-text = "Launch Player"
 
 [node name="LogOut" type="Button" parent="HBoxContainer"]
 layout_mode = 2

@@ -1,12 +1,11 @@
-res://settings.tscn
-res://Themes/Bittify_Main_Theme.tres
-res://Pages/settings.tscn
-res://Pages/settings_page.tscn
+res://Scenes/main_player.tscn
 res://Pages/about_window.tscn
 res://Scenes/about_window.tscn
 res://Scenes/about_menu.tscn
-res://Scenes/main_player.tscn
 res://Scenes/initialisation.tscn
 res://settings_page.tscn
+res://Pages/settings_page.tscn
 res://Scenes/settings_scene.tscn
-res://Scripts/main_player.gd
+res://Pages/about_page.tscn
+res://Pages/login_page.tscn
+res://Scripts/settings.gd

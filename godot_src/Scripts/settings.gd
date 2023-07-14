@@ -9,7 +9,6 @@ extends Control
 @onready var textedit_box_component = preload("res://Components/text_edit_component.tscn")
 #@onready var player = preload("res://Scenes/player_page.tscn")
 @onready var about_page = preload("res://Pages/about_window.tscn")
-@onready var launch_player = $HBoxContainer/LaunchMiniplayer
 @onready var settings_dict = {
 	"Window Settings" : {
 		"Launch Player on Start" : SettingBoundComponent.new(check_box_component, ApplicationStorage.Settings.PLAYER_LAUNCH_IMMEDIATELY),
@@ -22,8 +21,7 @@ extends Control
 		"Custom Display Style" : SettingBoundComponent.new(textedit_box_component, ApplicationStorage.Settings.CUSTOM_TEXT_STYLE)
 	},
 	"Experimental Features" : {
-		"Allow multiple Miniplayers" : SettingBoundComponent.new(check_box_component, ApplicationStorage.Settings.ALLOW_MORE_THAN_ONE_PLAYER),
-		"Borderless Player" : SettingBoundComponent.new(check_box_component, ApplicationStorage.Settings.BORDERLESS),
+		"Borderless Player (Applies on Restart)" : SettingBoundComponent.new(check_box_component, ApplicationStorage.Settings.BORDERLESS),
 	}
 }
 
@@ -63,31 +61,29 @@ func on_settings_change(new_settings):
 		SongManager.number_of_sessions = 0
 		if (any_window_exists):
 			open_new_player_window()
-
+func on_about_pressed():
+	if (get_tree().get_root().has_node("about_window")):
+		get_tree().get_root().get_node("about_window").move_to_foreground()
+		return
+	var window = about_page.instantiate()
+	window.title = "About - Bittify"
+	get_tree().get_root().add_child(window)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	log_out_button.pressed.connect(
 		func():
 			ApplicationStorage.modify_data(ApplicationStorage.Settings.ACCESS_TOKEN, "")
 			ApplicationStorage.modify_data(ApplicationStorage.Settings.REFRESH_TOKEN, "")
-			for window in player_windows:
-				window.queue_free()
-			player_windows.clear()
+			get_window().queue_free()
 			SongManager.number_of_sessions = 0
 			ContentPageShell.load_view(ContentPageShell.Page.LOGIN_PAGE)
 			get_parent().queue_free()
 	)
 
 	about_button.pressed.connect(
-		func():
-			var window = about_page.instantiate()
-			window.title = "About - Bittify"
-			add_child(window)
+		on_about_pressed
 	)
 
-	launch_player.pressed.connect(
-		open_new_player_window
-	)
 
 	ApplicationStorage.on_settings_change.connect(
 		on_settings_change
@@ -114,3 +110,8 @@ func _ready():
 
 			vbox.add_child(component)
 			component._setup(i, dictionary[i].setting)
+
+func _notification(what):
+	if what == NOTIFICATION_WM_CLOSE_REQUEST:
+		get_window().queue_free()
+			

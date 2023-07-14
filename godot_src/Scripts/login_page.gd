@@ -29,4 +29,4 @@ func _bittify_go_button_pressed():
 	ApplicationStorage.modify_data(ApplicationStorage.Settings.REFRESH_TOKEN, refresh_token)
 	ApplicationStorage.modify_data(ApplicationStorage.Settings.ACCESS_TOKEN, access_token)
 
-	ContentPageShell.load_view(ContentPageShell.Page.SETTINGS_PAGE)
+	ContentPageShell.load_view(ContentPageShell.Page.PLAYER_PAGE)
